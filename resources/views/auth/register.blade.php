@@ -48,23 +48,13 @@
                                     {{ session('err') }}
                                 </div>
                                 @endif
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" name="first_name"
-                                            class="form-control form-control-user  @error('first_name') is-invalid @enderror"
-                                            placeholder="First Name" value="{{ old('first_name') }}">
-                                        @error('first_name')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="text" name="last_name"
-                                            class="form-control form-control-user @error('last_name') is-invalid @enderror"
-                                            placeholder="Last Name" value="{{ old('last_name') }}">
-                                        @error('last_name')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
+                                <div class="form-group">
+                                    <input type="text" name="nim"
+                                        class="form-control form-control-user @error('nim') is-invalid @enderror"
+                                        placeholder="Input NIM" value="{{ old('nim') }}">
+                                    @error('nim')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <input type="email" name="email"

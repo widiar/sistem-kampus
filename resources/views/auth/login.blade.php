@@ -59,10 +59,10 @@
                                         </div>
                                         @endif
                                         <div class="form-group">
-                                            <input type="email" name="email"
-                                                class="form-control form-control-user @error('email') is-invalid @enderror"
-                                                placeholder="Enter Email Address..." value="{{ old('email') }}">
-                                            @error('email')
+                                            <input type="text" name="nim"
+                                                class="form-control form-control-user @error('nim') is-invalid @enderror"
+                                                placeholder="Enter NIM..." value="{{ old('nim') }}">
+                                            @error('nim')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>

@@ -18,8 +18,7 @@ class AuthController extends Controller
     public function doRegister(Request $request)
     {
         $rules = [
-            'first_name' => 'required',
-            'last_name' => 'required',
+            'nim' => 'required|unique:users|digits:10',
             'password' => 'required|same:password2|min:8',
             'email' => 'email|required|unique:users',
         ];
@@ -35,8 +34,7 @@ class AuthController extends Controller
 
         $password = Hash::make($request->password);
         $data = [
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
+            'nim' => $request->nim,
             'email' => $request->email,
             'password' => $password,
         ];
@@ -53,23 +51,25 @@ class AuthController extends Controller
     public function doLogin(Request  $request)
     {
         $request->validate([
-            'email' => 'email|required',
+            'nim' => 'required|digits:10',
             'password' => 'required'
         ]);
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('nim', $request->nim)->first();
         $cre = [
-            'email' => $request->email,
+            'nim' => $request->nim,
             'password' => $request->password
         ];
         if (Auth::attempt($cre)) {
-            if ($user && $user->status == 0) {
+            if ($user && $user->status == 0 && $user->role != 1) {
                 Auth::logout();
-                return redirect()->route('login')->with('status', 'Email anda belum di verifikasi. Silahkan hubungi Admin');
+                return redirect()->route('login')->with('status', 'Akun anda belum di verifikasi. Silahkan hubungi Admin');
+            } else if ($user && $user->role == 1) {
+                return redirect()->route('admin.dashboard');
             } else {
                 return redirect()->route('home');
             }
         } else {
-            return redirect()->route('login')->with('status', 'Email atau Password anda salah')->withInput();
+            return redirect()->route('login')->with('status', 'Nim atau Password anda salah')->withInput();
         }
     }
 
