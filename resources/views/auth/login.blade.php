@@ -41,19 +41,42 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <form class="user">
+                                    <form class="user" method="POST" action="">
+                                        @csrf
+                                        @if(session('status'))
+                                        <div class="alert alert-danger">
+                                            {{ session('status') }}
+                                        </div>
+                                        @endif
+                                        @if(session('statussukses'))
+                                        <div class="alert alert-success">
+                                            {{ session('statussukses') }}
+                                        </div>
+                                        @endif
+                                        @if(session('warning'))
+                                        <div class="alert alert-warning warning">
+                                            {{ session('warning') }}
+                                        </div>
+                                        @endif
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address...">
+                                            <input type="email" name="email"
+                                                class="form-control form-control-user @error('email') is-invalid @enderror"
+                                                placeholder="Enter Email Address..." value="{{ old('email') }}">
+                                            @error('email')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password">
+                                            <input type="password" name="password"
+                                                class="form-control form-control-user @error('password') is-invalid @enderror"
+                                                placeholder="Password">
+                                            @error('password')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
-                                        <a href="#" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Login
-                                        </a>
+                                        </button>
                                         <hr>
                                     </form>
                                     {{-- <div class="text-center">
