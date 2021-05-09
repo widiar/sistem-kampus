@@ -69,13 +69,13 @@
             <nav id="navbar" class="navbar">
                 <ul>
                     <li><a href="{{ route('home') }}">Home</a></li>
+                    <li><a href="{{ route('services') }}">Alumni</a></li>
                     <li><a href="{{ route('about') }}">About</a></li>
                     @guest
                     <li><a href="{{ route('login') }}">Login</a></li>
                     <li><a href="{{ route('register') }}">Register</a></li>
                     @endguest
                     @auth
-                    <li><a href="{{ route('services') }}">Alumni</a></li>
                     <li class="dropdown"><a href="#"><span>Mahasiswa</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
                             <li><a href="#">Personal</a></li>
