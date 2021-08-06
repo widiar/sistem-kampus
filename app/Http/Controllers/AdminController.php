@@ -9,7 +9,7 @@ class AdminController extends Controller
 {
     public function mahasiswa(Request $request)
     {
-        $mahasiswa = User::where('role', 0)->paginate(10);
+        $mahasiswa = User::where('role', 0)->get();
         return view('admin.mahasiswa', compact('mahasiswa'));
     }
 

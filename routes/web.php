@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\QuestionsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -70,6 +71,17 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             })->name('dashboard');
             Route::get('mahasiswa', [AdminController::class, 'mahasiswa'])->name('mahasiswa');
             Route::patch('verifikasi/{user}/{status}', [AdminController::class, 'verifikasi'])->name('verif-mahasiswa');
+
+            Route::name('questions.')->group(function () {
+                Route::prefix('questions')->group(function () {
+                    Route::get('', [QuestionsController::class, 'index'])->name('index');
+                    Route::get('create', [QuestionsController::class, 'create'])->name('create');
+                    Route::post('', [QuestionsController::class, 'store'])->name('store');
+                    Route::get('edit/{question}', [QuestionsController::class, 'edit'])->name('edit');
+                    Route::patch('{question}', [QuestionsController::class, 'update'])->name('update');
+                    Route::delete('{id}', [QuestionsController::class, 'delete'])->name('delete');
+                });
+            });
         });
     });
 });

@@ -4,7 +4,7 @@ $(document).ready(function(){
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
     });
-    $(".verif, .notverif").submit(function(e){
+    $(".actionz").on("submit", ".verif, .notverif", function(e){
         e.preventDefault();
         var name = $(this).attr('class');
         if (name == 'verif'){
@@ -28,6 +28,49 @@ $(document).ready(function(){
             if (result.isConfirmed){
                 $.ajax({
                     type: "PATCH",
+                    url: $(this).attr("action"),
+                    success: function (msg) {
+                        if (msg == "Sukses") {
+                            Swal.fire(
+                                "Berhasil!",
+                                berhasil,
+                                "success"
+                            ).then((result) => {
+                                if (result.value) {
+                                    window.location.href = $(location).attr(
+                                        "href"
+                                    );
+                                }
+                            });
+                        } else {
+                            Swal.fire(
+                                "Gagal",
+                                gagal,
+                                "error"
+                            );
+                        }
+                    },
+                });
+            }
+        });
+    });
+    $(".actionz").on("submit", ".deleteData", function(e){
+        e.preventDefault();
+        var text = 'Anda akan menghapus data ini';
+        var berhasil = 'Berhasil menghapus data';
+        var gagal = 'Gagal menghapus data';
+        Swal.fire({
+            title: "Anda Yakin?",
+            text: text,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yap!",
+        }).then((result) => {
+            if (result.isConfirmed){
+                $.ajax({
+                    type: "DELETE",
                     url: $(this).attr("action"),
                     success: function (msg) {
                         if (msg == "Sukses") {

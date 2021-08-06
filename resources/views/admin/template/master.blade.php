@@ -20,7 +20,10 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
+
     <link rel="stylesheet" href="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/vendor/datatables/responsive.bootstrap4.min.css') }}">
+
     <link rel="stylesheet" href="{{ asset('admin/vendor/sweetalert2/sweetalert2.min.css') }}">
 
 </head>
@@ -59,6 +62,14 @@
                 <a class="nav-link" href="{{ route('admin.mahasiswa') }}">
                     <i class="nav-icon fas fa-user"></i>
                     <span>Mahasiswa</span></a>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <li class="nav-item{{request()->is('admin/questions*') ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.questions.index') }}">
+                    <i class="nav-icon fas fa-user"></i>
+                    <span>Questions</span></a>
             </li>
 
             <!-- Divider -->
@@ -147,18 +158,28 @@
     {{-- Data Tables --}}
     <script src="{{ asset('admin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('admin/vendor/datatables/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('admin/vendor/datatables/responsive.bootstrap4.min.js') }}"></script>
 
     <script src="{{ asset('admin/vendor/sweetalert2/sweetalert2.all.min.js') }}"></script>
+
+    <script src="{{ asset('admin/vendor/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
 
     <script src="{{ asset('admin/js/admin.js') }}"></script>
 
     <script>
-        $("#mahasiswaTable").dataTable({
-            paging: false,
-            order: [[1, "asc"]],
+        $("#adminTable").dataTable({
+            // paging: false,
+            // searching: false,
             // columnDefs: [{ orderable: false, targets: 5 }],
         });
+
+        $(function() {
+            bsCustomFileInput.init();
+        }); 
     </script>
+
+    @yield('script')
 
 </body>
 

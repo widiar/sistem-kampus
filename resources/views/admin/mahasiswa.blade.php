@@ -5,7 +5,7 @@
 @section('content')
 <div class="card shadow">
     <div class="card-body">
-        <table id="mahasiswaTable" class="table table-bordered">
+        <table id="adminTable" class="table table-bordered dt-responsive nowrap" style="width: 100%">
             <thead>
                 <tr>
                     <th>NO</th>
@@ -15,7 +15,7 @@
                     <th class="text-center">Status</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="actionz">
                 @php
                 $no=0;
                 @endphp
@@ -56,8 +56,8 @@
             </tbody>
         </table>
     </div>
-    <div class="ml-3">
+    {{-- <div class="ml-3">
         {{  $mahasiswa->withQueryString()->links() }}
-    </div>
+    </div> --}}
 </div>
 @endsection
