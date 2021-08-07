@@ -22,7 +22,7 @@ class CreateMahasiswasTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
-            $table->foreign('user_id', 'user_fk_1')->references('id')->on('users');
+            $table->foreign('user_id', 'user_fk_1')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

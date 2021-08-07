@@ -26,6 +26,10 @@
                     @foreach ($questions as $question)
                     <div class="question">
                         <h5>{{ $question->text }}</h5>
+                        @if ($question->image)
+                        <img src="{{ asset('storage/questions/image/' . $question->image) }}"
+                            class="img-responsive w-50" alt="">
+                        @endif
                         @foreach ($question->options as $option)
                         <div class="form-check">
                             <input required class="form-check-input" type="radio" name="answer[{{$question->id}}]"

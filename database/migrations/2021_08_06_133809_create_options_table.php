@@ -20,7 +20,7 @@ class CreateOptionsTable extends Migration
             $table->unsignedBigInteger('questions_id');
             $table->timestamps();
 
-            $table->foreign('questions_id', 'questions_fk')->references('id')->on('questions');
+            $table->foreign('questions_id', 'questions_fk')->references('id')->on('questions')->onDelete('cascade');
         });
     }
 

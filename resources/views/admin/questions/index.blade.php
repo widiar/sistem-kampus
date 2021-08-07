@@ -23,11 +23,11 @@
 
 <div class="card shadow">
     <div class="card-body">
-        <table id="adminTable" class="table table-bordered dt-responsive nowrap" style="width: 100%">
+        <table id="adminTable" class="table table-bordered dt-responsive" style="width: 100%">
             <thead>
                 <tr>
                     <th>NO</th>
-                    <th>Text</th>
+                    <th class="all">Text</th>
                     <th class="text-center">Aksi</th>
                 </tr>
             </thead>
@@ -39,8 +39,8 @@
                 @foreach ($questions as $data)
                 <tr>
                     <td>{{ ++$no }}</td>
-                    <td>{{ $data->text }}</td>
-                    <td class="row justify-content-center">
+                    <td>{{ Str::limit($data->text, 50, "...") }}</td>
+                    <td class="row justify-content-center" style="min-width: 120px">
                         <a href="{{ route('admin.questions.edit', $data->id) }}" class="mx-2">
                             <button class="btn btn-primary"><i class="fas fa-edit"></i></button>
                         </a>
