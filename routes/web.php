@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\QuestionsController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +21,6 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('', [HomeController::class, 'index'])->name('home');
 
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'doLogin'])->name('_login');
@@ -28,39 +28,64 @@ Route::get('register', [AuthController::class, 'register'])->name('register');
 Route::post('register', [AuthController::class, 'doRegister'])->name('_register');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('about', function () {
-    return view('about');
-})->name('about');
+Route::middleware(['quiz'])->group(function () {
+    Route::get('', [HomeController::class, 'index'])->name('home');
+    Route::get('about', function () {
+        return view('about');
+    })->name('about');
 
-Route::get('services', function () {
-    return view('services');
-})->name('services');
+    Route::get('services', function () {
+        return view('services');
+    })->name('services');
 
-Route::prefix('portofolio')->group(function () {
-    Route::get('', function () {
-        return view('portofolio');
-    })->name('portofolio');
-    Route::get('details', function () {
-        return view('portofolio-details');
-    })->name('portofolio-details');
+    Route::prefix('portofolio')->group(function () {
+        Route::get('', function () {
+            return view('portofolio');
+        })->name('portofolio');
+        Route::get('details', function () {
+            return view('portofolio-details');
+        })->name('portofolio-details');
+    });
+
+    Route::get('team', function () {
+        return view('team');
+    })->name('team');
+
+    Route::get('pricing', function () {
+        return view('pricing');
+    })->name('pricing');
+
+    Route::get('blog', function () {
+        return view('blog');
+    })->name('blog');
+
+    Route::get('contact', function () {
+        return view('contact');
+    })->name('contact');
 });
 
-Route::get('team', function () {
-    return view('team');
-})->name('team');
 
-Route::get('pricing', function () {
-    return view('pricing');
-})->name('pricing');
+// Route::middleware(['auth'])->group(function () {
+//     Route::name('mahasiswa.')->group(function () {
+//         Route::prefix('mahasiswa')->group(function () {
+//         });
+//     });
+// });
 
-Route::get('blog', function () {
-    return view('blog');
-})->name('blog');
+Route::group([
+    'prefix' => 'mahasiswa',
+    'middleware' => ['auth']
+], function () {
+    Route::name('mahasiswa.')->group(function () {
+        Route::get('quiz', [MahasiswaController::class, 'quiz'])->name('quiz');
+        Route::post('quiz', [MahasiswaController::class, 'storeQuiz'])->name('store.quiz');
 
-Route::get('contact', function () {
-    return view('contact');
-})->name('contact');
-
+        Route::middleware(['quiz'])->group(function () {
+            Route::get('personal', [MahasiswaController::class, 'personal'])->name('personal');
+            Route::post('personal', [MahasiswaController::class, 'store'])->name('store');
+        });
+    });
+});
 
 //admin
 Route::middleware(['auth', 'auth.admin'])->group(function () {

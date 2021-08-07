@@ -26,6 +26,8 @@
     <link href="{{ asset('landing-page/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
     <link href="{{ asset('landing-page/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
+    <link href="{{ asset('landing-page/vendor/toastr/toastr.min.css') }}" rel="stylesheet">
+
     <!-- Template Main CSS File -->
     <link href="{{ asset('landing-page/css/style.css') }}" rel="stylesheet">
 
@@ -78,7 +80,7 @@
                     @auth
                     <li class="dropdown"><a href="#"><span>Mahasiswa</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
-                            <li><a href="#">Personal</a></li>
+                            <li><a href="{{ route('mahasiswa.personal') }}">Personal</a></li>
                             <li><a href="#">Input Nilai</a></li>
                             <li><a href="#">Permohonan Alumni</a></li>
                             <li><a href="{{ route('logout') }}">Logout</a></li>
@@ -186,6 +188,8 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
+    <script src="{{ asset('admin/vendor/jquery/jquery.min.js') }}"></script>
+
     <!-- Vendor JS Files -->
     <script src="{{ asset('landing-page/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('landing-page/vendor/glightbox/js/glightbox.min.js') }}"></script>
@@ -195,8 +199,12 @@
     <script src="{{ asset('landing-page/vendor/swiper/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('landing-page/vendor/waypoints/noframework.waypoints.js') }}"></script>
 
+    <script src="{{ asset('landing-page/vendor/toastr/toastr.min.js') }}"></script>
+
     <!-- Template Main JS File -->
     <script src="{{ asset('landing-page/js/main.js') }}"></script>
+
+    @yield('script')
 
 </body>
 
