@@ -55,20 +55,36 @@
                     <span>Dashboard</span></a>
             </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <li class="nav-item{{request()->is('admin/mahasiswa') ? ' active' : '' }}">
-                <a class="nav-link" href="{{ route('admin.mahasiswa') }}">
-                    <i class="nav-icon fas fa-user"></i>
-                    <span>Mahasiswa</span></a>
+            <li class="nav-item{{request()->is('admin/jurusan*') ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.jurusan.index') }}">
+                    <i class="nav-icon fas fa-book"></i>
+                    <span>Jurusan</span></a>
             </li>
 
-            <hr class="sidebar-divider">
+            <li class="nav-item{{request()->is('admin/mata-kuliah*') ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.matakuliah.index') }}">
+                    <i class="nav-icon fas fa-book-open"></i>
+                    <span>Mata Kuliah</span></a>
+            </li>
+
+            <li class="nav-item{{request()->is('admin/mahasiswa*') ? ' active' : '' }}">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#mahasiswaNav">
+                    <i class="fas fa-user-check"></i>
+                    <span>Verif Mahasiswa</span>
+                </a>
+                <div id="mahasiswaNav" class="collapse{{request()->is('admin/mahasiswa*') ? ' show' : '' }}"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item{{request()->is('admin/mahasiswa*') ? ' active' : '' }}"
+                            href="{{ route('admin.mahasiswa') }}">Register</a>
+                        <a class="collapse-item" href="#l">Nilai</a>
+                    </div>
+                </div>
+            </li>
 
             <li class="nav-item{{request()->is('admin/questions*') ? ' active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.questions.index') }}">
-                    <i class="nav-icon fas fa-user"></i>
+                    <i class="nav-icon fas fa-question-circle"></i>
                     <span>Questions</span></a>
             </li>
 

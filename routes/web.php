@@ -3,7 +3,9 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\MataKuliahController;
 use App\Http\Controllers\QuestionsController;
 use Illuminate\Support\Facades\Route;
 
@@ -105,6 +107,28 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
                     Route::get('edit/{question}', [QuestionsController::class, 'edit'])->name('edit');
                     Route::patch('{question}', [QuestionsController::class, 'update'])->name('update');
                     Route::delete('{id}', [QuestionsController::class, 'delete'])->name('delete');
+                });
+            });
+
+            Route::name('jurusan.')->group(function () {
+                Route::prefix('jurusan')->group(function () {
+                    Route::get('', [JurusanController::class, 'index'])->name('index');
+                    Route::get('create', [JurusanController::class, 'create'])->name('create');
+                    Route::post('', [JurusanController::class, 'store'])->name('store');
+                    Route::get('edit/{jurusan}', [JurusanController::class, 'edit'])->name('edit');
+                    Route::patch('{jurusan}', [JurusanController::class, 'update'])->name('update');
+                    Route::delete('{id}', [JurusanController::class, 'delete'])->name('delete');
+                });
+            });
+
+            Route::name('matakuliah.')->group(function () {
+                Route::prefix('mata-kuliah')->group(function () {
+                    Route::get('', [MataKuliahController::class, 'index'])->name('index');
+                    Route::get('create', [MataKuliahController::class, 'create'])->name('create');
+                    Route::post('', [MataKuliahController::class, 'store'])->name('store');
+                    Route::get('edit/{matakuliah}', [MataKuliahController::class, 'edit'])->name('edit');
+                    Route::patch('{matakuliah}', [MataKuliahController::class, 'update'])->name('update');
+                    Route::delete('{id}', [MataKuliahController::class, 'delete'])->name('delete');
                 });
             });
         });

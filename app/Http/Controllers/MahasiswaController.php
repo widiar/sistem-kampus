@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MahasiswaRequest;
+use App\Models\Jurusan;
 use App\Models\Options;
 use App\Models\Questions;
 use App\Models\User;
@@ -38,7 +39,8 @@ class MahasiswaController extends Controller
     public function personal()
     {
         $user = Auth::user();
-        return view('mahasiswa.personal', compact('user'));
+        $jurusan = Jurusan::all();
+        return view('mahasiswa.personal', compact('user', 'jurusan'));
     }
 
     public function store(MahasiswaRequest $request)
@@ -50,6 +52,7 @@ class MahasiswaController extends Controller
             $user->mahasiswa->gender = $request->gender;
             $user->mahasiswa->alamat = $request->alamat;
             $user->mahasiswa->notlp = $request->notlp;
+            $user->mahasiswa->jurusan_id = $request->jurusan;
             $user->mahasiswa->save();
         } else {
             $user->mahasiswa()->create([

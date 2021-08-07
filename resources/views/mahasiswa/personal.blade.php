@@ -73,6 +73,20 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                    <div class="form-group mb-3">
+                        <label for="text">Jurusan<span class="text-danger">*</span></label>
+                        <select name="jurusan" required
+                            class="custom-select form-control @error('jurusan') is-invalid @enderror">
+                            @foreach ($jurusan as $j)
+                            <option {{ old('jurusan', @$user->mahasiswa->jurusan_id) == $j->id ? "selected" : "" }}
+                                value="{{ $j->id }}">{{ $j->nama }}
+                            </option>
+                            @endforeach
+                        </select>
+                        @error('jurusan')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
                     <hr>
                     <h2>Score Quiz: {{ @$user->mahasiswa->score }}</h2>
                     <hr>
