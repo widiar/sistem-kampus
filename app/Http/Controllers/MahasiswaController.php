@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MahasiswaRequest;
 use App\Models\Jurusan;
+use App\Models\Mahasiswa;
+use App\Models\MataKuliah;
+use App\Models\NilaiMahasiswa;
 use App\Models\Options;
 use App\Models\Questions;
 use App\Models\User;
@@ -64,5 +67,99 @@ class MahasiswaController extends Controller
         }
 
         return redirect()->route('mahasiswa.personal')->with(['success' => 'Berhasil Update Data']);
+    }
+
+    public function nilai()
+    {
+        $user = Auth::user();
+        $nilai = NilaiMahasiswa::where('mahasiswa_id', $user->mahasiswa->id)->groupBy('semester')->get();
+        return view('mahasiswa.nilai', compact('nilai'));
+    }
+
+    public function addNilai()
+    {
+        $matakuliah = MataKuliah::all();
+        $semester = $this->getSemester();
+        return view('mahasiswa.addNilai', compact('matakuliah', 'semester'));
+    }
+
+    public function storeNilai(Request $request)
+    {
+        $user = User::find(Auth::user()->id);
+        $data = [];
+        foreach (array_combine($request->matkul, $request->nilai) as $matkul => $nilai) {
+            $dt = [
+                'matakuliah_id' => $matkul,
+                'semester' => $request->semester,
+                'nilai' => $nilai
+            ];
+            array_push($data, $dt);
+        }
+        $user->mahasiswa->nilai()->createMany($data);
+
+        return redirect()->route('mahasiswa.nilai')->with(['success' => 'Berhasil! Nilai akan di verifikasi.']);
+    }
+
+    public function getSemester()
+    {
+        $mahasiswa = Mahasiswa::where('user_id', Auth::user()->id)->first();
+        $smt = [1, 2, 3, 4, 5, 6, 7, 8];
+        $smtMhs = $mahasiswa->nilai()->groupBy('semester')->get();
+        foreach ($smtMhs as $sm) {
+            if (($key = array_search($sm->semester, $smt)) !== false)
+                unset($smt[$key]);
+        }
+        foreach ($smt as $data) {
+            $semester[] = (object) [
+                'id' => $data,
+                'text' => "Semester $data"
+            ];
+        }
+        return $semester;
+    }
+
+    public function show($smt)
+    {
+        $mahasiswa = Mahasiswa::where('user_id', Auth::user()->id)->first();
+        $nilai = $mahasiswa->nilai()->where('semester', $smt)->get();
+        return view('mahasiswa.showNilai', compact('nilai'));
+    }
+
+    public function editNilai($smt)
+    {
+        $mahasiswa = Mahasiswa::where('user_id', Auth::user()->id)->first();
+        $nilai = $mahasiswa->nilai()->where('semester', $smt)->get();
+        $matakuliah = MataKuliah::all();
+        return view('mahasiswa.editNilai', compact('nilai', 'matakuliah'));
+    }
+
+    public function updateNilai(Request $request, $smt)
+    {
+        $mahasiswa = Mahasiswa::where('user_id', Auth::user()->id)->first();
+        $nilai = $mahasiswa->nilai()->where('semester', $smt)->get();
+
+        //delete
+        foreach ($nilai as $vl) $nl[$vl->id] = 'tmp';
+        foreach (array_diff_key($nl, $request->matkul) as $key => $nil) $nilai->find($key)->delete();
+
+        //update insert
+        $postNilai = $request->nilai;
+        foreach ($request->matkul as $key => $value) {
+            $cek = $nilai->find($key);
+            $post = [
+                'matakuliah_id' => $value,
+                'nilai' => $postNilai[$key],
+                'is_approve' => 0,
+            ];
+            if ($cek) $cek->update($post);
+            else $mahasiswa->nilai()->create([
+                'matakuliah_id' => $value,
+                'nilai' => $postNilai[$key],
+                'is_approve' => 0,
+                'semester' => $smt
+            ]);
+        }
+
+        return redirect()->route('mahasiswa.nilai')->with(['success' => 'Berhasil! Nilai akan di verifikasi kembali.']);
     }
 }

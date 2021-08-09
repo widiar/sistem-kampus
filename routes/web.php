@@ -85,6 +85,15 @@ Route::group([
         Route::middleware(['quiz'])->group(function () {
             Route::get('personal', [MahasiswaController::class, 'personal'])->name('personal');
             Route::post('personal', [MahasiswaController::class, 'store'])->name('store');
+
+            Route::prefix('nilai')->group(function () {
+                Route::get('', [MahasiswaController::class, 'nilai'])->name('nilai');
+                Route::get('add', [MahasiswaController::class, 'addNilai'])->name('nilai.add');
+                Route::post('', [MahasiswaController::class, 'storeNilai'])->name('nilai.store');
+                Route::get('semester-{smt}', [MahasiswaController::class, 'show'])->name('nilai.show');
+                Route::get('edit/semester-{smt}', [MahasiswaController::class, 'editNilai'])->name('nilai.edit');
+                Route::patch('{smt}', [MahasiswaController::class, 'updateNilai'])->name('nilai.update');
+            });
         });
     });
 });
@@ -96,8 +105,17 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::get('dashboard', function () {
                 return view('admin.dashboard');
             })->name('dashboard');
-            Route::get('mahasiswa', [AdminController::class, 'mahasiswa'])->name('mahasiswa');
+            Route::get('mahasiswa/register', [AdminController::class, 'mahasiswa'])->name('mahasiswa');
             Route::patch('verifikasi/{user}/{status}', [AdminController::class, 'verifikasi'])->name('verif-mahasiswa');
+
+            Route::name('mahasiswa.')->group(function () {
+                Route::prefix('mahasiswa')->group(function () {
+                    Route::get('nilai', [AdminController::class, 'nilaiMahasiswa'])->name('nilai');
+                    Route::get('nilai/verif/{mhs}', [AdminController::class, 'verifNilai'])->name('verif.nilai');
+                    Route::post('get-nilai', [AdminController::class, 'getNilai'])->name('getNilai');
+                    Route::patch('update-nilai', [AdminController::class, 'updateNilai'])->name('nilai.update');
+                });
+            });
 
             Route::name('questions.')->group(function () {
                 Route::prefix('questions')->group(function () {

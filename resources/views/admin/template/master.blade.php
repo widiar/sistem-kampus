@@ -75,9 +75,10 @@
                 <div id="mahasiswaNav" class="collapse{{request()->is('admin/mahasiswa*') ? ' show' : '' }}"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item{{request()->is('admin/mahasiswa*') ? ' active' : '' }}"
+                        <a class="collapse-item{{request()->is('admin/mahasiswa/register*') ? ' active' : '' }}"
                             href="{{ route('admin.mahasiswa') }}">Register</a>
-                        <a class="collapse-item" href="#l">Nilai</a>
+                        <a class="collapse-item{{request()->is('admin/mahasiswa/nilai*') ? ' active' : '' }}"
+                            href="{{ route('admin.mahasiswa.nilai') }}">Nilai</a>
                     </div>
                 </div>
             </li>

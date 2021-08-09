@@ -26,7 +26,16 @@
     <link href="{{ asset('landing-page/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
     <link href="{{ asset('landing-page/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
+    <link rel="stylesheet" href="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/vendor/datatables/responsive.bootstrap4.min.css') }}">
+
     <link href="{{ asset('landing-page/vendor/toastr/toastr.min.css') }}" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('landing-page/css/style.css') }}" rel="stylesheet">
@@ -81,7 +90,7 @@
                     <li class="dropdown"><a href="#"><span>Mahasiswa</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
                             <li><a href="{{ route('mahasiswa.personal') }}">Personal</a></li>
-                            <li><a href="#">Input Nilai</a></li>
+                            <li><a href="{{ route('mahasiswa.nilai') }}">Input Nilai</a></li>
                             <li><a href="#">Permohonan Alumni</a></li>
                             <li><a href="{{ route('logout') }}">Logout</a></li>
                         </ul>
@@ -199,10 +208,30 @@
     <script src="{{ asset('landing-page/vendor/swiper/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('landing-page/vendor/waypoints/noframework.waypoints.js') }}"></script>
 
+    {{-- Data Tables --}}
+    <script src="{{ asset('admin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('admin/vendor/datatables/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('admin/vendor/datatables/responsive.bootstrap4.min.js') }}"></script>
+
     <script src="{{ asset('landing-page/vendor/toastr/toastr.min.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <!-- Template Main JS File -->
     <script src="{{ asset('landing-page/js/main.js') }}"></script>
+
+    <script>
+        $("#userTable").dataTable({
+            // paging: false,
+            // searching: false,
+            // columnDefs: [{ orderable: false, targets: 5 }],
+        });
+        $(".select2").select2({
+            theme: "bootstrap",
+        });
+    </script>
+
 
     @yield('script')
 
