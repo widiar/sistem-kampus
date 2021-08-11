@@ -67,12 +67,15 @@ Route::middleware(['quiz'])->group(function () {
 });
 
 
-// Route::middleware(['auth'])->group(function () {
-//     Route::name('mahasiswa.')->group(function () {
-//         Route::prefix('mahasiswa')->group(function () {
-//         });
-//     });
-// });
+Route::middleware(['auth', 'quiz'])->group(function () {
+    Route::name('cv.')->group(function () {
+        Route::prefix('cv')->group(function () {
+            Route::get('', function () {
+                return view('cv.index');
+            })->name('index');
+        });
+    });
+});
 
 Route::group([
     'prefix' => 'mahasiswa',

@@ -91,6 +91,7 @@
                         <ul>
                             <li><a href="{{ route('mahasiswa.personal') }}">Personal</a></li>
                             <li><a href="{{ route('mahasiswa.nilai') }}">Input Nilai</a></li>
+                            <li><a href="{{ route('cv.index') }}">CV</a></li>
                             <li><a href="#">Permohonan Alumni</a></li>
                             <li><a href="{{ route('logout') }}">Logout</a></li>
                         </ul>
