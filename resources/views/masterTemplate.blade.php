@@ -29,6 +29,8 @@
     <link rel="stylesheet" href="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/vendor/datatables/responsive.bootstrap4.min.css') }}">
 
+    @yield('css')
+
     <link href="{{ asset('landing-page/vendor/toastr/toastr.min.css') }}" rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -91,7 +93,6 @@
                         <ul>
                             <li><a href="{{ route('mahasiswa.personal') }}">Personal</a></li>
                             <li><a href="{{ route('mahasiswa.nilai') }}">Input Nilai</a></li>
-                            <li><a href="{{ route('cv.index') }}">CV</a></li>
                             <li><a href="#">Permohonan Alumni</a></li>
                             <li><a href="{{ route('logout') }}">Logout</a></li>
                         </ul>
@@ -219,6 +220,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+    <script src="{{ asset('admin/vendor/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
+
     <!-- Template Main JS File -->
     <script src="{{ asset('landing-page/js/main.js') }}"></script>
 
@@ -231,6 +234,10 @@
         $(".select2").select2({
             theme: "bootstrap",
         });
+
+        $(function() {
+            bsCustomFileInput.init();
+        }); 
     </script>
 
 

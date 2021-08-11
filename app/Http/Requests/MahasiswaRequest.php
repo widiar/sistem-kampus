@@ -28,7 +28,9 @@ class MahasiswaRequest extends FormRequest
             'gender' => 'required',
             'alamat' => 'required',
             'notlp' => ['required', 'regex:/^(\+62|62|0)8[1-9][0-9]{6,9}$/'],
-            'jurusan' => 'required|exists:jurusan,id'
+            'jurusan' => 'required|exists:jurusan,id',
+            'ttl' => 'required',
+            'image' => 'image|mimes:png,jpg,jpeg',
         ];
     }
 }

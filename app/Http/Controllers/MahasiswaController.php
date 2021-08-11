@@ -12,6 +12,7 @@ use App\Models\Questions;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class MahasiswaController extends Controller
 {
@@ -56,14 +57,21 @@ class MahasiswaController extends Controller
             $user->mahasiswa->alamat = $request->alamat;
             $user->mahasiswa->notlp = $request->notlp;
             $user->mahasiswa->jurusan_id = $request->jurusan;
+            $user->mahasiswa->ttl = $request->ttl;
+            if ($request->image) {
+                $image = $request->image;
+                $user->mahasiswa->image = $image->hashName();
+                if ($user->mahasiswa->image) Storage::disk('public')->delete('mahasiswa/image/' . $user->mahasiswa->image);
+                $image->storeAs('public/mahasiswa/image', $image->hashName());
+            }
+            if ($request->cv) {
+                $cv = $request->cv;
+                $user->mahasiswa->cv = $cv->hashName();
+                if ($user->mahasiswa->cv) Storage::disk('public')->delete('mahasiswa/cv/' . $user->mahasiswa->cv);
+                $cv->storeAs('public/mahasiswa/cv', $cv->hashName());
+            }
+
             $user->mahasiswa->save();
-        } else {
-            $user->mahasiswa()->create([
-                'nama' => $request->nama,
-                'gender' => $request->gender,
-                'alamat' => $request->alamat,
-                'notlp' => $request->notlp,
-            ]);
         }
 
         return redirect()->route('mahasiswa.personal')->with(['success' => 'Berhasil Update Data']);

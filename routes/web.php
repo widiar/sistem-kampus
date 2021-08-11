@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CVController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\MahasiswaController;
@@ -70,9 +71,8 @@ Route::middleware(['quiz'])->group(function () {
 Route::middleware(['auth', 'quiz'])->group(function () {
     Route::name('cv.')->group(function () {
         Route::prefix('cv')->group(function () {
-            Route::get('', function () {
-                return view('cv.index');
-            })->name('index');
+            Route::get('', [CVController::class, 'index'])->name('index');
+            Route::post('', [CVController::class, 'post']);
         });
     });
 });

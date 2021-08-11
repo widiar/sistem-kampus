@@ -2,6 +2,22 @@
 
 @section('title', 'Mahasiswa')
 
+@section('css')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+<style>
+    .profile-img {
+        height: 7cm;
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .profile-img:hover {
+        cursor: pointer;
+    }
+</style>
+@endsection
+
 @section('main-content')
 
 <div class="container">
@@ -19,41 +35,65 @@
             {{session('info')}}
         </p>
         @endif
-        <div class="card shadow w-75 mx-auto my-4">
+        <div class="card shadow mx-auto my-4">
             <div class="card-header">
                 <h1 class="text-center">Data Mahasiswa</h1>
             </div>
             <div class="card-body">
-                <form action="" method="POST">
+                <form action="" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-group mb-3">
-                        <label for="text">NIM<span class="text-danger">*</span></label>
-                        <input type="text" disabled name="nama" class="form-control " value="{{ $user->nim }}">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="text">Nama Lengkap<span class="text-danger">*</span></label>
-                        <input type="text" required name="nama"
-                            class="form-control  @error('nama') is-invalid @enderror"
-                            value="{{ old('nama', @$user->mahasiswa->nama) }}">
-                        @error('nama')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="text">Jenis Kelamin<span class="text-danger">*</span></label>
-                        <select name="gender" required
-                            class="custom-select form-control @error('gender') is-invalid @enderror">
-                            <option selected>Jenis Kelamin</option>
-                            <option {{ old('gender', @$user->mahasiswa->gender) == "Laki-laki" ? "selected" : "" }}
-                                value="Laki-laki">Laki-Laki
-                            </option>
-                            <option {{ old('gender', @$user->mahasiswa->gender) == "Perempuan" ? "selected" : "" }}
-                                value="Perempuan">Perempuan
-                            </option>
-                        </select>
-                        @error('gender')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                    <div class="row">
+                        <div class="col-3">
+                            <img src="{{ isset($user->mahasiswa->image) ? Storage::url('mahasiswa/image/'. $user->mahasiswa->image) : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
+                                class="img-thumbnail profile-img" alt="">
+                            <input type="file" name="image" class="input-image" style="display: none"
+                                accept="image/x-png, image/jpeg">
+                            @error('image')
+                            <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-3">
+                                <label for="text">NIM<span class="text-danger">*</span></label>
+                                <input type="text" disabled name="nama" class="form-control " value="{{ $user->nim }}">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="text">Nama Lengkap<span class="text-danger">*</span></label>
+                                <input type="text" required name="nama"
+                                    class="form-control  @error('nama') is-invalid @enderror"
+                                    value="{{ old('nama', @$user->mahasiswa->nama) }}">
+                                @error('nama')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="text">Jenis Kelamin<span class="text-danger">*</span></label>
+                                <select name="gender" required
+                                    class="custom-select form-control @error('gender') is-invalid @enderror">
+                                    <option selected>Jenis Kelamin</option>
+                                    <option
+                                        {{ old('gender', @$user->mahasiswa->gender) == "Laki-laki" ? "selected" : "" }}
+                                        value="Laki-laki">Laki-Laki
+                                    </option>
+                                    <option
+                                        {{ old('gender', @$user->mahasiswa->gender) == "Perempuan" ? "selected" : "" }}
+                                        value="Perempuan">Perempuan
+                                    </option>
+                                </select>
+                                @error('gender')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="text">Tempat, Tanggal Lahir<span class="text-danger">*</span></label>
+                                <input type="text" required name="ttl"
+                                    class="form-control  @error('ttl') is-invalid @enderror"
+                                    value="{{ old('ttl', @$user->mahasiswa->ttl) }}">
+                                @error('ttl')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group mb-3">
                         <label for="text">Alamat<span class="text-danger">*</span></label>
@@ -87,10 +127,38 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                    <div class="form-group">
+                        <label for="">CV</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" name="cv"
+                                    class="file custom-file-input @error('cv') is-invalid @enderror" id="cv"
+                                    value="{{ old('cv') }}" accept="application/pdf">
+                                <label class="custom-file-label" for="image">
+                                    <span class="d-inline-block text-truncate w-75">Browse File</span>
+                                </label>
+                                @error("cv")
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="input-group-append">
+                                <a href="{{ route('cv.index') }}">
+                                    <button type="button" class="btn btn-info">Buat CV</button>
+                                </a>
+                            </div>
+                        </div>
+                        @isset($user->mahasiswa->cv)
+                        <a href="{{ Storage::url('mahasiswa/cv/' . $user->mahasiswa->cv) }}" target="_blank">
+                            <small class="text-info">Lihat CV</small>
+                        </a>
+                        @endisset
+                        <small id="exampleInputFile" class="form-text text-muted">upload format file .pdf
+                            max 5mb.</small>
+                    </div>
                     <hr>
                     <h2>Score Quiz: {{ @$user->mahasiswa->score }}</h2>
                     <hr>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary btn-block">Save</button>
                 </form>
             </div>
         </div>
@@ -107,5 +175,10 @@
         toastr.success(sukses, 'Berhasil!')
     }
     if (info !== '') toastr.info(info, 'Mahasiswa');
+
+    $(".profile-img").click(function(){
+        $(".input-image").click()
+    })
+
 </script>
 @endsection
