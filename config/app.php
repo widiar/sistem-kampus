@@ -177,6 +177,8 @@ return [
 
         Barryvdh\Snappy\ServiceProvider::class,
 
+        App\Providers\GoogleDriveServiceProvider::class,
+
     ],
 
     /*

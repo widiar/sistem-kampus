@@ -18,7 +18,7 @@ class AuthController extends Controller
     public function doRegister(Request $request)
     {
         $rules = [
-            'nim' => 'required|unique:users|digits:10',
+            'nim' => 'required|unique:users|digits:9',
             'password' => 'required|same:password2|min:8',
             'email' => 'email|required|unique:users',
         ];
@@ -51,7 +51,7 @@ class AuthController extends Controller
     public function doLogin(Request  $request)
     {
         $request->validate([
-            'nim' => 'required|digits:10',
+            'nim' => 'required|digits:9',
             'password' => 'required'
         ]);
         $user = User::where('nim', $request->nim)->first();

@@ -9,6 +9,7 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\MataKuliahController;
 use App\Http\Controllers\QuestionsController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,6 +76,13 @@ Route::middleware(['auth', 'quiz'])->group(function () {
             Route::post('', [CVController::class, 'post']);
         });
     });
+});
+
+Route::get('test', function () {
+    $disk = Storage::disk('google');
+    // $url = $disk->url('folder/my_file.txt');
+    // $disk =  Storage::disk('google')->put('test.txt', 'Hello');
+    dd($disk->allFiles());
 });
 
 Route::group([
