@@ -39,7 +39,7 @@
                             <img src="{{ isset($mahasiswa->image) ? json_decode($mahasiswa->image)->url : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
                                 class="img-thumbnail profile-img" alt="">
                             <input type="hidden" name="profile_img"
-                                value="{{ isset($mahasiswa->image) ? env('APP_URL') . json_decode($mahasiswa->image)->url : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}">
+                                value="{{ isset($mahasiswa->image) ? json_decode($mahasiswa->image)->url : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}">
                             @else
                             <img src="{{ isset($mahasiswa->image) ? Storage::url('mahasiswa/image/'. $mahasiswa->image) : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
                                 class="img-thumbnail profile-img" alt="">
