@@ -51,7 +51,7 @@ class AuthController extends Controller
     public function doLogin(Request  $request)
     {
         $request->validate([
-            'nim' => 'required|digits:9',
+            'nim' => 'required',
             'password' => 'required'
         ]);
         $user = User::where('nim', $request->nim)->first();
