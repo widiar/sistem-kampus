@@ -6,6 +6,7 @@ use App\Models\Mahasiswa;
 use App\Models\NilaiMahasiswa;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -30,7 +31,8 @@ class AdminController extends Controller
 
     public function verifNilai(Mahasiswa $mhs)
     {
-        $nilai = $mhs->nilai()->groupBy('semester')->get();
+        $nilai = $mhs->nilai()->select(DB::raw('*, max(semester)'))->groupBy('semester')->get();
+        // dd($nilai);
         return view('admin.nilai.verif', compact('nilai', 'mhs'));
     }
 
