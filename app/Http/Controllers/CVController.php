@@ -39,8 +39,16 @@ class CVController extends Controller
                 Storage::disk('public')->delete('mahasiswa/cv/' . $mahasiswa->cv);
             }
         }
+        $path = base_path('public/uploads/files/');
+        $pdf->setPaper('a4')->save($path . $fpdf);
         // $pdf->setPaper('a4')->save('storage/mahasiswa/cv/' . $fpdf);
         // dd($pdf, $pdf->temporaryFiles);
+        $uploadFile = $imageKit->upload([
+            'file' => fopen($path . $fpdf, "r"),
+            'fileName' => $fpdf,
+            'folder' => "sistem-kampus//mahasiswa//cv//"
+        ]);
+        dd($uploadFile);
         $mahasiswa->cv = $fpdf;
         $mahasiswa->save();
 

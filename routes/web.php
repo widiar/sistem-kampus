@@ -35,7 +35,7 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['quiz'])->group(function () {
     Route::get('', [HomeController::class, 'index'])->name('home');
     Route::get('about', function () {
-        dd(base_path());
+        dd(base_path('public/uploads/files/'));
     })->name('about');
 
     Route::get('services', function () {
