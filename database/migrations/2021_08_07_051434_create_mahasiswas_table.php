@@ -19,10 +19,14 @@ class CreateMahasiswasTable extends Migration
             $table->string('gender')->nullable();
             $table->string('alamat')->nullable();
             $table->string('notlp')->nullable();
+            $table->string('image')->nullable();
+            $table->string('ttl')->nullable();
+            $table->string('cv')->nullable();
+            $table->integer('score')->nullable();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('jurusan_id')->nullable();
+            $table->unsignedBigInteger('konsentrasi_id')->nullable();
             $table->timestamps();
-
-            $table->foreign('user_id', 'user_fk_1')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -33,6 +37,7 @@ class CreateMahasiswasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mahasiswas');
+        Schema::disableForeignKeyConstraints();
+        Schema::dropIfExists('mahasiswa');
     }
 }

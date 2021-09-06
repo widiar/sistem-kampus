@@ -17,10 +17,8 @@ class CreateOptionsTable extends Migration
             $table->id();
             $table->longText('text');
             $table->boolean('is_true');
-            $table->unsignedBigInteger('questions_id');
+            $table->foreignId('questions_id')->constrained('questions', 'id')->onDelete('cascade');
             $table->timestamps();
-
-            $table->foreign('questions_id', 'questions_fk')->references('id')->on('questions')->onDelete('cascade');
         });
     }
 
@@ -31,6 +29,7 @@ class CreateOptionsTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('options');
     }
 }

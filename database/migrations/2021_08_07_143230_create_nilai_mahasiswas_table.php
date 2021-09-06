@@ -19,10 +19,8 @@ class CreateNilaiMahasiswasTable extends Migration
             $table->unsignedBigInteger('matakuliah_id');
             $table->string('semester');
             $table->string('nilai');
+            $table->smallInteger('is_approve')->default(0);
             $table->timestamps();
-
-            $table->foreign('mahasiswa_id', 'mahasiswa_fk_11')->references('id')->on('mahasiswa')->onDelete('cascade');
-            $table->foreign('matakuliah_id', 'matakuliah_fk_11')->references('id')->on('mata_kuliah')->onDelete('cascade');
         });
     }
 

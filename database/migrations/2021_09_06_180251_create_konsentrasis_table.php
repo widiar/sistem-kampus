@@ -18,8 +18,6 @@ class CreateKonsentrasisTable extends Migration
             $table->string('nama');
             $table->unsignedBigInteger('jurusan_id');
             $table->timestamps();
-
-            $table->foreign('jurusan_id', 'jurusan_fk_34')->references('id')->on('jurusan')->onDelete('cascade');
         });
     }
 
