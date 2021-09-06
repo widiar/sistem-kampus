@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\MataKuliah;
+use App\Models\Konsentrasi;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class MataKuliahFactory extends Factory
+class KonsentrasiFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = MataKuliah::class;
+    protected $model = Konsentrasi::class;
 
     /**
      * Define the model's default state.
@@ -22,10 +22,8 @@ class MataKuliahFactory extends Factory
     public function definition()
     {
         return [
-            'kode' => $this->faker->bothify('??##??'),
             'nama' => $this->faker->sentence(mt_rand(1, 3)),
-            'sks' => $this->faker->randomNumber(2),
-            'konsentrasi_id' => mt_rand(1, 10)
+            'jurusan_id' => mt_rand(1, 6)
         ];
     }
 }

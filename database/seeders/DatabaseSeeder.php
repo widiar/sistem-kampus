@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Konsentrasi;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,6 +21,7 @@ class DatabaseSeeder extends Seeder
             OptionsSeeder::class,
             JurusanSeeder::class,
             MataKuliahSeeder::class,
+            KonsentrasiSeeder::class,
         ]);
     }
 }

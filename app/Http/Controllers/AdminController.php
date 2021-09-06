@@ -25,7 +25,7 @@ class AdminController extends Controller
 
     public function nilaiMahasiswa()
     {
-        $mahasiswa = Mahasiswa::all();
+        $mahasiswa = Mahasiswa::where('nama', '<>', null)->get();
         return view('admin.nilai.index', compact('mahasiswa'));
     }
 

@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MataKuliah extends Model
+class Konsentrasi extends Model
 {
     use HasFactory;
 
-    protected $table = 'mata_kuliah';
+    protected $table = 'konsentrasi';
 
     protected $guarded = ['id'];
 
-    public function konsentrasi()
+    public function jurusan()
     {
-        return $this->belongsTo(Konsentrasi::class);
+        return $this->belongsTo(Jurusan::class);
     }
 }

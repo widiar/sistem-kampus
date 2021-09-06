@@ -18,9 +18,9 @@ class Mahasiswa extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function jurusan()
+    public function konsentrasi()
     {
-        return $this->belongsTo(Jurusan::class);
+        return $this->belongsTo(Konsentrasi::class);
     }
 
     public function nilai()
