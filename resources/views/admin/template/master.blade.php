@@ -60,6 +60,11 @@
                     <i class="nav-icon fas fa-book"></i>
                     <span>Jurusan</span></a>
             </li>
+            <li class="nav-item{{request()->is('admin/konsentrasi*') ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.konsentrasi.index') }}">
+                    <i class="nav-icon fas fa-book"></i>
+                    <span>Konsentrasi</span></a>
+            </li>
 
             <li class="nav-item{{request()->is('admin/mata-kuliah*') ? ' active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.matakuliah.index') }}">

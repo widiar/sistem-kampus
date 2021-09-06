@@ -18,6 +18,11 @@ class Jurusan extends Model
         return $this->hasMany(Mahasiswa::class);
     }
 
+    public function konsentrasi()
+    {
+        return $this->hasMany(Konsentrasi::class);
+    }
+
     public function matakuliah()
     {
         return $this->hasMany(MataKuliah::class);

@@ -34,11 +34,11 @@
                 @enderror
             </div>
             <div class="form-group mb-3">
-                <label for="text">Jurusan<span class="text-danger">*</span></label>
+                <label for="text">Konsentrasi<span class="text-danger">*</span></label>
                 <select name="jurusan" required
                     class="custom-select form-control @error('jurusan') is-invalid @enderror">
                     @foreach ($jurusan as $j)
-                    <option {{ old('jurusan', $matakuliah->jurusan_id) == $j->id ? "selected" : "" }}
+                    <option {{ old('jurusan', $matakuliah->konsentrasi_id) == $j->id ? "selected" : "" }}
                         value="{{ $j->id }}">{{ $j->nama }}
                     </option>
                     @endforeach

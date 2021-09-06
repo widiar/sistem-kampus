@@ -45,6 +45,10 @@ class JurusanController extends Controller
     public function delete($id)
     {
         $jurusan = Jurusan::find($id);
+        foreach ($jurusan->konsentrasi as $dt) {
+            $dt->matakuliah()->delete();
+        }
+        $jurusan->konsentrasi()->delete();
         $jurusan->delete();
         return "Sukses";
     }

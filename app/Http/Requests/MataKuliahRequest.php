@@ -27,7 +27,7 @@ class MataKuliahRequest extends FormRequest
             'kode' => 'required',
             'nama' => 'required',
             'sks' => 'required|integer',
-            'jurusan' => 'required|exists:jurusan,id'
+            'jurusan' => 'required|exists:konsentrasi,id'
         ];
     }
 }

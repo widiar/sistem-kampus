@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CVController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\KonsentrasiController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\MataKuliahController;
 use App\Http\Controllers\QuestionsController;
@@ -146,6 +147,8 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
                     Route::delete('{id}', [JurusanController::class, 'delete'])->name('delete');
                 });
             });
+
+            Route::resource('konsentrasi', KonsentrasiController::class);
 
             Route::name('matakuliah.')->group(function () {
                 Route::prefix('mata-kuliah')->group(function () {

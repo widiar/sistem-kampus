@@ -22,6 +22,10 @@ class Mahasiswa extends Model
     {
         return $this->belongsTo(Konsentrasi::class);
     }
+    public function jurusan()
+    {
+        return $this->belongsTo(Jurusan::class);
+    }
 
     public function nilai()
     {

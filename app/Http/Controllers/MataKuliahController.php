@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MataKuliahRequest;
 use App\Models\Jurusan;
+use App\Models\Konsentrasi;
 use App\Models\MataKuliah;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,7 @@ class MataKuliahController extends Controller
 
     public function create()
     {
-        $jurusan = Jurusan::all();
+        $jurusan = Konsentrasi::all();
         return view('admin.matakuliah.create', compact('jurusan'));
     }
 
@@ -27,14 +28,14 @@ class MataKuliahController extends Controller
             'kode' => $request->kode,
             'nama' => $request->nama,
             'sks' => $request->sks,
-            'jurusan_id' => $request->jurusan,
+            'konsentrasi_id' => $request->jurusan,
         ]);
         return redirect()->route('admin.matakuliah.index')->with(['success' => 'Berhasil Menambah Mata Kuliah']);
     }
 
     public function edit(MataKuliah $matakuliah)
     {
-        $jurusan = Jurusan::all();
+        $jurusan = Konsentrasi::all();
         return view('admin.matakuliah.edit', compact('matakuliah', 'jurusan'));
     }
 
@@ -43,7 +44,7 @@ class MataKuliahController extends Controller
         $matakuliah->kode = $request->kode;
         $matakuliah->nama = $request->nama;
         $matakuliah->sks = $request->sks;
-        $matakuliah->jurusan_id = $request->jurusan;
+        $matakuliah->konsentrasi_id = $request->jurusan;
         $matakuliah->save();
         return redirect()->route('admin.matakuliah.index')->with(['success' => 'Berhasil Update Mata Kuliah']);
     }

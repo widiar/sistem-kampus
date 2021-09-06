@@ -17,4 +17,8 @@ class Konsentrasi extends Model
     {
         return $this->belongsTo(Jurusan::class);
     }
+    public function matakuliah()
+    {
+        return $this->hasMany(MataKuliah::class);
+    }
 }

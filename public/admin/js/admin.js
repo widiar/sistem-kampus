@@ -59,9 +59,10 @@ $(document).ready(function(){
         var text = 'Anda akan menghapus data ini';
         var berhasil = 'Berhasil menghapus data';
         var gagal = 'Gagal menghapus data';
+        let extra = $(this).data("extra");
         Swal.fire({
             title: "Anda Yakin?",
-            text: text,
+            html: `${text}<br><b>${extra}</b>`,
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",

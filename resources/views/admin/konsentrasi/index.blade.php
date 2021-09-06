@@ -3,8 +3,8 @@
 @section('title-content', 'Questions')
 
 @section('content')
-<a href="{{ route('admin.jurusan.create') }}">
-    <button class="btn btn-primary mb-3">Tambah Jurusan</button>
+<a href="{{ route('admin.konsentrasi.create') }}">
+    <button class="btn btn-primary mb-3">Tambah Konsentrasi</button>
 </a>
 
 @if(session('success'))
@@ -28,6 +28,7 @@
                 <tr>
                     <th>NO</th>
                     <th class="all">Nama</th>
+                    <th>Jurusan</th>
                     <th class="text-center">Aksi</th>
                 </tr>
             </thead>
@@ -35,17 +36,18 @@
                 @php
                 $no=0;
                 @endphp
-                @if (!is_null($jurusan))
-                @foreach ($jurusan as $data)
+                @if (!is_null($konsentrasi))
+                @foreach ($konsentrasi as $data)
                 <tr>
                     <td>{{ ++$no }}</td>
-                    <td>{{ Str::limit($data->nama, 50, "...") }}</td>
+                    <td>{{ $data->nama }}</td>
+                    <td>{{ $data->jurusan->nama }}</td>
                     <td class="row justify-content-center" style="min-width: 120px">
-                        <a href="{{ route('admin.jurusan.edit', $data->id) }}" class="mx-2">
+                        <a href="{{ route('admin.konsentrasi.edit', $data->id) }}" class="mx-2">
                             <button class="btn btn-primary"><i class="fas fa-edit"></i></button>
                         </a>
-                        <form action="{{ route('admin.jurusan.delete', $data->id) }}" method="POST" class="deleteData"
-                            data-extra="Akan Menghapus Konsentrasi dan Mata Kuliah yg Berhubungan.">
+                        <form action="{{ route('admin.konsentrasi.destroy', $data->id) }}" method="POST"
+                            class="deleteData" data-extra="Akan Menghapus Mata Kuliah yg Berhubungan.">
                             @method('DELETE')
                             @csrf
                             <button class="btn btn-danger" type="submit"><i class="fas fa-trash"></i></button>
