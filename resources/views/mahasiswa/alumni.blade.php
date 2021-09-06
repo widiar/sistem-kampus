@@ -62,10 +62,16 @@
                                 </a>
                             </div>
                         </div>
-                        @isset($user->mahasiswa->cv)
-                        <a href="{{ Storage::url('mahasiswa/cv/' . $user->mahasiswa->cv) }}" target="_blank">
+                        @isset($mahasiswa->cv)
+                        @if (env('APP_HOST') == 'heroku')
+                        <a href="{{ json_decode($mahasiswa->cv)->url }}" target="_blank">
                             <small class="text-info">Lihat CV</small>
                         </a>
+                        @else
+                        <a href="{{ Storage::url('mahasiswa/cv/' . $mahasiswa->cv) }}" target="_blank">
+                            <small class="text-info">Lihat CV</small>
+                        </a>
+                        @endif
                         @endisset
                         <small id="exampleInputFile" class="form-text text-muted">upload format file .pdf
                             max 5mb.</small>

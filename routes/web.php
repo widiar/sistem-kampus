@@ -35,7 +35,7 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['quiz'])->group(function () {
     Route::get('', [HomeController::class, 'index'])->name('home');
     Route::get('about', function () {
-        dd(base_path('public/uploads/files/'));
+        return view('about');
     })->name('about');
 
     Route::get('services', function () {
@@ -91,6 +91,7 @@ Route::group([
             Route::get('personal', [MahasiswaController::class, 'personal'])->name('personal');
             Route::post('personal', [MahasiswaController::class, 'store'])->name('store');
             Route::get('alumni', [MahasiswaController::class, 'alumni'])->name('alumni');
+            Route::post('alumni', [MahasiswaController::class, 'storeAlumni']);
 
             Route::prefix('nilai')->group(function () {
                 Route::get('', [MahasiswaController::class, 'nilai'])->name('nilai');

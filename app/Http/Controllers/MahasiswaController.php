@@ -192,6 +192,39 @@ class MahasiswaController extends Controller
 
     public function alumni()
     {
-        return view('mahasiswa.alumni');
+        $mahasiswa = Mahasiswa::where('user_id', Auth::user()->id)->first();
+        return view('mahasiswa.alumni', compact('mahasiswa'));
+    }
+
+    public function storeAlumni(Request $request)
+    {
+        $mahasiswa = Mahasiswa::where('user_id', Auth::user()->id)->first();
+        $request->validate([
+            'cv' => 'file|mimes:pdf'
+        ]);
+        $cv = $request->cv;
+        if (env('APP_HOST') == 'heroku') {
+            $imageKit = new ImageKit(
+                env('IMAGE_KIT_PUBLIC_KEY'),
+                env('IMAGE_KIT_SECRET_KEY'),
+                env('IMAGE_KIT_ENDPOINT')
+            );
+            if ($mahasiswa->cv) $imageKit->deleteFile(json_decode($mahasiswa->cv)->field);
+            $uploadFile = $imageKit->upload([
+                'file' => fopen($cv->getPathname(), "r"),
+                'fileName' => $cv->hashName(),
+                'folder' => "sistem-kampus//mahasiswa//cv//"
+            ]);
+            $mahasiswa->cv = json_encode([
+                "field" => $uploadFile->success->fileId,
+                "url" => $uploadFile->success->url,
+            ]);
+        } else {
+            $mahasiswa->cv = $cv->hashName();
+            if ($mahasiswa->cv) Storage::disk('public')->delete('mahasiswa/cv/' . $mahasiswa->cv);
+            $cv->storeAs('public/mahasiswa/cv', $cv->hashName());
+        }
+        $mahasiswa->save();
+        return redirect()->route('mahasiswa.alumni')->with(['success' => 'Berhasil! Data di simpan.']);
     }
 }
