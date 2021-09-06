@@ -44,8 +44,13 @@
                     @csrf
                     <div class="row">
                         <div class="col-3">
+                            @if (env('APP_HOST') == 'heroku')
+                            <img src="{{ isset($user->mahasiswa->image) ? json_decode($user->mahasiswa->image)->url : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
+                                class="img-thumbnail profile-img" alt="">
+                            @else
                             <img src="{{ isset($user->mahasiswa->image) ? Storage::url('mahasiswa/image/'. $user->mahasiswa->image) : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
                                 class="img-thumbnail profile-img" alt="">
+                            @endif
                             <input type="file" name="image" class="input-image" style="display: none"
                                 accept="image/x-png, image/jpeg">
                             @error('image')
@@ -127,34 +132,7 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="form-group">
-                        <label for="">CV</label>
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input type="file" name="cv"
-                                    class="file custom-file-input @error('cv') is-invalid @enderror" id="cv"
-                                    value="{{ old('cv') }}" accept="application/pdf">
-                                <label class="custom-file-label" for="image">
-                                    <span class="d-inline-block text-truncate w-75">Browse File</span>
-                                </label>
-                                @error("cv")
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="input-group-append">
-                                <a href="{{ route('cv.index') }}">
-                                    <button type="button" class="btn btn-info">Buat CV</button>
-                                </a>
-                            </div>
-                        </div>
-                        @isset($user->mahasiswa->cv)
-                        <a href="{{ Storage::url('mahasiswa/cv/' . $user->mahasiswa->cv) }}" target="_blank">
-                            <small class="text-info">Lihat CV</small>
-                        </a>
-                        @endisset
-                        <small id="exampleInputFile" class="form-text text-muted">upload format file .pdf
-                            max 5mb.</small>
-                    </div>
+
                     <hr>
                     <h2>Score Quiz: {{ @$user->mahasiswa->score }}</h2>
                     <hr>

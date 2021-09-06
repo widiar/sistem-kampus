@@ -49,6 +49,9 @@
                                 <a href="{{ route('mahasiswa.nilai.edit', $data->semester) }}" class="mx-2">
                                     <button class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></button>
                                 </a>
+                                <a href="{{ route('mahasiswa.nilai.delete', $data->semester) }}">
+                                    <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                                </a>
                             </td>
                             @else
                             <td class="text-center" style="min-width: 120px">

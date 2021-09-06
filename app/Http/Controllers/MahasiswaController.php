@@ -13,6 +13,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use ImageKit\ImageKit;
 
 class MahasiswaController extends Controller
 {
@@ -60,17 +61,27 @@ class MahasiswaController extends Controller
             $user->mahasiswa->ttl = $request->ttl;
             if ($request->image) {
                 $image = $request->image;
-                $user->mahasiswa->image = $image->hashName();
-                if ($user->mahasiswa->image) Storage::disk('public')->delete('mahasiswa/image/' . $user->mahasiswa->image);
-                $image->storeAs('public/mahasiswa/image', $image->hashName());
+                if (env('APP_HOST') == 'heroku') {
+                    $imageKit = new ImageKit(
+                        env('IMAGE_KIT_PUBLIC_KEY'),
+                        env('IMAGE_KIT_SECRET_KEY'),
+                        env('IMAGE_KIT_ENDPOINT')
+                    );
+                    $uploadFile = $imageKit->upload([
+                        'file' => fopen($image->getPathname(), "r"),
+                        'fileName' => $image->hashName(),
+                        'folder' => "sistem-kampus//mahasiswa//image//"
+                    ]);
+                    $user->mahasiswa->image = json_encode([
+                        "field" => $uploadFile->success->fileId,
+                        "url" => $uploadFile->success->url,
+                    ]);
+                } else {
+                    $user->mahasiswa->image = $image->hashName();
+                    if ($user->mahasiswa->image) Storage::disk('public')->delete('mahasiswa/image/' . $user->mahasiswa->image);
+                    $image->storeAs('public/mahasiswa/image', $image->hashName());
+                }
             }
-            if ($request->cv) {
-                $cv = $request->cv;
-                $user->mahasiswa->cv = $cv->hashName();
-                if ($user->mahasiswa->cv) Storage::disk('public')->delete('mahasiswa/cv/' . $user->mahasiswa->cv);
-                $cv->storeAs('public/mahasiswa/cv', $cv->hashName());
-            }
-
             $user->mahasiswa->save();
         }
 
@@ -80,7 +91,7 @@ class MahasiswaController extends Controller
     public function nilai()
     {
         $user = Auth::user();
-        $nilai = NilaiMahasiswa::where('mahasiswa_id', $user->mahasiswa->id)->groupBy('semester')->get();
+        $nilai = NilaiMahasiswa::select('semester', 'is_approve')->where('mahasiswa_id', $user->mahasiswa->id)->distinct()->orderBy('semester')->get();
         return view('mahasiswa.nilai', compact('nilai'));
     }
 
@@ -112,7 +123,7 @@ class MahasiswaController extends Controller
     {
         $mahasiswa = Mahasiswa::where('user_id', Auth::user()->id)->first();
         $smt = [1, 2, 3, 4, 5, 6, 7, 8];
-        $smtMhs = $mahasiswa->nilai()->groupBy('semester')->get();
+        $smtMhs = $mahasiswa->nilai()->select('semester')->distinct()->get();
         foreach ($smtMhs as $sm) {
             if (($key = array_search($sm->semester, $smt)) !== false)
                 unset($smt[$key]);
@@ -139,6 +150,14 @@ class MahasiswaController extends Controller
         $nilai = $mahasiswa->nilai()->where('semester', $smt)->get();
         $matakuliah = MataKuliah::all();
         return view('mahasiswa.editNilai', compact('nilai', 'matakuliah'));
+    }
+
+    public function deleteNilai($smt)
+    {
+        $mahasiswa = Mahasiswa::where('user_id', Auth::user()->id)->first();
+        $delete = $mahasiswa->nilai()->where('semester', $smt)->delete();
+        $nilai = NilaiMahasiswa::select('semester', 'is_approve')->where('mahasiswa_id', $mahasiswa->id)->distinct()->orderBy('semester')->get();
+        return view('mahasiswa.showNilai', compact('nilai'));
     }
 
     public function updateNilai(Request $request, $smt)
@@ -169,5 +188,10 @@ class MahasiswaController extends Controller
         }
 
         return redirect()->route('mahasiswa.nilai')->with(['success' => 'Berhasil! Nilai akan di verifikasi kembali.']);
+    }
+
+    public function alumni()
+    {
+        return view('mahasiswa.alumni');
     }
 }

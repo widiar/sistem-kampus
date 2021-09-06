@@ -35,10 +35,17 @@
                     @csrf
                     <div class="row">
                         <div class="col-3">
+                            @if (env('APP_HOST') == 'heroku')
+                            <img src="{{ isset($mahasiswa->image) ? json_decode($mahasiswa->image)->url : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
+                                class="img-thumbnail profile-img" alt="">
+                            <input type="hidden" name="profile_img"
+                                value="{{ isset($mahasiswa->image) ? env('APP_URL') . json_decode($mahasiswa->image)->url : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}">
+                            @else
                             <img src="{{ isset($mahasiswa->image) ? Storage::url('mahasiswa/image/'. $mahasiswa->image) : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
                                 class="img-thumbnail profile-img" alt="">
                             <input type="hidden" name="profile_img"
                                 value="{{ isset($mahasiswa->image) ? env('APP_URL') . Storage::url('mahasiswa/image/'. $mahasiswa->image) : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}">
+                            @endif
                         </div>
                         <div class="col">
                             <div class="form-group row mb-3">

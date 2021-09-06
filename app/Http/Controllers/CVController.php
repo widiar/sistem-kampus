@@ -7,12 +7,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\Snappy\Facades\SnappyPdf as PDF;
 use Illuminate\Support\Facades\Storage;
+use ImageKit\ImageKit;
 
 class CVController extends Controller
 {
     public function index()
     {
         $mahasiswa = Mahasiswa::where('user_id', Auth::user()->id)->first();
+        if (!$mahasiswa->nama) return redirect()->route('mahasiswa.alumni')->with(['info' => 'Silahkan Update Data di Personal dahulu']);
         return view('cv.index', compact('mahasiswa'));
     }
 
@@ -23,8 +25,22 @@ class CVController extends Controller
         // return view('cv.pdf', compact('data'));
         $fpdf = uniqid() . ".pdf";
         $pdf = PDF::loadView('cv.pdf', compact('data'));
-        if ($mahasiswa->cv) Storage::disk('public')->delete('mahasiswa/cv/' . $mahasiswa->cv);
-        $pdf->setPaper('a4')->save('storage/mahasiswa/cv/' . $fpdf);
+        if (env('APP_HOST') == 'heroku') {
+            $imageKit = new ImageKit(
+                env('IMAGE_KIT_PUBLIC_KEY'),
+                env('IMAGE_KIT_SECRET_KEY'),
+                env('IMAGE_KIT_ENDPOINT')
+            );
+        }
+        if ($mahasiswa->cv) {
+            if (env('APP_HOST') == 'heroku') {
+                $imageKit->deleteFile(json_decode($mahasiswa->cv)->field);
+            } else {
+                Storage::disk('public')->delete('mahasiswa/cv/' . $mahasiswa->cv);
+            }
+        }
+        // $pdf->setPaper('a4')->save('storage/mahasiswa/cv/' . $fpdf);
+        // dd($pdf, $pdf->temporaryFiles);
         $mahasiswa->cv = $fpdf;
         $mahasiswa->save();
 

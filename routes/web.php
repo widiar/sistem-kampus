@@ -35,7 +35,7 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['quiz'])->group(function () {
     Route::get('', [HomeController::class, 'index'])->name('home');
     Route::get('about', function () {
-        return view('about');
+        dd(base_path());
     })->name('about');
 
     Route::get('services', function () {
@@ -78,12 +78,6 @@ Route::middleware(['auth', 'quiz'])->group(function () {
     });
 });
 
-Route::get('test', function () {
-    $disk = Storage::disk('google');
-    // $url = $disk->url('folder/my_file.txt');
-    // $disk =  Storage::disk('google')->put('test.txt', 'Hello');
-    dd($disk->allFiles());
-});
 
 Route::group([
     'prefix' => 'mahasiswa',
@@ -96,6 +90,7 @@ Route::group([
         Route::middleware(['quiz'])->group(function () {
             Route::get('personal', [MahasiswaController::class, 'personal'])->name('personal');
             Route::post('personal', [MahasiswaController::class, 'store'])->name('store');
+            Route::get('alumni', [MahasiswaController::class, 'alumni'])->name('alumni');
 
             Route::prefix('nilai')->group(function () {
                 Route::get('', [MahasiswaController::class, 'nilai'])->name('nilai');
@@ -103,6 +98,7 @@ Route::group([
                 Route::post('', [MahasiswaController::class, 'storeNilai'])->name('nilai.store');
                 Route::get('semester-{smt}', [MahasiswaController::class, 'show'])->name('nilai.show');
                 Route::get('edit/semester-{smt}', [MahasiswaController::class, 'editNilai'])->name('nilai.edit');
+                Route::get('delete/semester-{smt}', [MahasiswaController::class, 'deleteNilai'])->name('nilai.delete');
                 Route::patch('{smt}', [MahasiswaController::class, 'updateNilai'])->name('nilai.update');
             });
         });

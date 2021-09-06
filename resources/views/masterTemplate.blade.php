@@ -82,7 +82,6 @@
             <nav id="navbar" class="navbar">
                 <ul>
                     <li><a href="{{ route('home') }}">Home</a></li>
-                    <li><a href="{{ route('services') }}">Alumni</a></li>
                     <li><a href="{{ route('about') }}">About</a></li>
                     @guest
                     <li><a href="{{ route('login') }}">Login</a></li>
@@ -93,7 +92,7 @@
                         <ul>
                             <li><a href="{{ route('mahasiswa.personal') }}">Personal</a></li>
                             <li><a href="{{ route('mahasiswa.nilai') }}">Input Nilai</a></li>
-                            <li><a href="#">Permohonan Alumni</a></li>
+                            <li><a href="{{ route('mahasiswa.alumni') }}">Permohonan Alumni</a></li>
                             <li><a href="{{ route('logout') }}">Logout</a></li>
                         </ul>
                     </li>
