@@ -46,7 +46,9 @@ class MahasiswaController extends Controller
     {
         $user = Auth::user();
         $jurusan = Jurusan::all();
-        return view('mahasiswa.personal', compact('user', 'jurusan'));
+        $konsentrasi = Konsentrasi::where('jurusan_id', @$user->mahasiswa->jurusan->id)->get();
+        // dd($konsentrasi);
+        return view('mahasiswa.personal', compact('user', 'jurusan', 'konsentrasi'));
     }
 
     public function getKonsentrasi($id)
@@ -75,6 +77,7 @@ class MahasiswaController extends Controller
             $user->mahasiswa->alamat = $request->alamat;
             $user->mahasiswa->notlp = $request->notlp;
             $user->mahasiswa->jurusan_id = $request->jurusan;
+            $user->mahasiswa->konsentrasi_id = $request->konsentrasi;
             $user->mahasiswa->ttl = $request->ttl;
             if ($request->image) {
                 $image = $request->image;

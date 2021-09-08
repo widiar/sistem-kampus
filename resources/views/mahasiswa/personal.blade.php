@@ -122,6 +122,7 @@
                         <label for="text">Jurusan<span class="text-danger">*</span></label>
                         <select name="jurusan" required
                             class="custom-select jurusan form-control @error('jurusan') is-invalid @enderror">
+                            <option disabled selected>Pilih Jurusan</option>
                             @foreach ($jurusan as $j)
                             <option {{ old('jurusan', @$user->mahasiswa->jurusan_id) == $j->id ? "selected" : "" }}
                                 value="{{ $j->id }}">{{ $j->nama }}
@@ -136,6 +137,13 @@
                         <label for="text">Konsentrasi<span class="text-danger">*</span></label>
                         <select name="konsentrasi" required
                             class="custom-select form-control @error('konsentrasi') is-invalid @enderror konsentrasi">
+                            @if(@$konsentrasi)
+                            @foreach (@$konsentrasi as $j)
+                            <option {{ old('konsentrasi', @$user->mahasiswa->konsentrasi_id) == $j->id ? "selected" : "" }}
+                                value="{{ $j->id }}">{{ $j->nama }}
+                            </option>
+                            @endforeach
+                            @endif
                         </select>
                         @error('konsentrasi')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -184,7 +192,7 @@
     }
 
     let jurusan = $(".konsentrasi");
-    initJurusan($('.jurusan').val())
+    // initJurusan($('.jurusan').val())
 
     $('.jurusan').change(function(){
         let value = $(this).val();
