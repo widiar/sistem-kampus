@@ -10,6 +10,7 @@ use App\Models\NilaiMahasiswa;
 use App\Models\Options;
 use App\Models\Questions;
 use App\Models\User;
+use App\Models\Konsentrasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -46,6 +47,22 @@ class MahasiswaController extends Controller
         $user = Auth::user();
         $jurusan = Jurusan::all();
         return view('mahasiswa.personal', compact('user', 'jurusan'));
+    }
+
+    public function getKonsentrasi($id)
+    {
+        try {
+            $konsentrasi = Konsentrasi::where('jurusan_id', $id)->get();
+            return response()->json([
+                'result' => 200,
+                'data' => $konsentrasi
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'result' => '201'
+            ]);
+        }
+        
     }
 
     public function store(MahasiswaRequest $request)

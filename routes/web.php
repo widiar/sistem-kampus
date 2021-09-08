@@ -93,6 +93,7 @@ Route::group([
             Route::post('personal', [MahasiswaController::class, 'store'])->name('store');
             Route::get('alumni', [MahasiswaController::class, 'alumni'])->name('alumni');
             Route::post('alumni', [MahasiswaController::class, 'storeAlumni']);
+            Route::get('getKonsentrasi/{id}', [MahasiswaController::class, 'getKonsentrasi'])->name('getKonsentrasi');
 
             Route::prefix('nilai')->group(function () {
                 Route::get('', [MahasiswaController::class, 'nilai'])->name('nilai');

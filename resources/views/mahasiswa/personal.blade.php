@@ -121,7 +121,7 @@
                     <div class="form-group mb-3">
                         <label for="text">Jurusan<span class="text-danger">*</span></label>
                         <select name="jurusan" required
-                            class="custom-select form-control @error('jurusan') is-invalid @enderror">
+                            class="custom-select jurusan form-control @error('jurusan') is-invalid @enderror">
                             @foreach ($jurusan as $j)
                             <option {{ old('jurusan', @$user->mahasiswa->jurusan_id) == $j->id ? "selected" : "" }}
                                 value="{{ $j->id }}">{{ $j->nama }}
@@ -129,6 +129,15 @@
                             @endforeach
                         </select>
                         @error('jurusan')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="text">Konsentrasi<span class="text-danger">*</span></label>
+                        <select name="konsentrasi" required
+                            class="custom-select form-control @error('konsentrasi') is-invalid @enderror">
+                        </select>
+                        @error('konsentrasi')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
@@ -157,6 +166,26 @@
     $(".profile-img").click(function(){
         $(".input-image").click()
     })
+
+    let jurusan = $(".jurusan");
+    $('.jurusan').change(function(){
+        let value = $(this).val();
+        let urlKon = `{{ route('mahasiswa.getKonsentrasi', '#id') }}`;
+        //ajax request
+        $.ajax({
+            url: urlKon.replace('#id', value),
+            success: function(res){
+                if(res.result == 200){
+                    res.data.forEach(element => {
+                        let opt = document.createElement('option');
+                        opt.value = element.id
+                        opt.innerHtml = element.nama
+                        jurusan.appendChild(opt)
+                    });
+                }
+            }
+        });
+    });
 
 </script>
 @endsection
