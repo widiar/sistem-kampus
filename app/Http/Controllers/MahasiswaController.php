@@ -59,7 +59,7 @@ class MahasiswaController extends Controller
             ]);
         } catch (\Throwable $th) {
             return response()->json([
-                'result' => '201'
+                'result' => 201
             ]);
         }
         

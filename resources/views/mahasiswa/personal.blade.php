@@ -135,7 +135,7 @@
                     <div class="form-group mb-3">
                         <label for="text">Konsentrasi<span class="text-danger">*</span></label>
                         <select name="konsentrasi" required
-                            class="custom-select form-control @error('konsentrasi') is-invalid @enderror">
+                            class="custom-select form-control @error('konsentrasi') is-invalid @enderror konsentrasi">
                         </select>
                         @error('konsentrasi')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -167,25 +167,30 @@
         $(".input-image").click()
     })
 
-    let jurusan = $(".jurusan");
-    $('.jurusan').change(function(){
-        let value = $(this).val();
+    const initJurusan = (value) => {
         let urlKon = `{{ route('mahasiswa.getKonsentrasi', '#id') }}`;
         //ajax request
         $.ajax({
             url: urlKon.replace('#id', value),
             success: function(res){
                 if(res.result == 200){
+                    jurusan.find('option').remove();
                     res.data.forEach(element => {
-                        let opt = document.createElement('option');
-                        opt.value = element.id
-                        opt.innerHtml = element.nama
-                        jurusan.appendChild(opt)
+                        jurusan.append(new Option(element.nama, element.id))
                     });
                 }
             }
         });
+    }
+
+    let jurusan = $(".konsentrasi");
+    initJurusan($('.jurusan').val())
+
+    $('.jurusan').change(function(){
+        let value = $(this).val();
+        initJurusan(value)
     });
+
 
 </script>
 @endsection
