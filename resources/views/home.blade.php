@@ -14,12 +14,14 @@
                 <div class="carousel-item active" style="background: url(landing-page/img/slide/slide-1.jpg)">
                     <div class="carousel-container">
                         <div class="carousel-content">
-                            <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Eterna</span></h2>
-                            <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui
-                                aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem
-                                mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti
-                                vel. Minus et tempore modi architecto.</p>
-                            <a href="" class="btn-get-started animate__animated animate__fadeInUp">Read More</a>
+                            <h2 class="animate__animated animate__fadeInDown">ITB STIKOM BALI</h2>
+                            <p class="animate__animated animate__fadeInUp">Institut Teknologi dan Bisnis (ITB) STIKOM Bali merupakan 
+                                salah satu perguruan tinggi swasta yang bertempat di Bali dan bergerak pada 
+                                bidang pengajaran Teknologi dan Bisnis dengan berbagai penghargaan dan prestasi 
+                                yang dimiliki baik tingkat nasional maupun tingkat internasional. 
+                                Institut Teknologi dan Bisnis (ITB) STIKOM Bali merupakan salah satu kampus IT di 
+                                Bali yang berhasil menghasilkan lulusan lulusan dengan kualitas terbaik dan berguna untuk masyarakat. </p>
+                            
                         </div>
                     </div>
                 </div>
@@ -28,30 +30,15 @@
                 <div class="carousel-item" style="background: url(landing-page/img/slide/slide-2.jpg)">
                     <div class="carousel-container">
                         <div class="carousel-content">
-                            <h2 class="animate__animated fanimate__adeInDown">Lorem <span>Ipsum Dolor</span></h2>
-                            <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui
-                                aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem
-                                mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti
-                                vel. Minus et tempore modi architecto.</p>
-                            <a href="" class="btn-get-started animate__animated animate__fadeInUp">Read More</a>
+                            <h2 class="animate__animated fanimate__adeInDown">Sistem Informasi<span> Mahasiswa Online</span></h2>
+                            <p class="animate__animated animate__fadeInUp">Selamat datang di Sistem Informasi Mahasiswa Online ITB Stikom Bali. 
+                                Sistem Informasi Mahasiswa Online ITB Stikom Bali adalah sistem informasi yang dibangun dengan tujuan membantu Mahasiswa ITB Stikom Bali</p>
+                           
                         </div>
                     </div>
                 </div>
 
-                <!-- Slide 3 -->
-                <div class="carousel-item" style="background: url(landing-page/img/slide/slide-3.jpg)">
-                    <div class="carousel-container">
-                        <div class="carousel-content">
-                            <h2 class="animate__animated animate__fadeInDown">Sequi ea <span>Dime Lara</span></h2>
-                            <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui
-                                aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem
-                                mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti
-                                vel. Minus et tempore modi architecto.</p>
-                            <a href="" class="btn-get-started animate__animated animate__fadeInUp">Read More</a>
-                        </div>
-                    </div>
-                </div>
-
+                
             </div>
 
             <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
@@ -67,73 +54,17 @@
 </section><!-- End Hero -->
 
 <main id="main">
-
-    <!-- ======= Featured Section ======= -->
-    <section id="featured" class="featured">
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="icon-box">
-                        <i class="bi bi-card-checklist"></i>
-                        <h3><a href="">Lorem Ipsum</a></h3>
-                        <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
-                            cupiditate non provident</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 mt-4 mt-lg-0">
-                    <div class="icon-box">
-                        <i class="bi bi-bar-chart"></i>
-                        <h3><a href="">Dolor Sitema</a></h3>
-                        <p>Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat tarad limino ata</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 mt-4 mt-lg-0">
-                    <div class="icon-box">
-                        <i class="bi bi-binoculars"></i>
-                        <h3><a href="">Sed ut perspiciatis</a></h3>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                            pariatur</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section><!-- End Featured Section -->
-
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
         <div class="container">
 
-            <div class="row">
-                <div class="col-lg-6">
-                    <img src="landing-page/img/about.jpg" class="img-fluid" alt="">
-                </div>
-                <div class="col-lg-6 pt-4 pt-lg-0 content">
-                    <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
-                    <p class="fst-italic">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore
-                        magna aliqua.
-                    </p>
-                    <ul>
-                        <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        </li>
-                        <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in voluptate
-                            velit.</li>
-                        <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu
-                            fugiat nulla pariatur.</li>
-                    </ul>
-                    <p>
-                        Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-                        in voluptate
-                        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum
-                    </p>
-                </div>
+            <div class="section-title">
+                <h2>About Us</h2>
+                <p >Sistem Informasi Mahasiswa Online adalah sistem yang dibangun dengan tujuan membantu mahasiswa untuk melihat kemampuannya
+                     dan mengambil keputusan berdasarkan kemampuan yang dimiliki mahasiswa tersebut. 
+                     Dengan dirancangnya sistem ini diharapkan sistem dapat digunakan dalam pengimplementasian 
+                     bagian kemahasiswaan pada Institut Teknologi dan Bisnis (ITB) STIKOM Bali Kampus II Jimbaran sehingga 
+                     dapat membantu dan memudahkan mahasiswa dalam melakukan pemilihan konsentrasi, pemilihan judul skripsi, serta memudahkan alumni dalam pencarian lowong pekerjaan.</p>
             </div>
 
         </div>
@@ -143,63 +74,30 @@
     <section id="services" class="services">
         <div class="container">
 
-            <div class="row">
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bxl-dribbble"></i></div>
-                        <h4><a href="">Lorem Ipsum</a></h4>
-                        <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
-                    </div>
-                </div>
+        <div class="section-title">
+            <h2>Mahasiswa Tingkat Akhir (MTA)</h2>
 
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bx-file"></i></div>
-                        <h4><a href="">Sed ut perspiciatis</a></h4>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-                    </div>
-                </div>
+        </div>
 
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bx-tachometer"></i></div>
-                        <h4><a href="">Magni Dolores</a></h4>
-                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bx-world"></i></div>
-                        <h4><a href="">Nemo Enim</a></h4>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bx-slideshow"></i></div>
-                        <h4><a href="">Dele cardo</a></h4>
-                        <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bx-arch"></i></div>
-                        <h4><a href="">Divera don</a></h4>
-                        <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
-                    </div>
-                </div>
-
+        <div class="card shadow mx-auto my-4">
+            <div class="card-body">
+                <table id="userTable" class="table table-bordered dt-responsive" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>NO</th>
+                            <th class="all">Semester</th>
+                            <th class="text-center">Aksi</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead> 
+            </table> 
+            </div>
             </div>
 
         </div>
     </section><!-- End Services Section -->
 
-    <!-- ======= Clients Section ======= -->
-    @include('template.client')
-    <!-- End Clients Section -->
+
 
 </main><!-- End #main -->
 @endsection
