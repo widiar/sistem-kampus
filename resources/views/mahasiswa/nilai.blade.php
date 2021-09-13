@@ -4,7 +4,7 @@
 
 @section('main-content')
 
-<div class="container  my-4">
+<div class="container my-4">
     <main id="main">
         @if(session('success'))
         <p class="successMsg" style="display: none">

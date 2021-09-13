@@ -50,9 +50,23 @@
   ======================================================== -->
 </head>
 
-<body>
+<body id="body">
 
-
+    <section id="topbar" class="d-flex align-items-center" style="background: white">
+        {{-- <div class="container d-flex justify-content-center justify-content-md-between">
+            <div class="contact-info d-flex align-items-center">
+                <i class="bi bi-envelope d-flex align-items-center"><a
+                        href="mailto:contact@example.com">contact@example.com</a></i>
+                <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
+            </div>
+            <div class="social-links d-none d-md-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div> --}}
+    </section>
     <!-- ======= Header ======= -->
     <header id="header" class="d-flex align-items-center">
         <div class="container d-flex justify-content-between align-items-center">
@@ -92,7 +106,7 @@
     @yield('main-content')
 
     <!-- ======= Footer ======= -->
-    <footer id="footer">
+    <footer id="footer" style="bottom: 0">
 
         <div class="container">
             <div class="copyright">
@@ -150,6 +164,15 @@
         $(function() {
             bsCustomFileInput.init();
         }); 
+
+        $(document).ready(function() {
+            // Check if body height is higher than window height :)
+            if ($("body").height() > $(window).height()) {
+                $("#footer").css("position", "unset")
+            }else{
+                $("#footer").css("position", "fixed")
+            }
+        });
     </script>
 
 

@@ -139,7 +139,8 @@
                             class="custom-select form-control @error('konsentrasi') is-invalid @enderror konsentrasi">
                             @if(@$konsentrasi)
                             @foreach (@$konsentrasi as $j)
-                            <option {{ old('konsentrasi', @$user->mahasiswa->konsentrasi_id) == $j->id ? "selected" : "" }}
+                            <option
+                                {{ old('konsentrasi', @$user->mahasiswa->konsentrasi_id) == $j->id ? "selected" : "" }}
                                 value="{{ $j->id }}">{{ $j->nama }}
                             </option>
                             @endforeach

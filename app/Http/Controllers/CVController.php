@@ -6,6 +6,7 @@ use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\Snappy\Facades\SnappyPdf as PDF;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use ImageKit\ImageKit;
 
@@ -51,12 +52,13 @@ class CVController extends Controller
                 "field" => $uploadFile->success->fileId,
                 "url" => $uploadFile->success->url,
             ]);
+            File::delete($path . $fpdf);
         } else {
             $pdf->setPaper('a4')->save('storage/mahasiswa/cv/' . $fpdf);
             $mahasiswa->cv = $fpdf;
         }
         $mahasiswa->save();
 
-        return redirect()->route('mahasiswa.personal')->with(['success' => 'Berhasil Membuat CV']);
+        return redirect()->route('mahasiswa.alumni')->with(['success' => 'Berhasil Membuat CV']);
     }
 }
