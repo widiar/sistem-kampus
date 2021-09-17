@@ -43,7 +43,7 @@
                 <form action="" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-lg-3 col-md-3 col-sm-12">
                             @if (env('APP_HOST') == 'heroku')
                             <img src="{{ isset($user->mahasiswa->image) ? json_decode($user->mahasiswa->image)->url : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
                                 class="img-thumbnail profile-img" alt="">
@@ -51,13 +51,12 @@
                             <img src="{{ isset($user->mahasiswa->image) ? Storage::url('mahasiswa/image/'. $user->mahasiswa->image) : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
                                 class="img-thumbnail profile-img" alt="">
                             @endif
-                            <input type="file" name="image" class="input-image" style="display: none"
-                                accept="image/x-png, image/jpeg">
+                            <input type="file" name="image" class="input-image" style="display: none" accept="image/*">
                             @error('image')
                             <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="col">
+                        <div class="col-md col-md col-sm-12">
                             <div class="form-group mb-3">
                                 <label for="text">NIM<span class="text-danger">*</span></label>
                                 <input type="text" disabled name="nama" class="form-control " value="{{ $user->nim }}">
