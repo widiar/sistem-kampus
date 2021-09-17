@@ -51,7 +51,7 @@
                             <img src="{{ isset($user->mahasiswa->image) ? Storage::url('mahasiswa/image/'. $user->mahasiswa->image) : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
                                 class="img-thumbnail profile-img" alt="">
                             @endif
-                            <input type="file" name="image" class="input-image" style="display: none" accept="image/*">
+                            <input type="file" name="image" class="input-image" style="display: none">
                             @error('image')
                             <p class="text-danger">{{ $message }}</p>
                             @enderror
