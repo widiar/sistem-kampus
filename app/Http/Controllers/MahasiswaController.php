@@ -64,7 +64,6 @@ class MahasiswaController extends Controller
                 'result' => 201
             ]);
         }
-        
     }
 
     public function store(MahasiswaRequest $request)
@@ -81,6 +80,7 @@ class MahasiswaController extends Controller
             $user->mahasiswa->ttl = $request->ttl;
             if ($request->image) {
                 $image = $request->image;
+                dd($image->getPathname());
                 if (env('APP_HOST') == 'heroku') {
                     $imageKit = new ImageKit(
                         env('IMAGE_KIT_PUBLIC_KEY'),

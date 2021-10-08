@@ -103,7 +103,8 @@
 
     $(document).ready(function(){
         $(".matkulselected").select2({
-            theme: "bootstrap"
+            theme: "bootstrap",
+            minimumInputLength: 2, 
         })
     })
 
