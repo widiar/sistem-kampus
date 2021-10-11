@@ -15,6 +15,23 @@
     .profile-img:hover {
         cursor: pointer;
     }
+
+    .img-frame {
+        position: relative;
+    }
+
+    #edit-image {
+        position: absolute;
+        bottom: 0;
+        font-size: 18px;
+        background: rgb(71, 71, 71);
+        opacity: 0.8;
+        width: 100%;
+        text-align: center;
+        height: 30px;
+        color: #fff;
+        cursor: pointer;
+    }
 </style>
 @endsection
 
@@ -43,21 +60,23 @@
                 <form action="" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                        <div class="col-3">
-                            @if (env('APP_HOST') == 'heroku')
-                            <img src="{{ isset($user->mahasiswa->image) ? json_decode($user->mahasiswa->image)->url : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
-                                class="img-thumbnail profile-img" alt="">
-                            @else
-                            <img src="{{ isset($user->mahasiswa->image) ? Storage::url('mahasiswa/image/'. $user->mahasiswa->image) : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
-                                class="img-thumbnail profile-img" alt="">
-                            @endif
-                            <input type="file" name="image" class="input-image" style="display: none"
-                                accept="image/x-png, image/jpeg">
+                        <div class="col-lg-3 col-md-3 col-sm-12">
+                            <div class="img-frame">
+                                @if (env('APP_HOST') == 'heroku')
+                                <img src="{{ isset($user->mahasiswa->image) ? json_decode($user->mahasiswa->image)->url : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
+                                    class="profile-img" alt="">
+                                @else
+                                <img src="{{ isset($user->mahasiswa->image) ? Storage::url('mahasiswa/image/'. $user->mahasiswa->image) : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
+                                    class="profile-img" alt="" width="100%" height="5cm">
+                                @endif
+                                <div id="edit-image"><strong>Edit Image</strong></div>
+                            </div>
+                            <input type="file" name="image" class="input-image" style="display: none" accept="image/*">
                             @error('image')
                             <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="col">
+                        <div class="col-md col-md col-sm-12">
                             <div class="form-group mb-3">
                                 <label for="text">NIM<span class="text-danger">*</span></label>
                                 <input type="text" disabled name="nama" class="form-control " value="{{ $user->nim }}">
@@ -172,8 +191,13 @@
     }
     if (info !== '') toastr.info(info, 'Mahasiswa');
 
-    $(".profile-img").click(function(){
+    $("#edit-image").click(function(){
         $(".input-image").click()
+    })
+
+    $(".input-image").change(function(e){
+        let url = URL.createObjectURL(e.target.files[0])
+        $(".profile-img").attr("src", url)
     })
 
     const initJurusan = (value) => {
