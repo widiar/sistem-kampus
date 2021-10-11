@@ -102,7 +102,75 @@
 
                     </div>
                 </div>
-                <a style="text-align: right; color:#2e59d9;" href="#">Selengkapnya>></a>
+                
+                <a style="text-align: right; color:#2e59d9;" href="#">Selengkapnya>></a><br></br><br></br>
+
+            </div>
+            
+        </div>
+        </div>
+
+        <div class="container">
+        <div class="section-title">
+                <h2>Top 5 Nilai A Terbanyak</h2>
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <div class="testimonial-item">
+                        <img src="landing-page/img/testimonials/yuda.jpeg" class="testimonial-img" alt="">
+                        <h3>Kadek Yuda Perwira Intaran</h3>
+                        <h4 style="padding:10px;">Sistem Informasi</h4>
+                        <button style="background-color:#e96b56; border:none;" type="submit" class="btn btn-primary btn-user btn-block">
+                            Lihat profile
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="testimonial-item mt-4 mt-lg-0">
+                        <img src="landing-page/img/testimonials/yogi.jpg" class="testimonial-img" alt="">
+                        <h3>I Kadek Yogi Wiguna</h3>
+                        <h4 style="padding:10px;">Sistem Informasi</h4>
+                        <button style="background-color:#e96b56; border:none;" type="submit" class="btn btn-primary btn-user btn-block">
+                            Lihat profile
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="testimonial-item">
+                        <img src="landing-page/img/testimonials/yuda.jpeg" class="testimonial-img" alt="">
+                        <h3>Kadek Yuda Perwira Intaran</h3>
+                        <h4 style="padding:10px;">Sistem Informasi</h4>
+                        <button style="background-color:#e96b56; border:none;" type="submit" class="btn btn-primary btn-user btn-block">
+                            Lihat profile
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="testimonial-item mt-4 mt-lg-0">
+                        <img src="landing-page/img/testimonials/yogi.jpg" class="testimonial-img" alt="">
+                        <h3>I Kadek Yogi Wiguna</h3>
+                        <h4 style="padding:10px;">Sistem Informasi</h4>
+                        <button style="background-color:#e96b56; border:none;" type="submit" class="btn btn-primary btn-user btn-block">
+                            Lihat profile
+                        </button>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="testimonial-item mt-4 mt-lg-0">
+                        <img src="landing-page/img/testimonials/yogi.jpg" class="testimonial-img" alt="">
+                        <h3>I Kadek Yogi Wiguna</h3>
+                        <h4 style="padding:10px;">Sistem Informasi</h4>
+                        <button style="background-color:#e96b56; border:none;" type="submit" class="btn btn-primary btn-user btn-block">
+                            Lihat profile
+                        </button>
+
+                    </div>
+                </div>
+                
 
             </div>
             
