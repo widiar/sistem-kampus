@@ -2210,3 +2210,10 @@ section {
     font-size: 13px;
     color: #fff;
 }
+
+.profile-img {
+    height: 2.5cm;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}

@@ -69,10 +69,10 @@
                     <div class="testimonial-item">
                         @if (env('APP_HOST') == 'heroku')
                         <img src="{{ isset($mhs->image) ? json_decode($mhs->image)->url : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
-                            class="testimonial-img" alt="">
+                            class="testimonial-img profile-img" alt="">
                         @else
                         <img src="{{ isset($mhs->image) ? Storage::url('mahasiswa/image/'. $mahasiswa->image) : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
-                            class="testimonial-img" alt="">
+                            class="testimonial-img profile-img" alt="">
                         @endif
                         <h3>{{ $mhs->nama }}</h3>
                         <h4 style="padding:10px;">{{ $mhs->konsentrasi->nama }}</h4>
@@ -102,10 +102,10 @@
                     <div class="testimonial-item">
                         @if (env('APP_HOST') == 'heroku')
                         <img src="{{ isset($mhs->image) ? json_decode($mhs->image)->url : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
-                            class="testimonial-img" alt="">
+                            class="testimonial-img profile-img" alt="">
                         @else
                         <img src="{{ isset($mhs->image) ? Storage::url('mahasiswa/image/'. $mahasiswa->image) : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
-                            class="testimonial-img" alt="">
+                            class="testimonial-img profile-img" alt="">
                         @endif
                         <h3>{{ $mhs->nama }}</h3>
                         <a href="{{ route('profile', $mhs->id) }}" style="background-color:#e96b56; border:none;"

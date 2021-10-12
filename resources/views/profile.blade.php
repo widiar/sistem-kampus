@@ -1,16 +1,3 @@
-<!--
-=========================================================
-Material Kit - v2.0.7
-=========================================================
-
-Product Page: https://www.creative-tim.com/product/material-kit
-Copyright 2020 Creative Tim (https://www.creative-tim.com/)
-
-Coded by Creative Tim
-
-=========================================================
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,6 +16,14 @@ The above copyright notice and this permission notice shall be included in all c
     <link href="{{ asset('profile/css/material-kit.css?v=2.0.7') }}" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{ asset('profile/demo/demo.css') }}" rel="stylesheet" />
+    <style>
+        .profile-img {
+            height: 4cm;
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+    </style>
 </head>
 
 <body class="profile-page sidebar-collapse">
@@ -44,10 +39,10 @@ The above copyright notice and this permission notice shall be included in all c
                         <div class="avatar">
                             @if (env('APP_HOST') == 'heroku')
                             <img src="{{ isset($mahasiswa->image) ? json_decode($mahasiswa->image)->url : asset('profile/img/faces/christian.jpg') }}"
-                                alt="Circle Image" class="img-raised rounded-circle img-fluid">
+                                alt="Circle Image" class="img-raised rounded-circle img-fluid profile-img">
                             @else
                             <img src="{{ isset($mahasiswa->image) ? Storage::url('mahasiswa/image/'. $mahasiswa->image) : asset('profile/img/faces/christian.jpg') }}"
-                                alt="Circle Image" class="img-raised rounded-circle img-fluid">
+                                alt="Circle Image" class="img-raised rounded-circle img-fluid profile-img">
                             @endif
                         </div>
                         <div class="name">
