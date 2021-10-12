@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailMahasiswa;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,7 @@ class CVController extends Controller
     public function index()
     {
         $mahasiswa = Mahasiswa::where('user_id', Auth::user()->id)->first();
-        if (!$mahasiswa->nama) return redirect()->route('mahasiswa.alumni')->with(['info' => 'Silahkan Update Data di Personal dahulu']);
+        if (!$mahasiswa->gender) return redirect()->route('mahasiswa.personal')->with(['info' => 'Silahkan Update Data di Personal dahulu']);
         return view('cv.index', compact('mahasiswa'));
     }
 
@@ -60,5 +61,49 @@ class CVController extends Controller
         $mahasiswa->save();
 
         return redirect()->route('mahasiswa.alumni')->with(['success' => 'Berhasil Membuat CV']);
+    }
+
+    public function postProfile(Request $request)
+    {
+        $mahasiswa = Mahasiswa::where('user_id', Auth::user()->id)->first();
+        $skill = NULL;
+        $pengalaman = NULL;
+        $pendidikan = NULL;
+        if ($request->skill) {
+            foreach ($request->skill as $sk) {
+                $skill .= "$sk|";
+            }
+        }
+        if ($request->exp) {
+            foreach (array_combine($request->exp, $request->year) as $exp => $yr) {
+                $pengalaman[] = [
+                    'nama' => $exp,
+                    'tahun' => $yr
+                ];
+            }
+        }
+        if ($request->sch) {
+            foreach (array_combine($request->sch, $request->tahun) as $exp => $yr) {
+                $pendidikan[] = [
+                    'nama' => $exp,
+                    'tahun' => $yr
+                ];
+            }
+        }
+        if (@$mahasiswa->detail->deskripsi) {
+            $mahasiswa->detail->deskripsi = $request->deskripsi;
+            $mahasiswa->detail->skill = $skill;
+            $mahasiswa->detail->pengalaman = ($pengalaman != NULL) ? json_encode($pengalaman) : $pengalaman;
+            $mahasiswa->detail->pendidikan = ($pendidikan != NULL) ? json_encode($pendidikan) : $pendidikan;
+            $mahasiswa->detail->save();
+        } else {
+            $mahasiswa->detail()->create([
+                'deskripsi' => $request->deskripsi,
+                'skill' => $skill,
+                'pengalaman' => ($pengalaman != NULL) ? json_encode($pengalaman) : $pengalaman,
+                'pendidikan' => ($pendidikan != NULL) ? json_encode($pendidikan) : $pendidikan
+            ]);
+        }
+        return redirect()->route('mahasiswa.personal')->with(['success' => 'Berhasil Membuat Profile']);
     }
 }

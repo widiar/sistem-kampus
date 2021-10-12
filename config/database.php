@@ -65,6 +65,18 @@ return [
             ]) : [],
         ],
 
+        'pgsql2' => [
+            'driver' => 'pgsql',
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT_PGSQL', '3306'),
+            'database' => env('DB_DATABASE', 'forge'),
+            'username' => env('DB_USERNAME_PGSQL', 'forge'),
+            'password' => env('DB_PASSWORD_PGSQL', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'strict' => false,
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => $DATABASE_URL["host"],

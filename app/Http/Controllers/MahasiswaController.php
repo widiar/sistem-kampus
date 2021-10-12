@@ -80,7 +80,7 @@ class MahasiswaController extends Controller
             $user->mahasiswa->ttl = $request->ttl;
             if ($request->image) {
                 $image = $request->image;
-                dd($image->getPathname());
+                // dd($image->getPathname());
                 if (env('APP_HOST') == 'heroku') {
                     $imageKit = new ImageKit(
                         env('IMAGE_KIT_PUBLIC_KEY'),
@@ -111,12 +111,15 @@ class MahasiswaController extends Controller
     public function nilai()
     {
         $user = Auth::user();
+        if (!$user->mahasiswa->gender) return redirect()->route('mahasiswa.personal')->with(['info' => 'Silahkan Update Data di Personal dahulu']);
         $nilai = NilaiMahasiswa::select('semester', 'is_approve')->where('mahasiswa_id', $user->mahasiswa->id)->distinct()->orderBy('semester')->get();
         return view('mahasiswa.nilai', compact('nilai'));
     }
 
     public function addNilai()
     {
+        $user = Auth::user();
+        if (!$user->mahasiswa->gender) return redirect()->route('mahasiswa.personal')->with(['info' => 'Silahkan Update Data di Personal dahulu']);
         $matakuliah = MataKuliah::all();
         $semester = $this->getSemester();
         return view('mahasiswa.addNilai', compact('matakuliah', 'semester'));
@@ -168,6 +171,7 @@ class MahasiswaController extends Controller
     {
         $mahasiswa = Mahasiswa::where('user_id', Auth::user()->id)->first();
         $nilai = $mahasiswa->nilai()->where('semester', $smt)->get();
+        if ($nilai->count() < 1) abort(404);
         $matakuliah = MataKuliah::all();
         return view('mahasiswa.editNilai', compact('nilai', 'matakuliah'));
     }

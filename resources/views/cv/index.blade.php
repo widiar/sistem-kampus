@@ -93,28 +93,82 @@
                     <hr>
                     <div class="form-group">
                         <label for="">Deskriprsi</label>
-                        <textarea required name="deskripsi" class="form-control" cols="30" rows="10"></textarea>
+                        <textarea required name="deskripsi" class="form-control" cols="30"
+                            rows="10">{{ @$mahasiswa->detail->deskripsi }}</textarea>
                     </div>
                     <hr>
                     <div class="skills">
                         <h4>Skill :</h4>
+                        @if (@$mahasiswa->detail->skill)
+                        @foreach (explode("|", $mahasiswa->detail->skill) as $item)
+                        @if (!$loop->last)
+                        <div class="skill col-4">
+                            <input type="text" required name="skill[]" class="form-control" placeholder="Skill"
+                                value="{{ $item }}">
+                            <button type="button" class="btn btn-danger btn-sm my-3 btn-hapus">Hapus</button><br>
+                        </div>
+                        @endif
+                        @endforeach
+                        @endif
                     </div>
                     <button type="button" class="btn btn-primary btn-sm btn-add-skill">Tambah</button>
                     <hr>
 
                     <div class="experiences">
                         <h4>Pengalaman :</h4>
+                        @if (@$mahasiswa->detail->pengalaman)
+                        @foreach (json_decode($mahasiswa->detail->pengalaman) as $item)
+                        <div class="experience">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <input type="text" required name="exp[]" value="{{ $item->nama }}"
+                                            class="form-control" placeholder="Nama Pengalaman">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <input type="text" required name="year[]" value="{{ $item->tahun }}"
+                                            class="form-control" placeholder="cth: 06/2000-07/2021">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-danger btn-sm my-3 btn-hapus">Hapus</button><br>
+                        </div>
+                        @endforeach
+                        @endif
                     </div>
                     <button type="button" class="btn btn-primary btn-sm btn-add-exp">Tambah</button>
                     <hr>
 
                     <div class="schools">
                         <h4>Pendidikan :</h4>
+                        @if (@$mahasiswa->detail->pendidikan)
+                        @foreach (json_decode($mahasiswa->detail->pendidikan) as $item)
+                        <div class="school">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <input type="text" required name="sch[]" value="{{ $item->nama }}"
+                                            class="form-control" placeholder="Pendidikan">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <input type="text" required name="tahun[]" value="{{ $item->tahun }}"
+                                            class="form-control" placeholder="Tahun">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-danger btn-sm my-3 btn-hapus">Hapus</button><br>
+                        </div>
+                        @endforeach
+                        @endif
                     </div>
                     <button type="button" class="btn btn-primary btn-sm btn-add-sch">Tambah</button>
 
                     <hr>
-                    <button type="submit" class="my-3 btn btn-success btn-block">Buat CV</button>
+                    <button type="submit" class="my-3 btn btn-success btn-block">Buat Profile</button>
                 </form>
             </div>
         </div>

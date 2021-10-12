@@ -31,4 +31,9 @@ class Mahasiswa extends Model
     {
         return $this->hasMany(NilaiMahasiswa::class);
     }
+
+    public function detail()
+    {
+        return $this->hasOne(DetailMahasiswa::class, 'mahasiswa_id');
+    }
 }

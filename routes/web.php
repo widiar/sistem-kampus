@@ -35,6 +35,9 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['quiz'])->group(function () {
     Route::get('', [HomeController::class, 'index'])->name('home');
+    Route::get('mahasiswa/{id}/profile', [HomeController::class, 'profile'])->name('profile');
+    Route::get('list/profile', [HomeController::class, 'listProfile'])->name('list.profile');
+
     Route::get('about', function () {
         return view('about');
     })->name('about');
@@ -72,9 +75,10 @@ Route::middleware(['quiz'])->group(function () {
 
 Route::middleware(['auth', 'quiz'])->group(function () {
     Route::name('cv.')->group(function () {
-        Route::prefix('cv')->group(function () {
+        Route::prefix('profile/create')->group(function () {
             Route::get('', [CVController::class, 'index'])->name('index');
-            Route::post('', [CVController::class, 'post']);
+            // Route::post('', [CVController::class, 'post']);
+            Route::post('', [CVController::class, 'postProfile']);
         });
     });
 });

@@ -2,13 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mahasiswa;
+use App\Models\NilaiMahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        return view('home');
+        $mahasiswa = Mahasiswa::all()->take(10);
+        // $nilai = DB::table('nilai_mahasiswa')
+        //     ->join('mahasiswa', 'mahasiswa.id', '=', 'nilai_mahasiswa.mahasiswa_id')
+        //     ->join('konsentrasi', 'konsentrasi.id', '=', 'mahasiswa.konsentrasi_id')
+        //     ->selectRaw('nilai_mahasiswa.nilai, count(nilai_mahasiswa.id) as number_mhs, mahasiswa.nama as nama, konsentrasi.nama as konsentrasi')
+        //     ->groupBy('nilai_mahasiswa.mahasiswa_id')
+        //     ->having('nilai_mahasiswa.nilai', '>', 85)
+        //     ->get();
+        $nilai = DB::select("SELECT e.*, (SELECT count(p.id) FROM nilai_mahasiswa AS p WHERE e.id = p.mahasiswa_id AND nilai::INT > 85 AND is_approve = 1) AS nilai_a FROM mahasiswa AS e ORDER BY nilai_a DESC LIMIT 5");
+        // dd($nilai);
+        return view('home', compact('mahasiswa', 'nilai'));
+    }
+
+    public function profile($id)
+    {
+        $mahasiswa = Mahasiswa::findOrFail($id);
+        return view('profile', compact('mahasiswa'));
+    }
+
+    public function listProfile(Request $request)
+    {
+        if ($request->search) {
+            $mahasiswa = Mahasiswa::where('nama', 'ilike', "%$request->search%")->paginate(10);
+        } else {
+            $mahasiswa = Mahasiswa::paginate(10);
+        }
+        return view('services', compact('mahasiswa'));
     }
 }

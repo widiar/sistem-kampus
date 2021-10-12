@@ -38,7 +38,7 @@
                                 <div class="col">
                                     <div class="form-group mb-3">
                                         <label for="text">Nilai<span class="text-danger">*</span></label>
-                                        <input type="text" required name="nilai[{{$data->id}}]" class="form-control"
+                                        <input type="number" required name="nilai[{{$data->id}}]" class="form-control"
                                             value="{{ $data->nilai }}">
                                     </div>
                                 </div>
@@ -86,7 +86,7 @@
                     <div class="col">
                         <div class="form-group mb-3">
                             <label for="text">Nilai<span class="text-danger">*</span></label>
-                            <input type="text" required name="nilai[]" class="form-control">
+                            <input type="number" required name="nilai[]" class="form-control">
                         </div>
                     </div>
                 </div>

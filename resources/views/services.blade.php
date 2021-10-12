@@ -1,6 +1,6 @@
 @extends('masterTemplate')
 
-@section('title', 'Services')
+@section('title', 'List Profile')
 
 @section('main-content')
 <main id="main">
@@ -11,67 +11,55 @@
 
             <ol>
                 <li><a href="{{ route('home') }}">Home</a></li>
-                <li>Mahasiswa Tingkat Akhir (MTA)</li>
+                <li>List Profile Mahasiswa</li>
             </ol>
-            <h2>Mahasiswa Tingkat Akhir (MTA)</h2>
+            <h2>List Profile Mahasiswa</h2>
 
         </div>
     </section><!-- End Breadcrumbs -->
 
+
     <!-- ======= Services Section ======= -->
-    <section id="services" class="services">
+    <section id="testimonials" class="testimonials">
         <div class="container">
+            <form action="" method="get">
+                <div class="input-group input-group-sm mb-3 w-50">
+                    <input type="text" class="form-control" name="search" value="{{ Request::get('search') }}">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                    <a class="btn btn-primary btn-sm" href="{{ route('list.profile') }}"
+                        style="margin-left: 50px">Clear</a>
+                </div>
+            </form>
 
-        <div class="section-title">
-            <h2>Mahasiswa Tingkat Akhir (MTA)</h2>
+            <div class="row">
+                @foreach ($mahasiswa as $mhs)
+                <div class="col-lg-6">
+                    <div class="testimonial-item">
+                        @if (env('APP_HOST') == 'heroku')
+                        <img src="{{ isset($mhs->image) ? json_decode($mhs->image)->url : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
+                            class="testimonial-img" alt="">
+                        @else
+                        <img src="{{ isset($mhs->image) ? Storage::url('mahasiswa/image/'. $mahasiswa->image) : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
+                            class="testimonial-img" alt="">
+                        @endif
+                        <h3>{{ $mhs->nama }}</h3>
+                        <h4 style="padding:10px;">{{ $mhs->konsentrasi->nama }}</h4>
+                        <a href="{{ route('profile', $mhs->id) }}" style="background-color:#e96b56; border:none;"
+                            type="submit" class="btn btn-primary btn-user btn-block">
+                            Lihat profile
+                        </a>
+                    </div>
+                </div>
+                @endforeach
 
+            </div>
         </div>
-
-        <div class="card shadow mx-auto my-4">
-            <div class="card-body">
-                <table id="userTable" class="table table-bordered dt-responsive" style="width: 100%">
-                    <thead>
-                        <tr>
-                            <th>NO</th>
-                            <th class="all">NIM</th>
-                            <th class="text-center">Nama</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead> 
-            </table> 
-            </div>
-            </div>
-
-        </div>
-    </section><!-- End Services Section -->
-
-    <!-- ======= Our Skills Section ======= -->
-    <section id="skills" class="skills">
-        <div class="container">
-
-            <div class="section-title">
-                <h2>Nilai Tertinggi</h2>
-
-            </div>
-
-            <div class="card shadow mx-auto my-4">
-            <div class="card-body">
-                <table id="adminTable" class="table table-bordered dt-responsive" style="width: 100%">
-                    <thead>
-                        <tr>
-                            <th>NO</th>
-                            <th class="all">Semester</th>
-                            <th class="text-center">Aksi</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead> 
-            </table> 
-            </div>
-            </div>
-            
-
-        </div>
-    </section><!-- End Our Skills Section -->
+    </section>
+    <div style="float: right; margin-right: 25px">
+        {{ $mahasiswa->withQueryString()->links() }}
+    </div>
 
 </main><!-- End #main -->
 @endsection
