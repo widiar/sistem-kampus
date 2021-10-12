@@ -35,6 +35,7 @@
 
             <div class="row">
                 @foreach ($mahasiswa as $mhs)
+                @if (@$mhs->detail->deskripsi)
                 <div class="col-lg-6">
                     <div class="testimonial-item">
                         @if (env('APP_HOST') == 'heroku')
@@ -52,6 +53,7 @@
                         </a>
                     </div>
                 </div>
+                @endif
                 @endforeach
 
             </div>

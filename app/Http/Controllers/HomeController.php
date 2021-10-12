@@ -28,7 +28,9 @@ class HomeController extends Controller
     public function profile($id)
     {
         $mahasiswa = Mahasiswa::findOrFail($id);
-        return view('profile', compact('mahasiswa'));
+        if (@$mahasiswa->detail->deskripsi)
+            return view('profile', compact('mahasiswa'));
+        else abort(404);
     }
 
     public function listProfile(Request $request)
