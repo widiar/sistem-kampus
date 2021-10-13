@@ -7,7 +7,7 @@
 <div class="container">
     <main id="main">
         <div class="card shadow w-75 mx-auto my-4">
-            <div class="card-body">
+            <div class="card-body" style="margin-bottom: 80px">
                 <form action="{{ route('mahasiswa.nilai.store') }}" method="POST" id="tambahNilai">
                     @csrf
                     <div class="form-group mb-3">
@@ -15,7 +15,7 @@
                         <select name="semester" required
                             class="custom-select select2 form-control @error('semester') is-invalid @enderror">
                             @foreach ($semester as $smt)
-                            <option {{ old('semester') == $smt->id ? "selected" : "" }} value="{{ $smt->id }}">
+                            <option {{ old('semester')==$smt->id ? "selected" : "" }} value="{{ $smt->id }}">
                                 {{ $smt->text }}
                             </option>
                             @endforeach

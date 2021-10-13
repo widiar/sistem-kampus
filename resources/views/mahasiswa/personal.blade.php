@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
 <style>
     .profile-img {
-        height: 7cm;
+        height: 7cm !important;
         width: 100%;
         object-fit: cover;
         object-position: center;
@@ -95,12 +95,12 @@
                                 <select name="gender" required
                                     class="custom-select form-control @error('gender') is-invalid @enderror">
                                     <option selected>Jenis Kelamin</option>
-                                    <option
-                                        {{ old('gender', @$user->mahasiswa->gender) == "Laki-laki" ? "selected" : "" }}
+                                    <option {{ old('gender', @$user->mahasiswa->gender) == "Laki-laki" ? "selected" : ""
+                                        }}
                                         value="Laki-laki">Laki-Laki
                                     </option>
-                                    <option
-                                        {{ old('gender', @$user->mahasiswa->gender) == "Perempuan" ? "selected" : "" }}
+                                    <option {{ old('gender', @$user->mahasiswa->gender) == "Perempuan" ? "selected" : ""
+                                        }}
                                         value="Perempuan">Perempuan
                                     </option>
                                 </select>
@@ -158,8 +158,8 @@
                             class="custom-select form-control @error('konsentrasi') is-invalid @enderror konsentrasi">
                             @if(@$konsentrasi)
                             @foreach (@$konsentrasi as $j)
-                            <option
-                                {{ old('konsentrasi', @$user->mahasiswa->konsentrasi_id) == $j->id ? "selected" : "" }}
+                            <option {{ old('konsentrasi', @$user->mahasiswa->konsentrasi_id) == $j->id ? "selected" : ""
+                                }}
                                 value="{{ $j->id }}">{{ $j->nama }}
                             </option>
                             @endforeach
