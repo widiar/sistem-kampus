@@ -142,7 +142,9 @@
             </div>
 
         </div>
+        <a href="{{ route('nilai.mhs', $mahasiswa->id) }}" class="btn btn-primary ml-3">Lihat Nilai</a>
     </div>
+
     </div>
 
     <!--   Core JS Files   -->

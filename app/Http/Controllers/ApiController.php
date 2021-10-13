@@ -22,4 +22,17 @@ class ApiController extends Controller
         }
         return $data;
     }
+
+    public function nilai(Request $request)
+    {
+        $mhs = Mahasiswa::find($request->id);
+        $nilai = $mhs->nilai()->where('semester', $request->semester)->get();
+        foreach ($nilai as $val) {
+            $data[] = [
+                'matkul' => $val->matakuliah->nama,
+                'nilai' => $val->nilai
+            ];
+        }
+        return $data;
+    }
 }

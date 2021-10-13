@@ -42,4 +42,10 @@ class HomeController extends Controller
         }
         return view('services', compact('mahasiswa'));
     }
+
+    public function getNilai(Mahasiswa $mhs)
+    {
+        $nilai = $mhs->nilai()->distinct()->get('semester');
+        return view('nilai', compact('nilai', 'mhs'));
+    }
 }

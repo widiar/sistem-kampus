@@ -37,6 +37,7 @@ Route::middleware(['quiz'])->group(function () {
     Route::get('', [HomeController::class, 'index'])->name('home');
     Route::get('mahasiswa/{id}/profile', [HomeController::class, 'profile'])->name('profile');
     Route::get('list/profile', [HomeController::class, 'listProfile'])->name('list.profile');
+    Route::get('nilai/{mhs}', [HomeController::class, 'getNilai'])->name('nilai.mhs');
 
     Route::get('about', function () {
         return view('about');
