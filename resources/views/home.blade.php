@@ -98,6 +98,7 @@
             <div class="row">
 
                 @foreach ($nilai as $mhs)
+                @if ($mhs->gender && $mhs->nilai_a > 0)
                 <div class="col-lg-6">
                     <div class="testimonial-item">
                         @if (env('APP_HOST') == 'heroku')
@@ -114,6 +115,7 @@
                         </a>
                     </div>
                 </div>
+                @endif
                 @endforeach
 
             </div>

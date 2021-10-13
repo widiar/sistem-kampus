@@ -35,7 +35,7 @@
                 @endphp
                 @if (!is_null($mahasiswa))
                 @foreach ($mahasiswa as $data)
-                @if (!is_null($data->nilai))
+                @if ($data->nilai()->count() > 0)
                 <tr>
                     <td>{{ ++$no }}</td>
                     <td>{{ $data->user->nim }}</td>
