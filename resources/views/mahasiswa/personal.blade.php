@@ -63,10 +63,10 @@
                         <div class="col-lg-3 col-md-3 col-sm-12">
                             <div class="img-frame">
                                 @if (env('APP_HOST') == 'heroku')
-                                <img src="{{ isset($user->mahasiswa->image) ? json_decode($user->mahasiswa->image)->url : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
+                                <img src="{{ isset($user->mahasiswa->image) ? json_decode($user->mahasiswa->image)->url : 'https://ik.imagekit.io/prbydmwbm8c/dummy-profile-pic_10R7S25OM.png' }}"
                                     class="profile-img" alt="">
                                 @else
-                                <img src="{{ isset($user->mahasiswa->image) ? Storage::url('mahasiswa/image/'. $user->mahasiswa->image) : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
+                                <img src="{{ isset($user->mahasiswa->image) ? Storage::url('mahasiswa/image/'. $user->mahasiswa->image) : 'https://ik.imagekit.io/prbydmwbm8c/dummy-profile-pic_10R7S25OM.png' }}"
                                     class="profile-img" alt="" width="100%" height="5cm">
                                 @endif
                                 <div id="edit-image"><strong>Edit Image</strong></div>

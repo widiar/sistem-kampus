@@ -22,5 +22,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::name('api.')->group(function () {
     Route::get('mata-kuliah', [ApiController::class, 'matkul'])->name('matakuliah');
 
-    Route::get('nilai', [ApiController::class, 'nilai'])->name('nilai');
+    Route::post('nilai', [ApiController::class, 'nilai'])->name('nilai');
 });

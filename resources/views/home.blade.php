@@ -68,10 +68,10 @@
                 <div class="col-lg-6">
                     <div class="testimonial-item">
                         @if (env('APP_HOST') == 'heroku')
-                        <img src="{{ isset($mhs->image) ? json_decode($mhs->image)->url : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
+                        <img src="{{ isset($mhs->image) ? json_decode($mhs->image)->url : 'https://ik.imagekit.io/prbydmwbm8c/dummy-profile-pic_10R7S25OM.png' }}"
                             class="testimonial-img profile-img" alt="">
                         @else
-                        <img src="{{ isset($mhs->image) ? Storage::url('mahasiswa/image/'. $mahasiswa->image) : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
+                        <img src="{{ isset($mhs->image) ? Storage::url('mahasiswa/image/'. $mahasiswa->image) : 'https://ik.imagekit.io/prbydmwbm8c/dummy-profile-pic_10R7S25OM.png' }}"
                             class="testimonial-img profile-img" alt="">
                         @endif
                         <h3>{{ $mhs->nama }}</h3>
@@ -102,10 +102,10 @@
                 <div class="col-lg-6">
                     <div class="testimonial-item">
                         @if (env('APP_HOST') == 'heroku')
-                        <img src="{{ isset($mhs->image) ? json_decode($mhs->image)->url : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
+                        <img src="{{ isset($mhs->image) ? json_decode($mhs->image)->url : 'https://ik.imagekit.io/prbydmwbm8c/dummy-profile-pic_10R7S25OM.png' }}"
                             class="testimonial-img profile-img" alt="">
                         @else
-                        <img src="{{ isset($mhs->image) ? Storage::url('mahasiswa/image/'. $mahasiswa->image) : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
+                        <img src="{{ isset($mhs->image) ? Storage::url('mahasiswa/image/'. $mahasiswa->image) : 'https://ik.imagekit.io/prbydmwbm8c/dummy-profile-pic_10R7S25OM.png' }}"
                             class="testimonial-img profile-img" alt="">
                         @endif
                         <h3>{{ $mhs->nama }}</h3>

@@ -38,10 +38,10 @@
                     <div class="profile">
                         <div class="avatar">
                             @if (env('APP_HOST') == 'heroku')
-                            <img src="{{ isset($mahasiswa->image) ? json_decode($mahasiswa->image)->url : asset('profile/img/faces/christian.jpg') }}"
+                            <img src="{{ isset($mahasiswa->image) ? json_decode($mahasiswa->image)->url : 'https://ik.imagekit.io/prbydmwbm8c/dummy-profile-pic_10R7S25OM.png' }}"
                                 alt="Circle Image" class="img-raised rounded-circle img-fluid profile-img">
                             @else
-                            <img src="{{ isset($mahasiswa->image) ? Storage::url('mahasiswa/image/'. $mahasiswa->image) : asset('profile/img/faces/christian.jpg') }}"
+                            <img src="{{ isset($mahasiswa->image) ? Storage::url('mahasiswa/image/'. $mahasiswa->image) : 'https://ik.imagekit.io/prbydmwbm8c/dummy-profile-pic_10R7S25OM.png' }}"
                                 alt="Circle Image" class="img-raised rounded-circle img-fluid profile-img">
                             @endif
                         </div>

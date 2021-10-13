@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
 <style>
     .profile-img {
-        height: 7cm;
+        height: 7cm !important;
         width: 100%;
         object-fit: cover;
         object-position: center;
@@ -36,15 +36,15 @@
                     <div class="row">
                         <div class="col-3">
                             @if (env('APP_HOST') == 'heroku')
-                            <img src="{{ isset($mahasiswa->image) ? json_decode($mahasiswa->image)->url : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
+                            <img src="{{ isset($mahasiswa->image) ? json_decode($mahasiswa->image)->url : 'https://ik.imagekit.io/prbydmwbm8c/dummy-profile-pic_10R7S25OM.png' }}"
                                 class="img-thumbnail profile-img" alt="">
                             <input type="hidden" name="profile_img"
-                                value="{{ isset($mahasiswa->image) ? json_decode($mahasiswa->image)->url : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}">
+                                value="{{ isset($mahasiswa->image) ? json_decode($mahasiswa->image)->url : 'https://ik.imagekit.io/prbydmwbm8c/dummy-profile-pic_10R7S25OM.png' }}">
                             @else
-                            <img src="{{ isset($mahasiswa->image) ? Storage::url('mahasiswa/image/'. $mahasiswa->image) : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}"
+                            <img src="{{ isset($mahasiswa->image) ? Storage::url('mahasiswa/image/'. $mahasiswa->image) : 'https://ik.imagekit.io/prbydmwbm8c/dummy-profile-pic_10R7S25OM.png' }}"
                                 class="img-thumbnail profile-img" alt="">
                             <input type="hidden" name="profile_img"
-                                value="{{ isset($mahasiswa->image) ? env('APP_URL') . Storage::url('mahasiswa/image/'. $mahasiswa->image) : 'https://www.sman8denpasar.sch.id/wp-content/uploads/learn-press-profile/4/172522ec1028ab781d9dfd17eaca4427.jpg' }}">
+                                value="{{ isset($mahasiswa->image) ? env('APP_URL') . Storage::url('mahasiswa/image/'. $mahasiswa->image) : 'https://ik.imagekit.io/prbydmwbm8c/dummy-profile-pic_10R7S25OM.png' }}">
                             @endif
                         </div>
                         <div class="col">

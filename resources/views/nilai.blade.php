@@ -8,7 +8,7 @@
 
 @section('main-content')
 
-<div class="card shadow mx-auto w-75">
+<div class="card shadow mx-auto w-75" style="margin-bottom: 80px; margin-top: 30px">
     <div class="card-body">
         <ul class="nav nav-tabs my-3">
             @foreach ($nilai as $n)
@@ -62,7 +62,7 @@
             info: false,
             ajax: {
                 url: urlTable,
-                type: 'GET',
+                type: 'POST',
                 data: {
                     id: idMhs,
                     semester: smt
