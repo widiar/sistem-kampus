@@ -70,8 +70,11 @@ class CVController extends Controller
         $pengalaman = NULL;
         $pendidikan = NULL;
         if ($request->skill) {
-            foreach ($request->skill as $sk) {
-                $skill .= "$sk|";
+            foreach (array_combine($request->skill, $request->skl) as $name => $lvl) {
+                $skill[] = [
+                    'nama' => $name,
+                    'level' => $lvl
+                ];
             }
         }
         if ($request->exp) {
@@ -92,14 +95,14 @@ class CVController extends Controller
         }
         if (@$mahasiswa->detail->deskripsi) {
             $mahasiswa->detail->deskripsi = $request->deskripsi;
-            $mahasiswa->detail->skill = $skill;
+            $mahasiswa->detail->skill = ($skill != NULL) ? json_encode($skill) : $skill;
             $mahasiswa->detail->pengalaman = ($pengalaman != NULL) ? json_encode($pengalaman) : $pengalaman;
             $mahasiswa->detail->pendidikan = ($pendidikan != NULL) ? json_encode($pendidikan) : $pendidikan;
             $mahasiswa->detail->save();
         } else {
             $mahasiswa->detail()->create([
                 'deskripsi' => $request->deskripsi,
-                'skill' => $skill,
+                'skill' => ($skill != NULL) ? json_encode($skill) : $skill,
                 'pengalaman' => ($pengalaman != NULL) ? json_encode($pengalaman) : $pengalaman,
                 'pendidikan' => ($pendidikan != NULL) ? json_encode($pendidikan) : $pendidikan
             ]);

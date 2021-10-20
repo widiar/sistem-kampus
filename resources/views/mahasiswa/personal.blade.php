@@ -169,9 +169,11 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                    @if (@$user->mahasiswa->gender)
                     <a href="{{ route('cv.index') }}">
                         <button type="button" class="btn btn-primary">Buat Profile</button>
                     </a>
+                    @endif
                     <hr>
                     <h2>Score Quiz: {{ @$user->mahasiswa->score }}</h2>
                     <hr>

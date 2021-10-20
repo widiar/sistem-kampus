@@ -23,6 +23,66 @@
             object-fit: cover;
             object-position: center;
         }
+
+        .skills .content h3 {
+            font-weight: 700;
+            font-size: 26px;
+            color: #545454;
+            font-family: "Poppins", sans-serif;
+            margin-bottom: 20px;
+        }
+
+        .skills .content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .skills .content ul li {
+            padding-bottom: 10px;
+        }
+
+        .skills .content ul i {
+            font-size: 20px;
+            padding-right: 4px;
+            color: #e96b56;
+        }
+
+        .skills .content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .skills .progress {
+            height: 62px;
+            display: block;
+            background: none;
+            border-radius: 0;
+        }
+
+        .skills .progress .skill {
+            padding: 0;
+            margin: 0 0 6px 0;
+            text-transform: uppercase;
+            display: block;
+            font-weight: 600;
+            font-family: "Poppins", sans-serif;
+            color: #545454;
+        }
+
+        .skills .progress .skill .val {
+            float: right;
+            font-style: normal;
+        }
+
+        .skills .progress-bar-wrap {
+            background: #e0e0e0;
+        }
+
+        .skills .progress-bar {
+            width: 1px;
+            height: 10px;
+            transition: .9s;
+            background-color: #e96b56;
+        }
     </style>
 </head>
 
@@ -78,13 +138,21 @@
                 </div>
 
                 <div style="max-width: 100%; text-align: center;">
-                    @if (@$mahasiswa->detail->skill)
-                    @foreach (explode("|", $mahasiswa->detail->skill) as $item)
-                    @if (!$loop->last)
-                    <span class="badge badge-pill badge-secondary">{{$item}}</span>
-                    @endif
-                    @endforeach
-                    @endif
+                    <div class="skills">
+                        @if (@$mahasiswa->detail->skill)
+                        @foreach (json_decode($mahasiswa->detail->skill) as $item)
+
+                        <div class="progress">
+                            <span class="skill">{{ $item->nama }} <i class="val">{{ $item->level }}</i></span>
+                            <div class="progress-bar-wrap">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0"
+                                    aria-valuemax="100" style="width: {{ $item->level }}%;"></div>
+                            </div>
+                        </div>
+
+                        @endforeach
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

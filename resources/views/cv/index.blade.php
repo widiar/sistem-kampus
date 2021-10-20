@@ -100,14 +100,25 @@
                     <div class="skills">
                         <h4>Skill :</h4>
                         @if (@$mahasiswa->detail->skill)
-                        @foreach (explode("|", $mahasiswa->detail->skill) as $item)
-                        @if (!$loop->last)
-                        <div class="skill col-4">
-                            <input type="text" required name="skill[]" class="form-control" placeholder="Skill"
-                                value="{{ $item }}">
+                        @foreach (json_decode($mahasiswa->detail->skill) as $item)
+                        <div class="skill">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <input type="text" required name="skill[]" value="{{ $item->nama }}"
+                                            class="form-control" placeholder="Skill">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <input type="number" required min="0" max="100" name="skl[]"
+                                            value="{{ $item->level }}" class="form-control"
+                                            placeholder="Progress bar (%)">
+                                    </div>
+                                </div>
+                            </div>
                             <button type="button" class="btn btn-danger btn-sm my-3 btn-hapus">Hapus</button><br>
                         </div>
-                        @endif
                         @endforeach
                         @endif
                     </div>
@@ -187,8 +198,19 @@
     if (info !== '') toastr.info(info, 'Mahasiswa');
 
     $(document).ready(function(){
-        let skill = `<div class="skill col-4">
-                        <input type="text" required name="skill[]" class="form-control" placeholder="Skill">
+        let skill = `<div class="skill">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <input type="text" required name="skill[]" class="form-control" placeholder="Skill">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input type="number" required name="skl[]" min="0" max="100" class="form-control" placeholder="Progress bar (%)">
+                                </div>
+                            </div>
+                        </div>
                         <button type="button" class="btn btn-danger btn-sm my-3 btn-hapus">Hapus</button><br>
                     </div>`;
 
