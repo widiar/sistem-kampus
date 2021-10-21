@@ -57,8 +57,8 @@
     </div>
 </section><!-- End Hero -->
 
-<section id="testimonials" class="testimonials">
-    <div class="container">
+<section id="featured" class="featured">
+    <div class="container testimonials">
         <div class="section-title">
             <h2>Profile</h2>
             <div class="row">
@@ -92,7 +92,7 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container testimonials">
         <div class="section-title">
             <h2>Top 5 Nilai A Terbanyak</h2>
             <div class="row">
