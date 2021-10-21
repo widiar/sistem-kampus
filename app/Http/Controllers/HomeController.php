@@ -48,4 +48,13 @@ class HomeController extends Controller
         $nilai = $mhs->nilai()->distinct()->get('semester');
         return view('nilai', compact('nilai', 'mhs'));
     }
+
+    public function dev()
+    {
+        if (env("DATABASE_URL")) {
+            dd("ok");
+        } else {
+            dd("K");
+        }
+    }
 }

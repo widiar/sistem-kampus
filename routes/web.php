@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Storage;
 //     return view('welcome');
 // });
 
-// Route::get('dev', [HomeController::class, 'dev']);
+Route::get('dev', [HomeController::class, 'dev']);
 
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'doLogin'])->name('_login');
