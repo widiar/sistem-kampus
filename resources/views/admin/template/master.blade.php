@@ -89,10 +89,26 @@
             </li>
 
             <li class="nav-item{{request()->is('admin/questions*') ? ' active' : '' }}">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#questionNav">
+                    <i class="nav-icon fas fa-question-circle"></i>
+                    <span>Questions</span>
+                </a>
+                <div id="questionNav" class="collapse{{request()->is('admin/questions*') ? ' show' : '' }}"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item{{request()->is('admin/questions/category*') ? ' active' : '' }}"
+                            href="{{ route('admin.questions.category') }}">Category</a>
+                        <a class="collapse-item{{request()->is('admin/questions') ? ' active' : '' }}"
+                            href="{{ route('admin.questions.index') }}">Questions</a>
+                    </div>
+                </div>
+            </li>
+
+            {{-- <li class="nav-item{{request()->is('admin/questions*') ? ' active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.questions.index') }}">
                     <i class="nav-icon fas fa-question-circle"></i>
                     <span>Questions</span></a>
-            </li>
+            </li> --}}
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

@@ -11,7 +11,7 @@ class ApiController extends Controller
     public function matkul(Request $request)
     {
         $search = $request->search;
-        $matakuliah = MataKuliah::where('nama', 'like', "%$search%")->get();
+        $matakuliah = MataKuliah::where('nama', 'ilike', "%$search%")->get();
         $data = [];
         foreach ($matakuliah as $matkul) {
             $dt = [

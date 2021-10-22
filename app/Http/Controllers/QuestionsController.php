@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\QuestionsRequest;
+use App\Models\QuestionCategory;
 use App\Models\Questions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -17,7 +18,8 @@ class QuestionsController extends Controller
 
     public function create()
     {
-        return view('admin.questions.create');
+        $category = QuestionCategory::all();
+        return view('admin.questions.create', compact('category'));
     }
 
     public function store(QuestionsRequest $request)
@@ -42,6 +44,7 @@ class QuestionsController extends Controller
             $q = Questions::create([
                 'text' => $request->text,
                 'score' => $request->score,
+                'category_id' => $request->category
             ]);
         }
         $q->options()->createMany($options);
@@ -50,7 +53,8 @@ class QuestionsController extends Controller
 
     public function edit(Questions $question)
     {
-        return view('admin.questions.edit', compact('question'));
+        $category = QuestionCategory::all();
+        return view('admin.questions.edit', compact('question', 'category'));
     }
 
     public function update(QuestionsRequest $request, Questions $question)
@@ -58,6 +62,7 @@ class QuestionsController extends Controller
 
         $question->text = $request->text;
         $question->score = $request->score;
+        $question->category_id = $request->category;
         if ($request->image) {
             $image = $request->image;
             $question->image = $image->hashName();
@@ -88,6 +93,49 @@ class QuestionsController extends Controller
         $question = Questions::find($id);
         $question->options()->delete();
         $question->delete();
+        return "Sukses";
+    }
+
+    public function categoryIndex()
+    {
+        $category = QuestionCategory::all();
+        return view('admin.questions.kategori.index', compact('category'));
+    }
+
+    public function categoryCreate()
+    {
+        return view('admin.questions.kategori.create');
+    }
+
+    public function categoryStore(Request $request)
+    {
+        $request->validate([
+            'name' => 'required'
+        ]);
+        QuestionCategory::create([
+            'name' => $request->name
+        ]);
+        return redirect()->route('admin.questions.category')->with(['success' => 'Berhasil menambah Data']);
+    }
+
+    public function categoryEdit(QuestionCategory $category)
+    {
+        return view('admin.questions.kategori.edit', compact('category'));
+    }
+
+    public function categoryUpdate(Request $request, QuestionCategory $category)
+    {
+        $request->validate([
+            'name' => 'required'
+        ]);
+        $category->name = $request->name;
+        $category->save();
+        return redirect()->route('admin.questions.category')->with(['success' => 'Berhasil update Data']);
+    }
+
+    public function categoryDelete(QuestionCategory $category)
+    {
+        $category->delete();
         return "Sukses";
     }
 }

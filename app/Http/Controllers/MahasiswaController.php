@@ -11,6 +11,7 @@ use App\Models\Options;
 use App\Models\Questions;
 use App\Models\User;
 use App\Models\Konsentrasi;
+use App\Models\QuestionCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -23,8 +24,14 @@ class MahasiswaController extends Controller
     {
         $us = Auth::user();
         if (isset($us->mahasiswa)) return redirect()->route('mahasiswa.personal');
-        $questions = Questions::inRandomOrder()->get();
-        return view('mahasiswa.quiz', compact('questions'));
+        $category = QuestionCategory::all();
+        $data = [];
+        foreach ($category as $key) {
+            $dt = Questions::with('options')->where('category_id', $key->id)->inRandomOrder()->limit(3)->get();
+            array_push($data, $dt);
+        }
+        // $questions = Questions::inRandomOrder()->limit(3)->get();
+        return view('mahasiswa.quiz', compact('data'));
     }
 
     public function storeQuiz(Request $request)

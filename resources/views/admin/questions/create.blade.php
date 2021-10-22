@@ -18,6 +18,15 @@
             </div>
 
             <div class="form-group">
+                <label for="text">Kategori Soal<span class="text-danger">*</span></label>
+                <select name="category" required class="form-control select2">
+                    @foreach ($category as $cat)
+                    <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-group">
                 <label for="image">Image</label>
                 <div class="custom-file">
                     <input type="file" name="image" class="file custom-file-input @error('image') is-invalid @enderror"

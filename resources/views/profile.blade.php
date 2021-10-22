@@ -13,7 +13,7 @@
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- CSS Files -->
-    <link href="{{ asset('profile/css/material-kit.css?v=2.0.7') }}" rel="stylesheet" />
+    <link href="{{ asset('profile/css/material-kit.css') }}" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{ asset('profile/demo/demo.css') }}" rel="stylesheet" />
     <style>
@@ -66,6 +66,7 @@
             font-weight: 600;
             font-family: "Poppins", sans-serif;
             color: #545454;
+            text-align: left;
         }
 
         .skills .progress .skill .val {

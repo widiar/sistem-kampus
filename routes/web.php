@@ -142,6 +142,15 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
                     Route::get('edit/{question}', [QuestionsController::class, 'edit'])->name('edit');
                     Route::patch('{question}', [QuestionsController::class, 'update'])->name('update');
                     Route::delete('{id}', [QuestionsController::class, 'delete'])->name('delete');
+
+                    Route::prefix('category')->group(function () {
+                        Route::get('', [QuestionsController::class, 'categoryIndex'])->name('category');
+                        Route::get('create', [QuestionsController::class, 'categoryCreate'])->name('category.create');
+                        Route::post('create', [QuestionsController::class, 'categoryStore']);
+                        Route::get('edit/{category}', [QuestionsController::class, 'categoryEdit'])->name('category.edit');
+                        Route::put('{category}', [QuestionsController::class, 'categoryUpdate'])->name('category.update');
+                        Route::delete('{category}', [QuestionsController::class, 'categoryDelete'])->name('category.delete');
+                    });
                 });
             });
 

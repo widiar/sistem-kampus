@@ -23,6 +23,7 @@
                     <h1 class="text-center">Quiz</h1>
                 </div>
             </div>
+            @foreach ($data as $questions)
             @foreach ($questions as $question)
             <div class="card shadow mb-3">
                 <div class="card-body">
@@ -44,6 +45,7 @@
                     </div>
                 </div>
             </div>
+            @endforeach
             @endforeach
             <button type="submit" class="btn btn-primary btn-block">Submit</button>
         </form>

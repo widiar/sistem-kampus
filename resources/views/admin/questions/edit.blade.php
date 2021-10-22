@@ -19,6 +19,16 @@
             </div>
 
             <div class="form-group">
+                <label for="text">Kategori Soal<span class="text-danger">*</span></label>
+                <select name="category" required class="form-control select2">
+                    @foreach ($category as $cat)
+                    <option {{ ($cat->id == $question->category_id) ? 'selected':'' }} value="{{ $cat->id }}">{{
+                        $cat->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-group">
                 <label for="image">Image</label>
                 <div class="custom-file">
                     <input type="file" name="image" class="file custom-file-input @error('image') is-invalid @enderror"
@@ -58,13 +68,13 @@
                         </div>
                         <div class="col-6">
                             <div class="form-check mt-4">
-                                <input required class="form-check-input isTrue" type="radio" value="1" name="tmpTrue"
-                                    {{ ($option->is_true) ? "checked" : "" }}>
+                                <input required class="form-check-input isTrue" type="radio" value="1" name="tmpTrue" {{
+                                    ($option->is_true) ? "checked" : "" }}>
                                 <label class="form-check-label" for="isTrue">
                                     Benar
                                 </label>
-                                <input type="hidden" name="isTrue[{{$option->id}}]" value="{{ $option->is_true }}"
-                                    class="ftrue">
+                                <input type="hidden" name="isTrue[{{$option->id}}]"
+                                    value="{{ ($option->is_true) ? 1 : 0 }}" class="ftrue">
                             </div>
                         </div>
                     </div>

@@ -62,7 +62,7 @@ $(document).ready(function(){
         let extra = $(this).data("extra");
         Swal.fire({
             title: "Anda Yakin?",
-            html: `${text}<br><b>${extra}</b>`,
+            html: `${text}`,
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",

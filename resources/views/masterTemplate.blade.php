@@ -92,11 +92,11 @@
                             <li><a href="{{ route('mahasiswa.personal') }}">Personal</a></li>
                             <li><a href="{{ route('mahasiswa.nilai') }}">Input Nilai</a></li>
                             {{-- <li><a href="{{ route('mahasiswa.alumni') }}">Permohonan MTA</a>
-                    </li> --}}
-                    <li><a href="{{ route('logout') }}">Logout</a></li>
-                </ul>
-                </li>
-                @endauth
+                            </li> --}}
+                            <li><a href="{{ route('logout') }}">Logout</a></li>
+                        </ul>
+                    </li>
+                    @endauth
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -111,11 +111,13 @@
 
         <div class="container">
             <div class="copyright">
-                &copy; Copyright <strong><span>AW</span></strong>. All Rights Reserved
+                &copy; Copyright <strong><span><a style="color: white"
+                            href="http://ariwidiarsana-portofolio.herokuapp.com/">2021</a></span></strong>. All Rights
+                Reserved
             </div>
-            <div class="credits">
+            <!-- <div class="credits">
                 Created by <a href="http://ariwidiarsana-portofolio.herokuapp.com/">Ari Widiarsana</a>
-            </div>
+            </div> -->
         </div>
     </footer><!-- End Footer -->
 
