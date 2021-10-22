@@ -16,16 +16,18 @@
 <body>
 
     <div class="container my-3">
-        <div class="card shadow">
-            <div class="card-header">
-                <h1 class="text-center">Quiz</h1>
+        <form action="" method="POST">
+            @csrf
+            <div class="card shadow">
+                <div class="card-header">
+                    <h1 class="text-center">Quiz</h1>
+                </div>
             </div>
-            <div class="card-body">
-                <form action="" method="POST">
-                    @csrf
-                    @foreach ($questions as $question)
+            @foreach ($questions as $question)
+            <div class="card shadow mb-3">
+                <div class="card-body">
                     <div class="question">
-                        <h5>{{ $question->text }}</h5>
+                        <textarea class="form-control-plaintext" disabled cols="30">{{ $question->text }}</textarea>
                         @if ($question->image)
                         <img src="{{ asset('storage/questions/image/' . $question->image) }}"
                             class="img-responsive w-50" alt="">
@@ -39,14 +41,23 @@
                             </label>
                         </div>
                         @endforeach
-                        <hr>
                     </div>
-                    @endforeach
-                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                </form>
+                </div>
             </div>
-        </div>
+            @endforeach
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
     </div>
+
+
+    <script>
+        $("textarea").each(function () {
+            this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
+            }).on("input", function () {
+            this.style.height = "auto";
+            this.style.height = (this.scrollHeight) + "px";
+        });
+    </script>
 
 </body>
 
