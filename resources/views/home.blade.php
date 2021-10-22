@@ -76,7 +76,7 @@
                         @endif
                         <h3>{{ $mhs->nama }}</h3>
                         <h4 style="padding:10px;">{{ $mhs->konsentrasi->nama }}</h4>
-                        <a href="{{ route('profile', $mhs->id) }}" style="background-color:#e96b56; border:none;"
+                        <a href="{{ route('profile', $mhs->user->nim) }}" style="background-color:#e96b56; border:none;"
                             type="submit" class="btn btn-primary btn-user btn-block">
                             Lihat profile
                         </a>
@@ -109,7 +109,7 @@
                             class="testimonial-img profile-img" alt="">
                         @endif
                         <h3>{{ $mhs->nama }}</h3>
-                        <a href="{{ route('profile', $mhs->id) }}" style="background-color:#e96b56; border:none;"
+                        <a href="{{ route('profile', $mhs->nim) }}" style="background-color:#e96b56; border:none;"
                             type="submit" class="btn btn-primary btn-user btn-block">
                             Lihat profile
                         </a>

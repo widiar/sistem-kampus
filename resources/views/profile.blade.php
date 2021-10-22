@@ -210,7 +210,7 @@
             </div>
 
         </div>
-        <a href="{{ route('nilai.mhs', $mahasiswa->id) }}" class="btn btn-primary ml-3">Lihat Nilai</a>
+        <a href="{{ route('nilai.mhs', $mahasiswa->user->nim) }}" class="btn btn-primary ml-3">Lihat Nilai</a>
     </div>
 
     </div>

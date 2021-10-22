@@ -25,8 +25,9 @@ class ApiController extends Controller
 
     public function nilai(Request $request)
     {
-        $mhs = Mahasiswa::find($request->id);
-        $nilai = $mhs->nilai()->where('semester', $request->semester)->get();
+        $mhs = Mahasiswa::with('nilai')->find($request->id);
+        $nilai = $mhs->nilai()->where('semester', $request->semester)->where('is_approve', 1)->get();
+        $data = [];
         foreach ($nilai as $val) {
             $data[] = [
                 'matkul' => $val->matakuliah->nama,

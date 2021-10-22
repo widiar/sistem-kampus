@@ -12,7 +12,7 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $mahasiswa = Mahasiswa::all()->take(10);
+        $mahasiswa = Mahasiswa::with('user')->get()->take(10);
         // $nilai = DB::table('nilai_mahasiswa')
         //     ->join('mahasiswa', 'mahasiswa.id', '=', 'nilai_mahasiswa.mahasiswa_id')
         //     ->join('konsentrasi', 'konsentrasi.id', '=', 'mahasiswa.konsentrasi_id')
@@ -20,14 +20,14 @@ class HomeController extends Controller
         //     ->groupBy('nilai_mahasiswa.mahasiswa_id')
         //     ->having('nilai_mahasiswa.nilai', '>', 85)
         //     ->get();
-        $nilai = DB::select("SELECT e.*, (SELECT count(p.id) FROM nilai_mahasiswa AS p WHERE e.id = p.mahasiswa_id AND nilai::INT > 85 AND is_approve = 1) AS nilai_a FROM mahasiswa AS e ORDER BY nilai_a DESC LIMIT 5");
+        $nilai = DB::select("SELECT e.*, u.nim, (SELECT count(p.id) FROM nilai_mahasiswa AS p WHERE e.id = p.mahasiswa_id AND nilai::INT > 85 AND is_approve = 1) AS nilai_a FROM mahasiswa AS e INNER JOIN users AS u ON e.user_id = u.id  ORDER BY nilai_a DESC LIMIT 5");
         // dd($nilai);
         return view('home', compact('mahasiswa', 'nilai'));
     }
 
-    public function profile($id)
+    public function profile($user)
     {
-        $mahasiswa = Mahasiswa::findOrFail($id);
+        $mahasiswa = Mahasiswa::with(['detail', 'user'])->where('user_id', $user->id)->firstOrFail();
         if (@$mahasiswa->detail->deskripsi)
             return view('profile', compact('mahasiswa'));
         else abort(404);
@@ -36,16 +36,17 @@ class HomeController extends Controller
     public function listProfile(Request $request)
     {
         if ($request->search) {
-            $mahasiswa = Mahasiswa::where('nama', 'ilike', "%$request->search%")->paginate(10);
+            $mahasiswa = Mahasiswa::with(['detail', 'konsentrasi', 'user'])->where('nama', 'ilike', "%$request->search%")->paginate(10);
         } else {
-            $mahasiswa = Mahasiswa::paginate(10);
+            $mahasiswa = Mahasiswa::with(['detail', 'konsentrasi', 'user'])->paginate(10);
         }
         return view('services', compact('mahasiswa'));
     }
 
-    public function getNilai(Mahasiswa $mhs)
+    public function nilai($user)
     {
-        $nilai = $mhs->nilai()->distinct()->get('semester');
+        $mhs = Mahasiswa::with('nilai')->where('user_id', $user->id)->firstOrFail();
+        $nilai = $mhs->nilai()->where('is_approve', 1)->distinct()->get('semester');
         return view('nilai', compact('nilai', 'mhs'));
     }
 
