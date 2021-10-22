@@ -27,7 +27,7 @@ class MahasiswaController extends Controller
         $category = QuestionCategory::all();
         $data = [];
         foreach ($category as $key) {
-            $dt = Questions::with('options')->where('category_id', $key->id)->inRandomOrder()->limit(3)->get();
+            $dt = Questions::with('options')->where('category_id', $key->id)->inRandomOrder()->limit(10)->get();
             array_push($data, $dt);
         }
         // $questions = Questions::inRandomOrder()->limit(3)->get();
