@@ -46,7 +46,7 @@ class HomeController extends Controller
     public function nilai($user)
     {
         $mhs = Mahasiswa::with('nilai')->where('user_id', $user->id)->firstOrFail();
-        $nilai = $mhs->nilai()->where('is_approve', 1)->distinct()->get('semester');
+        $nilai = $mhs->nilai()->where('is_approve', 1)->distinct()->orderBy('semester', 'asc')->get('semester');
         return view('nilai', compact('nilai', 'mhs'));
     }
 

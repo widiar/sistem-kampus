@@ -31,7 +31,7 @@ class AdminController extends Controller
 
     public function verifNilai(Mahasiswa $mhs)
     {
-        $nilai = $mhs->nilai()->distinct()->get('semester');
+        $nilai = $mhs->nilai()->distinct()->orderBy('semester', 'asc')->get('semester');
         // dd($nilai);
         return view('admin.nilai.verif', compact('nilai', 'mhs'));
     }
