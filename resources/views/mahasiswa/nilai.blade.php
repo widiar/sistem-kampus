@@ -44,22 +44,25 @@
                         <tr>
                             <td>{{ ++$no }}</td>
                             <td>Semester {{ $data->semester }}</td>
-                            @if ($data->is_approve == 2)
+                            {{-- @if ($data->is_approve == 2) --}}
                             <td class="text-center" style="min-width: 120px">
                                 <a href="{{ route('mahasiswa.nilai.edit', $data->semester) }}" class="mx-2">
                                     <button class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></button>
                                 </a>
-                                <a href="{{ route('mahasiswa.nilai.delete', $data->semester) }}">
+                                {{-- <a href="{{ route('mahasiswa.nilai.delete', $data->semester) }}">
                                     <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                                </a> --}}
+                                <a href="{{ route('mahasiswa.nilai.show', $data->semester) }}" class="mx-2">
+                                    <button class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></button>
                                 </a>
                             </td>
-                            @else
+                            {{-- @else
                             <td class="text-center" style="min-width: 120px">
                                 <a href="{{ route('mahasiswa.nilai.show', $data->semester) }}" class="mx-2">
                                     <button class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></button>
                                 </a>
                             </td>
-                            @endif
+                            @endif --}}
                             <td class="text-center">
                                 @if ($data->is_approve == 0)
                                 <button class="btn btn-warning btn-sm" style="cursor: default;">Processed</button>
