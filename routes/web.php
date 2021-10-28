@@ -102,6 +102,8 @@ Route::group([
             Route::post('alumni', [MahasiswaController::class, 'storeAlumni']);
             Route::get('getKonsentrasi/{id}', [MahasiswaController::class, 'getKonsentrasi'])->name('getKonsentrasi');
 
+            Route::get('konsentrasi/detail/{id}', [MahasiswaController::class, 'detailKonsentrasi'])->name('detail.konsentrasi');
+
             Route::prefix('nilai')->group(function () {
                 Route::get('', [MahasiswaController::class, 'nilai'])->name('nilai');
                 Route::get('add', [MahasiswaController::class, 'addNilai'])->name('nilai.add');

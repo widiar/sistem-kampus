@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Jurusan;
 use App\Models\Konsentrasi;
+use App\Models\MataKuliah;
 use Illuminate\Http\Request;
 
 class KonsentrasiController extends Controller
@@ -15,7 +16,7 @@ class KonsentrasiController extends Controller
      */
     public function index()
     {
-        $konsentrasi = Konsentrasi::with('jurusan')->get();
+        $konsentrasi = Konsentrasi::with('jurusan')->orderBy('id', 'ASC')->get();
         return view('admin.konsentrasi.index', compact('konsentrasi'));
     }
 
@@ -38,14 +39,30 @@ class KonsentrasiController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'konsentrasi' => 'required',
-            'jurusan' => 'required|exists:jurusan,id'
+            'jurusan' => 'required|exists:jurusan,id',
+            'skill' => 'required',
+            'job' => 'required',
+            'topik' => 'required',
+            'matkul' => 'required',
         ]);
         try {
+            $syarat = [];
+            foreach (array_combine($request->matkul, $request->nilai) as $matkul => $nilai) {
+                $syarat[] = [
+                    'id' => $matkul,
+                    'nilai' => $nilai
+                ];
+            }
             Konsentrasi::create([
                 'nama' => $request->konsentrasi,
-                'jurusan_id' => $request->jurusan
+                'jurusan_id' => $request->jurusan,
+                'skill' => json_encode($request->skill),
+                'job' => json_encode($request->job),
+                'topik' => json_encode($request->topik),
+                'syarat' => json_encode($syarat),
             ]);
             return redirect()->route('admin.konsentrasi.index')->with(['success' => 'Berhasil Menambah Data']);
         } catch (\Throwable $th) {
@@ -73,7 +90,8 @@ class KonsentrasiController extends Controller
     public function edit(Konsentrasi $konsentrasi)
     {
         $jurusan = Jurusan::all();
-        return view('admin.konsentrasi.edit', compact('konsentrasi', 'jurusan'));
+        $matakuliah = MataKuliah::all();
+        return view('admin.konsentrasi.edit', compact('konsentrasi', 'jurusan', 'matakuliah'));
     }
 
     /**
@@ -87,11 +105,26 @@ class KonsentrasiController extends Controller
     {
         $request->validate([
             'konsentrasi' => 'required',
-            'jurusan' => 'required|exists:jurusan,id'
+            'jurusan' => 'required|exists:jurusan,id',
+            'skill' => 'required',
+            'job' => 'required',
+            'topik' => 'required',
+            'matkul' => 'required',
         ]);
         try {
+            $syarat = [];
+            foreach (array_combine($request->matkul, $request->nilai) as $matkul => $nilai) {
+                $syarat[] = [
+                    'id' => $matkul,
+                    'nilai' => $nilai
+                ];
+            }
             $konsentrasi->nama =  $request->konsentrasi;
             $konsentrasi->jurusan_id = $request->jurusan;
+            $konsentrasi->skill = json_encode($request->skill);
+            $konsentrasi->job = json_encode($request->job);
+            $konsentrasi->topik = json_encode($request->topik);
+            $konsentrasi->syarat = json_encode($syarat);
             $konsentrasi->save();
             return redirect()->route('admin.konsentrasi.index')->with(['success' => 'Berhasil Update Data']);
         } catch (\Throwable $th) {

@@ -1,6 +1,6 @@
 @extends('admin.template.master')
 
-@section('title-content', 'Questions')
+@section('title-content', 'Konsentrasi')
 
 @section('content')
 <a href="{{ route('admin.konsentrasi.create') }}">

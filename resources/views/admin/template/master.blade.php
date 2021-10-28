@@ -22,6 +22,12 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css"
+        rel="stylesheet">
+
+    <link href="{{ asset('landing-page/vendor/toastr/toastr.min.css') }}" rel="stylesheet">
+
     <link rel="stylesheet" href="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/vendor/datatables/responsive.bootstrap4.min.css') }}">
 
@@ -199,6 +205,10 @@
     <script src="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('admin/vendor/datatables/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('admin/vendor/datatables/responsive.bootstrap4.min.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script src="{{ asset('landing-page/vendor/toastr/toastr.min.js') }}"></script>
 
     <script src="{{ asset('admin/vendor/sweetalert2/sweetalert2.all.min.js') }}"></script>
 

@@ -57,7 +57,7 @@
                 <h1 class="text-center">Data Mahasiswa</h1>
             </div>
             <div class="card-body">
-                <form action="" method="POST" enctype="multipart/form-data">
+                <form action="" method="POST" enctype="multipart/form-data" id="form-personal">
                     @csrf
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-12">
@@ -168,6 +168,34 @@
                         @error('konsentrasi')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
+                        <div class="detail-konsentrasi" style="display: none">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <h5 class="my-3">Topik : </h5>
+                                    <ul class="topik">
+
+                                    </ul>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <h5 class="my-3">Skill : </h5>
+                                    <ul class="skill">
+
+                                    </ul>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <h5 class="my-3">Job : </h5>
+                                    <ul class="job">
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <input type="hidden" name="syarat" value="">
+                            <div class="syarat-list">
+                                <h5 class="my-2">Syarat : </h5>
+                                <div class="syarat">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     @if (@$user->mahasiswa->gender)
                     <a href="{{ route('cv.index') }}">
@@ -227,6 +255,57 @@
         let value = $(this).val();
         initJurusan(value)
     });
+
+    jurusan.change(function(e){
+        $('.detail-konsentrasi').hide(300)
+        $('.topik').html('')
+        $('.skill').html('')
+        $('.job').html('')
+        $('.syarat').html('')
+        $('input[name="syarat"]').val(1)
+        let url = `{{ route('mahasiswa.detail.konsentrasi', '#id') }}`
+        let id = $(this).val()
+        $.ajax({
+            url: url.replace('#id', id),
+            success: function(res){
+                if(res.code == 200){
+                    res.data.topik.forEach(topik => {
+                        $('.topik').append(`<li>${topik}</li>`)
+                    })
+                    res.data.skill.forEach(skill => {
+                        $('.skill').append(`<li>${skill}</li>`)
+                    })
+                    res.data.job.forEach(job => {
+                        $('.job').append(`<li>${job}</li>`)
+                    })
+                    res.data.syarat.forEach(syarat => {
+                        let badge
+                        if(syarat.status == 1) {
+                            badge = { code: 'success', text: 'Terpenuhi' }
+                            $('input[name="syarat"]').val(0)
+                        } 
+                        else {
+                            badge = { code: 'danger', text: 'Tidak Terpenuhi' }
+                            $('input[name="syarat"]').val(1)
+                        } 
+                        $('.syarat').append(`<h5>${syarat.nama} <span class="ml-3 badge badge-${badge.code}">${badge.text}</span></h5>`)
+                    })
+                    $('.detail-konsentrasi').show(300)
+                }else{
+                    alert(res.message)
+                }
+            }
+        })
+    })
+
+    $('#form-personal').submit(function(e){
+        let cek = $('input[name="syarat"]').val()
+        if (cek == 1){
+            e.preventDefault()
+            toastr.info('Anda tidak bisa memilih konsentrasi tersebut', 'Konsentrasi');
+            return false
+        }
+    })
 
 
 </script>

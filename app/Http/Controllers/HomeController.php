@@ -21,7 +21,6 @@ class HomeController extends Controller
         //     ->having('nilai_mahasiswa.nilai', '>', 85)
         //     ->get();
         $nilai = DB::select("SELECT e.*, u.nim, (SELECT count(p.id) FROM nilai_mahasiswa AS p WHERE e.id = p.mahasiswa_id AND nilai::INT > 85 AND is_approve = 1) AS nilai_a FROM mahasiswa AS e INNER JOIN users AS u ON e.user_id = u.id  ORDER BY nilai_a DESC LIMIT 5");
-        // dd($nilai);
         return view('home', compact('mahasiswa', 'nilai'));
     }
 

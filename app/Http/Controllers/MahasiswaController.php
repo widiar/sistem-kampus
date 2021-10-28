@@ -258,4 +258,50 @@ class MahasiswaController extends Controller
         $mahasiswa->save();
         return redirect()->route('mahasiswa.alumni')->with(['success' => 'Berhasil! Data di simpan.']);
     }
+
+    public function detailKonsentrasi($id)
+    {
+        try {
+            $mahasiswa = Mahasiswa::with('nilai')->where('user_id', Auth::user()->id)->first();
+            $konsentrasi = Konsentrasi::find($id);
+            $syarat = [];
+            foreach (json_decode($konsentrasi->syarat) as $sy) {
+                $matkul = MataKuliah::find($sy->id);
+                $nilai = $mahasiswa->nilai()->where('matakuliah_id', $sy->id)->first();
+                if ($nilai) {
+                    if ($nilai->nilai >= $sy->nilai)
+                        $syarat[] = [
+                            'nama' => $matkul->nama,
+                            'status' => 1
+                        ];
+                    else
+                        $syarat[] = [
+                            'nama' => $matkul->nama,
+                            'status' => 0
+                        ];
+                } else {
+                    $syarat[] = [
+                        'nama' => $matkul->nama,
+                        'status' => 0
+                    ];
+                }
+            }
+
+
+            return response()->json([
+                'code' => 200,
+                'data' => [
+                    'skill' => json_decode($konsentrasi->skill),
+                    'job' => json_decode($konsentrasi->job),
+                    'topik' => json_decode($konsentrasi->topik),
+                    'syarat' => $syarat,
+                ]
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'code' => 401,
+                'message' => 'Error Countered'
+            ]);
+        }
+    }
 }

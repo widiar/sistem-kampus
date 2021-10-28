@@ -7,7 +7,7 @@
 <div class="container">
     <main id="main">
         <div class="card shadow w-75 mx-auto my-4">
-            <div class="card-body">
+            <div class="card-body" style="margin-bottom: 80px">
                 <form action="{{ route('mahasiswa.nilai.update', $nilai[0]->semester) }}" method="POST"
                     id="tambahNilai">
                     @csrf

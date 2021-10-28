@@ -10,12 +10,11 @@
             <div class="card-header">
                 <h2 class="text-center">Nilai Semester {{ $nilai[0]->semester }}</h2>
             </div>
-            <div class="card-body">
+            <div class="card-body" style="margin-bottom: 80px">
                 <table id="nilaiTable" class="table table-bordered dt-responsive" style="width: 100%">
                     <thead>
                         <tr>
                             <th>NO</th>
-                            <th>Kode</th>
                             <th class="all">Mata Kuliah</th>
                             <th class="text-center">Nilai</th>
                         </tr>
@@ -28,7 +27,6 @@
                         @foreach ($nilai as $data)
                         <tr>
                             <td>{{ ++$no }}</td>
-                            <td>{{ $data->matakuliah->kode }}</td>
                             <td>{{ $data->matakuliah->nama }}</td>
                             <td class="text-center">{{ $data->nilai }}</td>
                         </tr>

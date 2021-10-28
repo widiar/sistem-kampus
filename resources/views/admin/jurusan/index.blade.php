@@ -1,6 +1,6 @@
 @extends('admin.template.master')
 
-@section('title-content', 'Questions')
+@section('title-content', 'Jurusan')
 
 @section('content')
 <a href="{{ route('admin.jurusan.create') }}">
