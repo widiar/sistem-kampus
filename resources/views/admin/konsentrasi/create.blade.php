@@ -25,63 +25,71 @@
                     @endforeach
                 </select>
             </div>
-            <div class="skill-list">
-                <div class="skill">
-                    <div class="form-group mb-3">
-                        <label for="text">Skill<span class="text-danger">*</span></label>
-                        <select name="skill[]" multiple="multiple" required
-                            class="custom-select select-multi form-control">
-
-                        </select>
-                    </div>
-                </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="1" name="umum" id="umum">
+                <label class="form-check-label" for="umum">
+                    Umum
+                </label>
             </div>
-            {{-- <button type="button" class="btn btn-primary addSkillButton mb-3">Add Skill</button> --}}
-            <div class="job-list">
-                <div class="job">
-                    <div class="form-group mb-3">
-                        <label for="text">Job<span class="text-danger">*</span></label>
-                        <select name="job[]" multiple="multiple" required
-                            class="custom-select select-multi form-control">
+            <div class="prasyarat">
+                <div class="skill-list">
+                    <div class="skill">
+                        <div class="form-group mb-3">
+                            <label for="text">Skill<span class="text-danger">*</span></label>
+                            <select name="skill[]" multiple="multiple" required
+                                class="custom-select select-multi form-control">
 
-                        </select>
-                    </div>
-                </div>
-            </div>
-            {{-- <button type="button" class="btn btn-primary addJobButton mb-3">Add Job</button> --}}
-            <div class="topik-list">
-                <div class="topik">
-                    <div class="form-group mb-3">
-                        <label for="text">Topik<span class="text-danger">*</span></label>
-                        <select name="topik[]" multiple="multiple" required
-                            class="custom-select select-multi form-control">
-
-                        </select>
-                    </div>
-                </div>
-            </div>
-            {{-- <button type="button" class="btn btn-primary mb-3 addTopikButton">Add Topik</button> --}}
-            <div class="matakuliah">
-                <div class="matkul">
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group mb-3">
-                                <label for="text">Mata Kuliah<span class="text-danger">*</span></label>
-                                <select name="matkul[]" required class="custom-select matkulselect form-control">
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group mb-3">
-                                <label for="text">Minimal Nilai<span class="text-danger">*</span></label>
-                                <input type="number" required name="nilai[]" class="form-control"
-                                    placeholder="Dalam angka">
-                            </div>
+                            </select>
                         </div>
                     </div>
                 </div>
+                {{-- <button type="button" class="btn btn-primary addSkillButton mb-3">Add Skill</button> --}}
+                <div class="job-list">
+                    <div class="job">
+                        <div class="form-group mb-3">
+                            <label for="text">Job<span class="text-danger">*</span></label>
+                            <select name="job[]" multiple="multiple" required
+                                class="custom-select select-multi form-control">
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                {{-- <button type="button" class="btn btn-primary addJobButton mb-3">Add Job</button> --}}
+                <div class="topik-list">
+                    <div class="topik">
+                        <div class="form-group mb-3">
+                            <label for="text">Topik<span class="text-danger">*</span></label>
+                            <select name="topik[]" multiple="multiple" required
+                                class="custom-select select-multi form-control">
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                {{-- <button type="button" class="btn btn-primary mb-3 addTopikButton">Add Topik</button> --}}
+                <div class="matakuliah">
+                    <div class="matkul">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group mb-3">
+                                    <label for="text">Mata Kuliah<span class="text-danger">*</span></label>
+                                    <select name="matkul[]" required class="custom-select matkulselect form-control">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group mb-3">
+                                    <label for="text">Minimal Nilai<span class="text-danger">*</span></label>
+                                    <input type="number" required name="nilai[]" class="form-control"
+                                        placeholder="Dalam angka">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary addButton">Add Matkul</button>
             </div>
-            <button type="button" class="btn btn-primary addButton">Add Matkul</button>
             <button type="submit" class="btn btn-primary float-right">Save</button>
         </div>
 
@@ -121,6 +129,18 @@
     })
 
     initMatkul()
+
+    $('#umum').change(function(){
+        if($('#umum').is(':checked')){
+            $('.prasyarat').hide(300)
+            $('.prasyarat').find('select').removeAttr('required')
+            $('.prasyarat').find('input').removeAttr('required')
+        }else{
+            $('.prasyarat').show(300)
+            $('.prasyarat').find('select').attr('required', 'required')
+            $('.prasyarat').find('input').attr('required', 'required')
+        }
+    })
 
     // $('.addSkillButton').click(function(){
     //     const element = `

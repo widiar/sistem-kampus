@@ -262,7 +262,7 @@
         $('.skill').html('')
         $('.job').html('')
         $('.syarat').html('')
-        $('input[name="syarat"]').val(1)
+        $('input[name="syarat"]').val(0)
         let url = `{{ route('mahasiswa.detail.konsentrasi', '#id') }}`
         let id = $(this).val()
         $.ajax({
@@ -290,7 +290,7 @@
                         } 
                         $('.syarat').append(`<h5>${syarat.nama} <span class="ml-3 badge badge-${badge.code}">${badge.text}</span></h5>`)
                     })
-                    $('.detail-konsentrasi').show(300)
+                    if(res.data.umum == 0) $('.detail-konsentrasi').show(300)
                 }else{
                     alert(res.message)
                 }

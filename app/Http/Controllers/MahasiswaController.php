@@ -265,36 +265,40 @@ class MahasiswaController extends Controller
             $mahasiswa = Mahasiswa::with('nilai')->where('user_id', Auth::user()->id)->first();
             $konsentrasi = Konsentrasi::find($id);
             $syarat = [];
-            foreach (json_decode($konsentrasi->syarat) as $sy) {
-                $matkul = MataKuliah::find($sy->id);
-                $nilai = $mahasiswa->nilai()->where('matakuliah_id', $sy->id)->first();
-                if ($nilai) {
-                    if ($nilai->nilai >= $sy->nilai)
-                        $syarat[] = [
-                            'nama' => $matkul->nama,
-                            'status' => 1
-                        ];
-                    else
+            $umum = 1;
+            if ($konsentrasi->syarat) {
+                foreach (json_decode($konsentrasi->syarat) as $sy) {
+                    $matkul = MataKuliah::find($sy->id);
+                    $nilai = $mahasiswa->nilai()->where('matakuliah_id', $sy->id)->first();
+                    if ($nilai) {
+                        if ($nilai->nilai >= $sy->nilai)
+                            $syarat[] = [
+                                'nama' => $matkul->nama,
+                                'status' => 1
+                            ];
+                        else
+                            $syarat[] = [
+                                'nama' => $matkul->nama,
+                                'status' => 0
+                            ];
+                    } else {
                         $syarat[] = [
                             'nama' => $matkul->nama,
                             'status' => 0
                         ];
-                } else {
-                    $syarat[] = [
-                        'nama' => $matkul->nama,
-                        'status' => 0
-                    ];
+                    }
                 }
+                $umum = 0;
             }
-
 
             return response()->json([
                 'code' => 200,
                 'data' => [
-                    'skill' => json_decode($konsentrasi->skill),
-                    'job' => json_decode($konsentrasi->job),
-                    'topik' => json_decode($konsentrasi->topik),
+                    'skill' => ($konsentrasi->skill) ? json_decode($konsentrasi->skill) : [],
+                    'job' => ($konsentrasi->skill) ? json_decode($konsentrasi->job) : [],
+                    'topik' => ($konsentrasi->skill) ? json_decode($konsentrasi->topik) : [],
                     'syarat' => $syarat,
+                    'umum' => $umum
                 ]
             ]);
         } catch (\Throwable $th) {

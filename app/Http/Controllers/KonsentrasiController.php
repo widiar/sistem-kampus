@@ -43,27 +43,30 @@ class KonsentrasiController extends Controller
         $request->validate([
             'konsentrasi' => 'required',
             'jurusan' => 'required|exists:jurusan,id',
-            'skill' => 'required',
-            'job' => 'required',
-            'topik' => 'required',
-            'matkul' => 'required',
         ]);
         try {
-            $syarat = [];
-            foreach (array_combine($request->matkul, $request->nilai) as $matkul => $nilai) {
-                $syarat[] = [
-                    'id' => $matkul,
-                    'nilai' => $nilai
-                ];
+            if ($request->topik) {
+                $syarat = [];
+                foreach (array_combine($request->matkul, $request->nilai) as $matkul => $nilai) {
+                    $syarat[] = [
+                        'id' => $matkul,
+                        'nilai' => $nilai
+                    ];
+                }
+                Konsentrasi::create([
+                    'nama' => $request->konsentrasi,
+                    'jurusan_id' => $request->jurusan,
+                    'skill' => json_encode($request->skill),
+                    'job' => json_encode($request->job),
+                    'topik' => json_encode($request->topik),
+                    'syarat' => json_encode($syarat),
+                ]);
+            } else {
+                Konsentrasi::create([
+                    'nama' => $request->konsentrasi,
+                    'jurusan_id' => $request->jurusan
+                ]);
             }
-            Konsentrasi::create([
-                'nama' => $request->konsentrasi,
-                'jurusan_id' => $request->jurusan,
-                'skill' => json_encode($request->skill),
-                'job' => json_encode($request->job),
-                'topik' => json_encode($request->topik),
-                'syarat' => json_encode($syarat),
-            ]);
             return redirect()->route('admin.konsentrasi.index')->with(['success' => 'Berhasil Menambah Data']);
         } catch (\Throwable $th) {
             dd($th);
@@ -105,11 +108,7 @@ class KonsentrasiController extends Controller
     {
         $request->validate([
             'konsentrasi' => 'required',
-            'jurusan' => 'required|exists:jurusan,id',
-            'skill' => 'required',
-            'job' => 'required',
-            'topik' => 'required',
-            'matkul' => 'required',
+            'jurusan' => 'required|exists:jurusan,id'
         ]);
         try {
             $syarat = [];
