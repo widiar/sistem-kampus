@@ -77,7 +77,7 @@
                 @foreach(json_decode($konsentrasi->syarat) as $syarat)
                 <div class="matkul">
                     <div class="row">
-                        <div class="col">
+                        <div class="col-lg-6 col-xs-12">
                             <div class="form-group mb-3">
                                 <label for="text">Mata Kuliah<span class="text-danger">*</span></label>
                                 <select name="matkul[]" required class="custom-select matkulselected form-control">
@@ -88,7 +88,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-lg-6 col-xs-12">
                             <div class="form-group mb-3">
                                 <label for="text">Minimal Nilai<span class="text-danger">*</span></label>
                                 <input type="number" required name="nilai[]" class="form-control"
@@ -104,14 +104,14 @@
                 @else
                 <div class="matkul">
                     <div class="row">
-                        <div class="col">
+                        <div class="col-lg-6 col-xs-12">
                             <div class="form-group mb-3">
                                 <label for="text">Mata Kuliah<span class="text-danger">*</span></label>
                                 <select name="matkul[]" required class="custom-select matkulselect form-control">
                                 </select>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-lg-6 col-xs-12">
                             <div class="form-group mb-3">
                                 <label for="text">Minimal Nilai<span class="text-danger">*</span></label>
                                 <input type="number" required name="nilai[]" class="form-control"
@@ -138,6 +138,7 @@
         $(".matkulselect").select2({
             theme: "bootstrap",
             minimumInputLength: 2,
+            width: '100%',
             ajax: {
                 url: urlGetMatkul,
                 dataType: 'json',
@@ -158,12 +159,14 @@
     }
 
     $('.select-multi').select2({
-        tags: true
+        tags: true,
+        width: '100%'
     })
 
     $('.matkulselected').select2({
         theme: "bootstrap",
         minimumInputLength: 2,
+        width: '100%'
     })
 
     initMatkul()
