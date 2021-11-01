@@ -5,13 +5,26 @@ namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
 use App\Models\MataKuliah;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ApiController extends Controller
 {
     public function matkul(Request $request)
     {
         $search = $request->search;
-        $matakuliah = MataKuliah::where('nama', 'ilike', "%$search%")->get();
+        if ($request->user_id) {
+            $id = $request->user_id;
+            $mahasiswa = Mahasiswa::with('nilai')->where('user_id', $id)->first();
+            if (!$mahasiswa) return abort(403);
+            $nilaiMhs = $mahasiswa->nilai()->get('matakuliah_id');
+            $nilai = [];
+            foreach ($nilaiMhs as $n) {
+                array_push($nilai, $n->matakuliah_id);
+            }
+            $matakuliah = MataKuliah::whereNotIn('id', $nilai)->where('nama', 'ilike', "%$search%")->get();
+        } else {
+            $matakuliah = MataKuliah::where('nama', 'ilike', "%$search%")->get();
+        }
         $data = [];
         foreach ($matakuliah as $matkul) {
             $dt = [

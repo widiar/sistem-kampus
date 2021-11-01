@@ -117,10 +117,11 @@
             ajax: {
                 url: urlGetMatkul,
                 dataType: 'json',
-                delay: 800,
+                delay: 1000,
                 data: function (params) {
                     var query = {
                         search: params.term,
+                        user_id: `{{ Auth::user()->id }}`
                     }
                     return query;
                 },

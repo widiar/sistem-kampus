@@ -27,11 +27,9 @@
                                     <div class="form-group mb-3">
                                         <label for="text">Mata Kuliah<span class="text-danger">*</span></label>
                                         <select name="matkul[{{$data->id}}]" required
-                                            class="custom-select matkulselected form-control">
-                                            @foreach ($matakuliah as $matkul)
-                                            <option {{($data->matakuliah_id == $matkul->id) ? 'selected' : ''}}
-                                                value="{{ $matkul->id }}">{{ $matkul->nama }}</option>
-                                            @endforeach
+                                            class="custom-select matkulselect form-control">
+                                            <option value="{{ $data->matakuliah_id }}" selected>{{
+                                                $data->matakuliah->nama }}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -129,10 +127,11 @@
             ajax: {
                 url: urlGetMatkul,
                 dataType: 'json',
-                delay: 800,
+                delay: 1000,
                 data: function (params) {
                     var query = {
                         search: params.term,
+                        user_id: `{{ Auth::user()->id }}`
                     }
                     return query;
                 },
