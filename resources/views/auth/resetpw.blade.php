@@ -1,7 +1,7 @@
 @extends('auth.template')
 
 
-@section('title', 'Login')
+@section('title', 'Reset Password')
 
 @section('content')
 <div class="row justify-content-center">
@@ -16,7 +16,7 @@
                     <div class="col-lg-6">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Selamat Datang!</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Reset Password!</h1>
                             </div>
                             <form class="user" method="POST" action="">
                                 @csrf
@@ -25,34 +25,24 @@
                                     {{ session('status') }}
                                 </div>
                                 @endif
-                                @if(session('statussukses'))
-                                <div class="alert alert-success">
-                                    {{ session('statussukses') }}
-                                </div>
-                                @endif
-                                @if(session('warning'))
-                                <div class="alert alert-warning warning">
-                                    {{ session('warning') }}
-                                </div>
-                                @endif
-                                <div class="form-group">
-                                    <input type="text" name="nim"
-                                        class="form-control form-control-user @error('nim') is-invalid @enderror"
-                                        placeholder="Enter NIM..." value="{{ old('nim') }}">
-                                    @error('nim')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
                                 <div class="form-group">
                                     <input type="password" name="password"
                                         class="form-control form-control-user @error('password') is-invalid @enderror"
-                                        placeholder="Password">
+                                        placeholder="Enter password..." value="{{ old('password') }}">
                                     @error('password')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
+                                <div class="form-group">
+                                    <input type="password" name="confirmPassword"
+                                        class="form-control form-control-user @error('confirmPassword') is-invalid @enderror"
+                                        placeholder="Enter confirm password...">
+                                    @error('confirmPassword')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
                                 <button type="submit" class="btn btn-primary btn-user btn-block">
-                                    Login
+                                    Reset Password
                                 </button>
                                 <hr>
                             </form>
@@ -62,7 +52,7 @@
                             <div class="text-center">
                                 <a class="small" href="{{ route('register') }}">Buat Akun Baru!</a>
                                 <br>
-                                <a class="small" href="{{ route('forgotpw') }}">Lupa Password</a>
+                                <a class="small" href="{{ route('login') }}">Login!</a>
                             </div>
                         </div>
                     </div>

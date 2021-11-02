@@ -35,6 +35,14 @@ Route::get('register', [AuthController::class, 'register'])->name('register');
 Route::post('register', [AuthController::class, 'doRegister'])->name('_register');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::get('forgot-password', function () {
+    return view('auth.forgotpw');
+})->name('forgotpw');
+Route::post('forgot-password', [AuthController::class, 'forgot']);
+
+Route::get('reset-password/', [AuthController::class, 'reset'])->name('resetPass');
+Route::post('reset-password/', [AuthController::class, 'postReset']);
+
 Route::middleware(['quiz'])->group(function () {
     Route::get('', [HomeController::class, 'index'])->name('home');
     Route::get('mahasiswa/{nim}/profile', [HomeController::class, 'profile'])->name('profile');

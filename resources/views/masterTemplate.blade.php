@@ -111,8 +111,8 @@
 
         <div class="container">
             <div class="copyright">
-                &copy; Copyright <strong><span><a style="color: white"
-                            href="http://ariwidiarsana-portofolio.herokuapp.com/">2021</a></span></strong>. All Rights
+                &copy; Copyright <strong><span><a href="http://ariwidiarsana-portofolio.herokuapp.com/">ITB
+                            STIKOM</a></span></strong>. All Rights
                 Reserved
             </div>
             <!-- <div class="credits">

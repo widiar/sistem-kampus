@@ -269,7 +269,7 @@ class MahasiswaController extends Controller
             if ($konsentrasi->syarat) {
                 foreach (json_decode($konsentrasi->syarat) as $sy) {
                     $matkul = MataKuliah::find($sy->id);
-                    $nilai = $mahasiswa->nilai()->where('matakuliah_id', $sy->id)->first();
+                    $nilai = $mahasiswa->nilai()->where('is_approve', 1)->where('matakuliah_id', $sy->id)->first();
                     if ($nilai) {
                         if ($nilai->nilai >= $sy->nilai)
                             $syarat[] = [
