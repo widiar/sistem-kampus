@@ -38,7 +38,8 @@
                                 <div class="col">
                                     <div class="form-group mb-3">
                                         <label for="text">Nilai<span class="text-danger">*</span></label>
-                                        <input type="number" required name="nilai[]" class="form-control">
+                                        <input type="text" placeholder="Nilai dalam Huruf" required name="nilai[]"
+                                            class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +82,7 @@
                     <div class="col">
                         <div class="form-group mb-3">
                             <label for="text">Nilai<span class="text-danger">*</span></label>
-                            <input type="number" required name="nilai[]" class="form-control">
+                            <input type="text" placeholder="Nilai dalam Huruf" required name="nilai[]" class="form-control">
                         </div>
                     </div>
                 </div>

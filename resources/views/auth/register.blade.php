@@ -3,7 +3,7 @@
 @section('title', 'Register')
 
 @section('content')
-<div class="card o-hidden border-0 shadow-lg my-5">
+<div class="card o-hidden border-0 shadow-lg" style="margin-top: 15%">
     <div class="card-body p-0">
         <!-- Nested Row within Card Body -->
         <div class="row">

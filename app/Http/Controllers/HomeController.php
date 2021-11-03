@@ -20,7 +20,7 @@ class HomeController extends Controller
         //     ->groupBy('nilai_mahasiswa.mahasiswa_id')
         //     ->having('nilai_mahasiswa.nilai', '>', 85)
         //     ->get();
-        $nilai = DB::select("SELECT e.*, u.nim, (SELECT count(p.id) FROM nilai_mahasiswa AS p WHERE e.id = p.mahasiswa_id AND nilai::INT > 85 AND is_approve = 1) AS nilai_a FROM mahasiswa AS e INNER JOIN users AS u ON e.user_id = u.id  ORDER BY nilai_a DESC LIMIT 5");
+        $nilai = DB::select("SELECT e.*, u.nim, (SELECT count(p.id) FROM nilai_mahasiswa AS p WHERE e.id = p.mahasiswa_id AND nilai = 'A' AND is_approve = 1) AS nilai_a FROM mahasiswa AS e INNER JOIN users AS u ON e.user_id = u.id  ORDER BY nilai_a DESC LIMIT 5");
         return view('home', compact('mahasiswa', 'nilai'));
     }
 
