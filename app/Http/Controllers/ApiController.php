@@ -21,9 +21,11 @@ class ApiController extends Controller
             foreach ($nilaiMhs as $n) {
                 array_push($nilai, $n->matakuliah_id);
             }
-            $matakuliah = MataKuliah::whereNotIn('id', $nilai)->where('nama', 'ilike', "%$search%")->get();
+            if (env('DB_CONNECTION') == 'mysql') $matakuliah = MataKuliah::whereNotIn('id', $nilai)->where('nama', 'like', "%$search%")->get();
+            else $matakuliah = MataKuliah::whereNotIn('id', $nilai)->where('nama', 'ilike', "%$search%")->get();
         } else {
-            $matakuliah = MataKuliah::where('nama', 'ilike', "%$search%")->get();
+            if (env('DB_CONNECTION') == 'mysql') $matakuliah = MataKuliah::where('nama', 'like', "%$search%")->get();
+            else $matakuliah = MataKuliah::where('nama', 'ilike', "%$search%")->get();
         }
         $data = [];
         foreach ($matakuliah as $matkul) {
