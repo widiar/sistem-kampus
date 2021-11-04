@@ -81,8 +81,8 @@
                             <div class="col-lg-6 col-xs-12">
                                 <div class="form-group mb-3">
                                     <label for="text">Minimal Nilai<span class="text-danger">*</span></label>
-                                    <input type="number" required name="nilai[]" class="form-control"
-                                        placeholder="Dalam angka">
+                                    <input type="text" required name="nilai[]" class="form-control"
+                                        placeholder="Dalam huruf">
                                 </div>
                             </div>
                         </div>
@@ -198,7 +198,7 @@
                     <div class="col">
                         <div class="form-group mb-3">
                             <label for="text">Nilai<span class="text-danger">*</span></label>
-                            <input type="number" required name="nilai[]" class="form-control" placeholder="Dalam angka">
+                            <input type="text" required name="nilai[]" class="form-control" placeholder="Dalam huruf">
                         </div>
                     </div>
                 </div>
