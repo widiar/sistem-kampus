@@ -105,7 +105,7 @@
                         <img src="{{ isset($mhs->image) ? json_decode($mhs->image)->url : 'https://ik.imagekit.io/prbydmwbm8c/dummy-profile-pic_10R7S25OM.png' }}"
                             class="testimonial-img profile-img" alt="">
                         @else
-                        <img src="{{ isset($mhs->image) ? Storage::url('mahasiswa/image/'. $mahasiswa->image) : 'https://ik.imagekit.io/prbydmwbm8c/dummy-profile-pic_10R7S25OM.png' }}"
+                        <img src="{{ isset($mhs->image) ? Storage::url('mahasiswa/image/'. $mhs->image) : 'https://ik.imagekit.io/prbydmwbm8c/dummy-profile-pic_10R7S25OM.png' }}"
                             class="testimonial-img profile-img" alt="">
                         @endif
                         <h3>{{ $mhs->nama }}</h3>
