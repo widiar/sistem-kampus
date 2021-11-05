@@ -51,10 +51,6 @@ class HomeController extends Controller
 
     public function dev()
     {
-        if (env("DATABASE_URL")) {
-            dd("ok");
-        } else {
-            dd("K");
-        }
+        // dd('B' >= 'B');
     }
 }

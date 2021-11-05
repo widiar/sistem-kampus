@@ -94,7 +94,7 @@
                                 <label for="text">Jenis Kelamin<span class="text-danger">*</span></label>
                                 <select name="gender" required
                                     class="custom-select form-control @error('gender') is-invalid @enderror">
-                                    <option selected>Jenis Kelamin</option>
+                                    <option disabled selected>Jenis Kelamin</option>
                                     <option {{ old('gender', @$user->mahasiswa->gender) == "Laki-laki" ? "selected" : ""
                                         }}
                                         value="Laki-laki">Laki-Laki

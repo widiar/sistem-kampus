@@ -271,7 +271,7 @@ class MahasiswaController extends Controller
                     $matkul = MataKuliah::find($sy->id);
                     $nilai = $mahasiswa->nilai()->where('is_approve', 1)->where('matakuliah_id', $sy->id)->first();
                     if ($nilai) {
-                        if ($nilai->nilai == $sy->nilai)
+                        if ($nilai->nilai >= $sy->nilai)
                             $syarat[] = [
                                 'nama' => $matkul->nama,
                                 'status' => 1
