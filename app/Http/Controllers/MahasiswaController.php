@@ -271,15 +271,16 @@ class MahasiswaController extends Controller
                     $matkul = MataKuliah::find($sy->id);
                     $nilai = $mahasiswa->nilai()->where('is_approve', 1)->where('matakuliah_id', $sy->id)->first();
                     if ($nilai) {
-                        if ($nilai->nilai >= $sy->nilai)
+                        if (ord(strtoupper($nilai->nilai)) <= ord(strtoupper($sy->nilai)))
                             $syarat[] = [
                                 'nama' => $matkul->nama,
-                                'status' => 1
+                                'status' => 1,
                             ];
                         else
                             $syarat[] = [
                                 'nama' => $matkul->nama,
-                                'status' => 0
+                                'status' => 0,
+                                'c' => (ord($nilai->nilai >= $sy->nilai) >= ord($sy->nilai))
                             ];
                     } else {
                         $syarat[] = [

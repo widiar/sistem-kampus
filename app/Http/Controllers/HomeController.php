@@ -51,6 +51,6 @@ class HomeController extends Controller
 
     public function dev()
     {
-        // dd('B' >= 'B');
+        dd('A' > 'B', ord('a'), ord('B'));
     }
 }
