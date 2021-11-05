@@ -206,13 +206,13 @@ class MahasiswaController extends Controller
             $cek = $nilai->find($key);
             $post = [
                 'matakuliah_id' => $value,
-                'nilai' => $postNilai[$key],
+                'nilai' => strtoupper($postNilai[$key]),
                 'is_approve' => 0,
             ];
             if ($cek) $cek->update($post);
             else $mahasiswa->nilai()->create([
                 'matakuliah_id' => $value,
-                'nilai' => $postNilai[$key],
+                'nilai' => strtoupper($postNilai[$key]),
                 'is_approve' => 0,
                 'semester' => $smt
             ]);

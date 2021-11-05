@@ -115,7 +115,7 @@ class KonsentrasiController extends Controller
             foreach (array_combine($request->matkul, $request->nilai) as $matkul => $nilai) {
                 $syarat[] = [
                     'id' => $matkul,
-                    'nilai' => $nilai
+                    'nilai' => strtoupper($nilai)
                 ];
             }
             $konsentrasi->nama =  $request->konsentrasi;
