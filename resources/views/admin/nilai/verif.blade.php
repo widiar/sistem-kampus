@@ -60,6 +60,7 @@
 
     $(document).ready(function(){
         let smt = $(".tab-link").first().data('id');
+        $(".tab-link").first().addClass('disabled')
         $("#valSmt").val(smt);
         initTableNilai(smt, idMhs)
     })
@@ -124,7 +125,9 @@
 
     $(".tab-link").click(function(){
         $(".tab-link").removeClass('active');
+        $(".tab-link").removeClass('disabled');
         $(this).addClass('active');
+        $(this).addClass('disabled');
         let smt = $(this).data('id');
         $("#valSmt").val(smt);
         initTableNilai(smt, idMhs)

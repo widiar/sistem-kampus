@@ -270,11 +270,11 @@ class MahasiswaController extends Controller
                 foreach (json_decode($konsentrasi->syarat) as $sy) {
                     $matkul = MataKuliah::find($sy->id);
                     $nilai = $mahasiswa->nilai()->where('is_approve', 1)->where('matakuliah_id', $sy->id)->first();
-                    if (strlen($nilai->nilai) > 1) $nilaiMhs = substr($nilai->nilai, 1);
-                    else $nilaiMhs = $nilai->nilai;
-                    if (strlen($sy->nilai) > 1) $nilaiSy = substr($sy->nilai, 1);
-                    else $nilaiSy = $sy->nilai;
                     if ($nilai) {
+                        if (strlen($nilai->nilai) > 1) $nilaiMhs = substr($nilai->nilai, 1);
+                        else $nilaiMhs = $nilai->nilai;
+                        if (strlen($sy->nilai) > 1) $nilaiSy = substr($sy->nilai, 1);
+                        else $nilaiSy = $sy->nilai;
                         if (ord(strtoupper($nilaiMhs)) <= ord(strtoupper($nilaiSy)))
                             $syarat[] = [
                                 'nama' => $matkul->nama,
