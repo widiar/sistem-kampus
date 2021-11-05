@@ -51,6 +51,7 @@ class HomeController extends Controller
 
     public function dev()
     {
-        dd('A' > 'B', ord('a'), ord('B'));
+        $c = 'AB';
+        dd('A' > 'B', ord('a'), ord('B'), strlen($c), substr($c, 1));
     }
 }
