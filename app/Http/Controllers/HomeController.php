@@ -35,7 +35,10 @@ class HomeController extends Controller
     public function listProfile(Request $request)
     {
         if ($request->search) {
-            $mahasiswa = Mahasiswa::with(['detail', 'konsentrasi', 'user'])->where('nama', 'ilike', "%$request->search%")->paginate(10);
+            if (env('DB_CONNECTION') == 'mysql')
+                $mahasiswa = Mahasiswa::with(['detail', 'konsentrasi', 'user'])->where('nama', 'like', "%$request->search%")->paginate(10);
+            else
+                $mahasiswa = Mahasiswa::with(['detail', 'konsentrasi', 'user'])->where('nama', 'ilike', "%$request->search%")->paginate(10);
         } else {
             $mahasiswa = Mahasiswa::with(['detail', 'konsentrasi', 'user'])->paginate(10);
         }
@@ -52,6 +55,6 @@ class HomeController extends Controller
     public function dev()
     {
         $c = 'AB';
-        dd('A' > 'B', ord('a'), ord('B'), strlen($c), substr($c, 1));
+        dd('A' > 'B', ord('8'), ord('B'), strlen($c), substr($c, 1));
     }
 }
