@@ -197,6 +197,22 @@
                             </div>
                         </div>
                     </div>
+                    <hr>
+                    <h3>Konsentrasi yang disarankan : </h3>
+                    <div class="row">
+                        @if(count($konsenSaran) > 0)
+                        @foreach($konsenSaran as $saran)
+                        <div class="col">
+                            <h5><span class="badge badge-success">{{ $saran }}</span></h5>
+                        </div>
+                        @endforeach
+                        @else
+                        <div class="col">
+                            <h5><span class="badge badge-warning">Tidak ada yang disarankan</span></h5>
+                        </div>
+                        @endif
+                    </div>
+                    <hr>
                     @if (@$user->mahasiswa->gender)
                     <a href="{{ route('cv.index') }}">
                         <button type="button" class="btn btn-primary">Buat Profile</button>
@@ -291,6 +307,8 @@
                         $('.syarat').append(`<h5>${syarat.nama} <span class="ml-3 badge badge-${badge.code}">${badge.text}</span></h5>`)
                     })
                     if(res.data.umum == 0) $('.detail-konsentrasi').show(300)
+                    if (res.data.disarankan >= 1) $('.sarankan').text('Disarankan')
+                    else $('.sarankan').text(null)
                 }else{
                     alert(res.message)
                 }

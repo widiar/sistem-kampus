@@ -1,6 +1,9 @@
 @extends('admin.template.master')
 
-@section('title-content', 'Mahasiswa')
+@section('title-content')
+<h1 class="h3 mb-0 text-gray-800">Mahasiswa<span class="badge" style="cursor: pointer" data-toggle="modal"
+        data-target="#exampleModal"><i class="fas fa-question-circle"></i></span></h1>
+@endsection
 
 @section('content')
 <div class="card shadow">
@@ -10,7 +13,7 @@
                 <tr>
                     <th>NO</th>
                     <th>NIM</th>
-                    <th>Email</th>
+                    <th>Nama</th>
                     <th class="text-center">Aksi</th>
                     <th class="text-center">Status</th>
                 </tr>
@@ -24,7 +27,7 @@
                 <tr>
                     <td>{{ ++$no }}</td>
                     <td>{{ $mhs->nim }}</td>
-                    <td>{{ $mhs->email }}</td>
+                    <td>{{ $mhs->mahasiswa->nama }}</td>
                     <td class="text-center">
                         @if ($mhs->status == 0)
                         <form action="{{ route('admin.verif-mahasiswa', ['user' => $mhs, 'status' => 1]) }}"
@@ -57,7 +60,29 @@
         </table>
     </div>
     {{-- <div class="ml-3">
-        {{  $mahasiswa->withQueryString()->links() }}
+        {{ $mahasiswa->withQueryString()->links() }}
     </div> --}}
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Informasi</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium totam laborum dolor pariatur
+                quisquam, a eius consectetur tempore eveniet repellat voluptatibus qui id quidem, natus dolores sequi?
+                Nulla, a dolor.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection

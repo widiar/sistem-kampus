@@ -2,23 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ConfirmMail;
 use App\Models\Mahasiswa;
 use App\Models\NilaiMahasiswa;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
     public function mahasiswa(Request $request)
     {
-        $mahasiswa = User::where('role', 0)->get();
+        $mahasiswa = User::with('mahasiswa')->where('role', 0)->get();
         return view('admin.mahasiswa', compact('mahasiswa'));
     }
 
     public function verifikasi(User $user, $status)
     {
         $user->status = $status;
+        Mail::to($user->email)->send(new ConfirmMail());
         $user->save();
         return "Sukses";
     }

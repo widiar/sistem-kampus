@@ -20,7 +20,7 @@ class MahasiswaQuiz
         if (Auth::check()) {
             $usr = Auth::user();
             if ($usr->role != 1) {
-                if (!isset($usr->mahasiswa)) {
+                if (!isset($usr->mahasiswa->gender)) {
                     return redirect()->route('mahasiswa.quiz');
                 }
             }

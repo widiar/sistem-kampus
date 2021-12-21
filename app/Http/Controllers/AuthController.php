@@ -24,6 +24,7 @@ class AuthController extends Controller
     {
         $rules = [
             'nim' => 'required|unique:users|digits:9',
+            'nama' => 'required',
             'password' => 'required|same:password2|min:8',
             'email' => 'email|required|unique:users',
         ];
@@ -43,8 +44,13 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => $password,
         ];
-        if (User::create($data))
+        $user = User::create($data);
+        if ($user) {
+            $user->mahasiswa()->create([
+                'nama' => $request->nama
+            ]);
             return redirect()->route('register')->with('status', 'Anda berhasil mendaftar');
+        }
     }
 
     public function login()

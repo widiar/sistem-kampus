@@ -29,8 +29,21 @@ $(document).ready(function(){
                 $.ajax({
                     type: "PATCH",
                     url: $(this).attr("action"),
+                    beforeSend: () => {
+                        Swal.fire({
+                            text: 'Procesing',
+                            timer: 2000,
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                            didOpen: () => {
+                                Swal.showLoading()
+                                Swal.stopTimer()
+                            }
+                        })
+                    },
                     success: function (msg) {
                         if (msg == "Sukses") {
+                            Swal.close()
                             Swal.fire(
                                 "Berhasil!",
                                 berhasil,

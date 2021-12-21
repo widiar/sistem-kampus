@@ -43,19 +43,46 @@ class MahasiswaController extends Controller
         foreach ($answers as $answer) {
             if ($answer->is_true) $score += $answer->question->score;
         }
-        $user->mahasiswa()->create([
-            'score' => $score
-        ]);
+        $user->mahasiswa->score = $score;
+        $user->mahasiswa->save();
         return redirect()->route('mahasiswa.personal')->with(['info' => 'Silahkan Update Data Mahasiswa']);
     }
 
     public function personal()
     {
         $user = Auth::user();
+        $mahasiswa = Mahasiswa::with('nilai')->where('user_id', Auth::user()->id)->first();
         $jurusan = Jurusan::all();
         $konsentrasi = Konsentrasi::where('jurusan_id', @$user->mahasiswa->jurusan->id)->get();
-        // dd($konsentrasi);
-        return view('mahasiswa.personal', compact('user', 'jurusan', 'konsentrasi'));
+
+        $konsentrasis = Konsentrasi::all();
+        $konsenSaran = [];
+        $umum = 1;
+        foreach ($konsentrasis as $ks) {
+            $syarat = [];
+            $disarankan = 0;
+            if ($ks->syarat) {
+                foreach (json_decode($ks->syarat) as $sy) {
+                    $matkul = MataKuliah::find($sy->id);
+                    $nilai = $mahasiswa->nilai()->where('is_approve', 1)->where('matakuliah_id', $sy->id)->first();
+                    if ($nilai) {
+                        if (strlen($nilai->nilai) > 1) $nilaiMhs = substr($nilai->nilai, 1);
+                        else $nilaiMhs = $nilai->nilai;
+                        if (strlen($sy->nilai) > 1) $nilaiSy = substr($sy->nilai, 1);
+                        else $nilaiSy = $sy->nilai;
+                        if (ord(strtoupper($nilaiMhs)) <= ord(strtoupper($nilaiSy)))
+                            $disarankan += 1;
+                    }
+                }
+                $umum = 0;
+                if ($disarankan >= 2) {
+                    array_push($konsenSaran, $ks->nama);
+                }
+            }
+        }
+        // dd($konsenSaran);
+
+        return view('mahasiswa.personal', compact('user', 'jurusan', 'konsentrasi', 'konsenSaran'));
     }
 
     public function getKonsentrasi($id)
@@ -266,6 +293,7 @@ class MahasiswaController extends Controller
             $konsentrasi = Konsentrasi::find($id);
             $syarat = [];
             $umum = 1;
+            $disarankan = 0;
             if ($konsentrasi->syarat) {
                 foreach (json_decode($konsentrasi->syarat) as $sy) {
                     $matkul = MataKuliah::find($sy->id);
@@ -275,12 +303,13 @@ class MahasiswaController extends Controller
                         else $nilaiMhs = $nilai->nilai;
                         if (strlen($sy->nilai) > 1) $nilaiSy = substr($sy->nilai, 1);
                         else $nilaiSy = $sy->nilai;
-                        if (ord(strtoupper($nilaiMhs)) <= ord(strtoupper($nilaiSy)))
+                        if (ord(strtoupper($nilaiMhs)) <= ord(strtoupper($nilaiSy))) {
+                            $disarankan += 1;
                             $syarat[] = [
                                 'nama' => $matkul->nama,
                                 'status' => 1,
                             ];
-                        else
+                        } else
                             $syarat[] = [
                                 'nama' => $matkul->nama,
                                 'status' => 0,
@@ -303,7 +332,8 @@ class MahasiswaController extends Controller
                     'job' => ($konsentrasi->skill) ? json_decode($konsentrasi->job) : [],
                     'topik' => ($konsentrasi->skill) ? json_decode($konsentrasi->topik) : [],
                     'syarat' => $syarat,
-                    'umum' => $umum
+                    'umum' => $umum,
+                    'disarankan' => $disarankan
                 ]
             ]);
         } catch (\Throwable $th) {
