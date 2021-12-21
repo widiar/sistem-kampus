@@ -49,7 +49,7 @@ class AuthController extends Controller
             $user->mahasiswa()->create([
                 'nama' => $request->nama
             ]);
-            return redirect()->route('register')->with('status', 'Anda berhasil mendaftar');
+            return redirect()->route('register')->with('status', 'Anda berhasil mendaftar silahkan menunggu 2x24 jam');
         }
     }
 

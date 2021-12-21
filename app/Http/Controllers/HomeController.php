@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jurusan;
+use App\Models\Konsentrasi;
 use App\Models\Mahasiswa;
+use App\Models\MataKuliah;
 use App\Models\NilaiMahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -52,9 +55,11 @@ class HomeController extends Controller
         return view('nilai', compact('nilai', 'mhs'));
     }
 
-    public function dev()
+    public function kurikulum()
     {
-        $c = 'AB';
-        dd('A' > 'B', ord('8'), ord('B'), strlen($c), substr($c, 1));
+        $jurusan = Jurusan::all();
+        $konsentrasi = Konsentrasi::all();
+        $matakuliah = MataKuliah::all();
+        return view('kurikulum', compact('jurusan', 'konsentrasi', 'matakuliah'));
     }
 }

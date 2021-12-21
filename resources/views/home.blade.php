@@ -14,7 +14,7 @@
                 <div class="carousel-item active" style="background: url(landing-page/img/slide/slide-1.jpg)">
                     <div class="carousel-container">
                         <div class="carousel-content">
-                            <h2 class="animate__animated animate__fadeInDown">ITB STIKOM BALI</h2>
+                            <h2 class="animate__animated animate__fadeInDown">ITB STIKOM BALI KAMPUS JIMBARAN</h2>
                             <p class="animate__animated animate__fadeInUp">Institut Teknologi dan Bisnis (ITB) STIKOM
                                 Bali merupakan
                                 salah satu perguruan tinggi swasta yang bertempat di Bali dan bergerak pada
@@ -37,7 +37,8 @@
                             <p class="animate__animated animate__fadeInUp">Selamat datang di Sistem Informasi Mahasiswa
                                 Online ITB Stikom Bali.
                                 Sistem Informasi Mahasiswa Online ITB Stikom Bali adalah sistem informasi yang dibangun
-                                dengan tujuan membantu Mahasiswa ITB Stikom Bali</p>
+                                dengan tujuan membantu Mahasiswa ITB Stikom Bali. Sistem ini menggunakan kurikulum 2018
+                            </p>
 
                         </div>
                     </div>

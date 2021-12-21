@@ -72,7 +72,7 @@
         <div class="container d-flex justify-content-between align-items-center">
 
             <div class="logo">
-                <h1><a href="{{ route('home') }}">ITB STIKOM BALI</a></h1>
+                <h1><a href="{{ route('home') }}">ITB STIKOM BALI KAMPUS JIMBARAN</a></h1>
                 <!-- Uncomment below if you prefer to use an image logo -->
                 <!-- <a href="index.html"><img src="landing-page/img/logo.png" alt="" class="img-fluid"></a>-->
             </div>
@@ -80,6 +80,7 @@
             <nav id="navbar" class="navbar">
                 <ul>
                     <li><a href="{{ route('home') }}">Home</a></li>
+                    <li><a href="{{ route('kurikulum') }}">Kurikulum</a></li>
                     <li><a href="{{ route('about') }}">About</a></li>
                     @guest
 
@@ -112,7 +113,7 @@
         <div class="container">
             <div class="copyright">
                 &copy; Copyright <strong><span><a href="http://ariwidiarsana-portofolio.herokuapp.com/">ITB
-                            STIKOM</a></span></strong>. All Rights
+                            STIKOM BALI KAMPUS JIMBARAN</a></span></strong>. All Rights
                 Reserved
             </div>
             <!-- <div class="credits">

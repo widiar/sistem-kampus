@@ -27,7 +27,6 @@ use Illuminate\Support\Facades\Storage;
 //     return view('welcome');
 // });
 
-Route::get('dev', [HomeController::class, 'dev']);
 
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'doLogin'])->name('_login');
@@ -42,6 +41,8 @@ Route::post('forgot-password', [AuthController::class, 'forgot']);
 
 Route::get('reset-password/', [AuthController::class, 'reset'])->name('resetPass');
 Route::post('reset-password/', [AuthController::class, 'postReset']);
+
+Route::get('kurikulum', [HomeController::class, 'kurikulum'])->name('kurikulum');
 
 Route::middleware(['quiz'])->group(function () {
     Route::get('', [HomeController::class, 'index'])->name('home');
