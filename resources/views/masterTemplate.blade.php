@@ -112,8 +112,8 @@
 
         <div class="container">
             <div class="copyright">
-                &copy; Copyright <strong><span>ITB
-                        STIKOM BALI KAMPUS JIMBARAN</span></strong>. All Rights
+                &copy; Copyright <strong><span><a href="http://ariwidiarsana-portofolio.herokuapp.com/">ITB
+                            STIKOM BALI KAMPUS JIMBARAN</a></span></strong>. All Rights
                 Reserved
             </div>
             <!-- <div class="credits">
