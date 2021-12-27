@@ -109,6 +109,7 @@
                         </div>
                         <div class="name">
                             <h3 class="title" style="margin-bottom: 0px">{{ $mahasiswa->nama }}</h3>
+                            <h4 style="margin: 0px">{{ $mahasiswa->user->email }}</h4>
                             <h4 style="margin: 0px">{{ $mahasiswa->konsentrasi->nama }}</h4>
                             <h4 style="margin: 0px">{{ $mahasiswa->alamat }}</h4>
                         </div>
